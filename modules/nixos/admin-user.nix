@@ -18,32 +18,33 @@ in
             description = "priviledged user's name";
         };
         #admin-user.sshKey = lib.mkOption {
-        #  description = "your users ssh key";
+        #    description = "your users ssh key";
         #};
-        #admin-user.homeManager = lib.mkOption {
-        #  description = "primary user's name";
-        #};
+        admin-user.homeManager = lib.mkOption {
+            description = "primary user's name";
+        };
     };
 
     config = lib.mkIf cfg.enable {
         users.users.${cfg.userName} = {
             isNormalUser = true;
-            description = "main user";
+            description = "super user";
             extraGroups = [
                 "networkmanager"
                 "wheel"
+                "video"
             ];
             shell = pkgs.zsh;
             #openssh.authorizedKeys.keys = [ cfg.sshKey ];
         };
 
-        #home-manager = {
-        #  extraSpecialArgs = {
-        #    inherit inputs;
-        #    vars = vars;
-        #  };
-        #  users.${cfg.userName} = cfg.homeManager;
-        #};
+        home-manager = {
+            extraSpecialArgs = {
+                inherit inputs;
+                vars = vars;
+            };
+            users.${cfg.userName} = cfg.homeManager;
+        };
 
         programs.zsh.enable = true;
     };

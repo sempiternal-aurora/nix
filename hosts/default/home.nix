@@ -33,10 +33,8 @@
         zsh
         firefox
         discord
-        waybar
         ctpv
         trash-cli
-        vivid
 
         (nerdfonts.override { fonts = [ "Hasklig" ]; })
         

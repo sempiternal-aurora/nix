@@ -31,6 +31,7 @@ in
             description = "main user";
             extraGroups = [
                 "networkmanager"
+                "video"
             ];
             shell = pkgs.zsh;
             #openssh.authorizedKeys.keys = [ cfg.sshKey ];

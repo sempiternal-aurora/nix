@@ -45,6 +45,9 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
     # Allow unfree licences for some packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "discord"
+        "1password-gui"
+        "1password-cli"
+        "1password"
     ];
 
     services.fprintd.enable = true;
@@ -52,6 +55,13 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
     hardware.brillo.enable = true;
 
     security.pam.services.swaylock = {};
+
+    # 1Password __MUST__ be installed as root
+    programs._1password.enable = true;
+    programs._1password-gui = {
+        enable = true;
+        polkitPolicyOwners = [ vars.adminUser vars.localUser ];
+    };
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.

@@ -6,6 +6,5 @@
         ./audio.nix
         ./console.nix
         ./system.nix
-        ./sway.nix
     ];
 }

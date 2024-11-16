@@ -26,6 +26,8 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     home.stateVersion = "24.05"; # Please read the comment before changing.
+
+    mine.sway = true;
     
     # The home.packages option allows you to install Nix packages into your
     # environment.
@@ -36,7 +38,6 @@
         ctpv
         trash-cli
 
-        (nerdfonts.override { fonts = [ "Hasklig" ]; })
         
         # # It is sometimes useful to fine-tune packages, for example, by applying
         # # overrides. You can do that directly here, just don't forget the

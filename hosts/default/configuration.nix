@@ -51,6 +51,8 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
 
     hardware.brillo.enable = true;
 
+    security.pam.services.swaylock = {};
+
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;

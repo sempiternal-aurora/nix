@@ -37,6 +37,7 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
     local-user = {
         enable = true;
         userName = vars.localUser;
+        homeManager = ( import ./home.nix ( args // { userName = vars.localUser; } ) );
     };
 
     networking.hostName = "coimpiutair"; # Define your hostname.

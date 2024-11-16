@@ -20,9 +20,9 @@ in
         #local-user.sshKey = lib.mkOption {
         #  description = "your users ssh key";
         #};
-        #local-user.homeManager = lib.mkOption {
-        #  description = "primary user's name";
-        #};
+        local-user.homeManager = lib.mkOption {
+            description = "primary user's name";
+        };
     };
 
     config = lib.mkIf cfg.enable {
@@ -36,13 +36,13 @@ in
             #openssh.authorizedKeys.keys = [ cfg.sshKey ];
         };
 
-        #home-manager = {
-        #  extraSpecialArgs = {
-        #    inherit inputs;
-        #    vars = vars;
-        #  };
-        #  users.${cfg.userName} = cfg.homeManager;
-        #};
+        home-manager = {
+            extraSpecialArgs = {
+                inherit inputs;
+                vars = vars;
+            };
+            users.${cfg.userName} = cfg.homeManager;
+        };
 
         programs.zsh.enable = true;
     };

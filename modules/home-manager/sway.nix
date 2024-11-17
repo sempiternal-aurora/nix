@@ -18,6 +18,7 @@ in
         home.packages = [
             font
             pkgs.adwaita-icon-theme
+            pkgs.mate.mate-polkit
         ];
         
         programs.kitty = {
@@ -35,6 +36,25 @@ in
             };
             shellIntegration.enableZshIntegration = true;
             themeFile = "Dracula";
+        };
+
+        systemd.user.services.polkit-mate-authentication-agent-1 = {
+            Unit = {
+                Description = "polkit-mate-authentication-agent-1";
+                PartOf = [ "graphical-session.target" ];
+                After = [ "graphical-session-pre.target" ];
+            };
+            Service = {
+                Type = "simple";
+                ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+                ExecRestart = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+                Restart = "on-failure";
+                KillMode = "mixed";
+                RestartSec = 1;
+                TimeoutStopSec = 10;
+            };
+
+            Install = { WantedBy = [ "sway-session.target" ]; };
         };
 
         programs.swaylock = {

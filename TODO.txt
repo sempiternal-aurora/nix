@@ -1,4 +1,3 @@
-Fix 1password vault keyring access
 fix swayidle
 add swayfx stuff into config
 move waybar css into nix

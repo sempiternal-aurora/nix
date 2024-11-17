@@ -28,6 +28,14 @@
     home.stateVersion = "24.05"; # Please read the comment before changing.
 
     mine.sway = true;
+    mine._1password = {
+        enable = true;
+        kwallet.enable = true;
+        systemd = {
+            enable = true;
+            target = "sway-session.target";
+        };
+    };
     
     # The home.packages option allows you to install Nix packages into your
     # environment.
@@ -56,6 +64,8 @@
     # Allow unfree licences for some packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "discord"
+        "1password"
+        "1password-gui"
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

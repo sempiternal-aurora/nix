@@ -56,6 +56,11 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
 
     security.pam.services.swaylock = {};
 
+    mine.keyboard = {
+        enable = true;
+        caps2esc = true;
+    };
+
     # 1Password __MUST__ be installed as root
     programs._1password.enable = true;
     programs._1password-gui = {

@@ -17,17 +17,14 @@ in
 
     config = lib.mkIf cfg.enable (lib.mkMerge [
         (lib.mkIf kcfg.enable {
+            home.packages = [
+                pkgs.kdePackages.kwallet
+            ];
             programs.gpg.enable = true;
             services.gpg-agent = {
                 enable = true;
-                extraConfig = ''
-                    pinentry-program ${pkgs.kwalletcli}/bin/pinentry-kwallet
-                '';
+                pinentryPackage = pkgs.pinentry-qt;
             };
-            home.sessionVariables = {
-                PINENTRY = "${pkgs.pinentry-qt}/bin/pinentry-qt";
-            };
-
         })
         (lib.mkIf cfg.systemd.enable {
             systemd.user.services._1password = {

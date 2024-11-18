@@ -1,12 +1,10 @@
 fix swayidle
-add swayfx stuff into config
 move waybar css into nix
-fix myria stuff
 check for remaining configs to be ported
-btop
 dev environments?
 fix tofi desktop stuff - all from arch
 git config
+nvim config
 once you're sure there's nothing more to port in, nuke home directory, needs cleaning
  - Make sure all git repos are pushed beforehand
 

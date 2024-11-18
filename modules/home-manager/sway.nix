@@ -8,17 +8,22 @@ let
     menu = "tofi-run | xargs swaymsg exec --";
     drun = "tofi-drun | xargs swaymsg exec --";
     font = (pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; });
+    warnDischarge = "10";
+    warnCharge = "90";
 in
 {
     options = {
-        mine.sway = lib.mkEnableOption "enable sway module";
+        mine.sway = {
+            enable = lib.mkEnableOption "enable sway module";
+            powercheck = lib.mkEnableOption "enable low power notifications";
+        };
     };
     
-    config = lib.mkIf cfg {
+    config = lib.mkIf cfg.enable {
         home.packages = [
             font
             pkgs.adwaita-icon-theme
-            pkgs.mate.mate-polkit
+            pkgs.wl-clipboard
         ];
         
         programs.kitty = {
@@ -36,25 +41,6 @@ in
             };
             shellIntegration.enableZshIntegration = true;
             themeFile = "Dracula";
-        };
-
-        systemd.user.services.polkit-mate-authentication-agent-1 = {
-            Unit = {
-                Description = "polkit-mate-authentication-agent-1";
-                PartOf = [ "graphical-session.target" ];
-                After = [ "graphical-session-pre.target" ];
-            };
-            Service = {
-                Type = "simple";
-                ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
-                ExecRestart = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-                Restart = "on-failure";
-                KillMode = "mixed";
-                RestartSec = 1;
-                TimeoutStopSec = 10;
-            };
-
-            Install = { WantedBy = [ "sway-session.target" ]; };
         };
 
         programs.swaylock = {
@@ -97,11 +83,18 @@ in
                 };
                 gaps = {
                     inner = 20;
-                    outer = 5;
+                    outer = -5;
                 };
                 floating = {
                     border = 2;
                     titlebar = false;
+                };
+                colors.focused = {
+                    border = "#A483C2";
+                    background = "#734F96";
+                    text = "#FFFFFF";
+                    indicator = "#E6E6FA";
+                    childBorder = "#734F96";
                 };
                 window = {
                     border = 2;
@@ -122,67 +115,15 @@ in
                     scroll_factor = "1";
                 };
                 defaultWorkspace = "workspace number 1";
-                keybindings = {
-                    "${modifier}+Return" = "exec ${terminal}";
-                    "${modifier}+d" = "exec \"${menu}\"";
+                keybindings = lib.mkOptionDefault {
                     "${modifier}+Shift+d" = "exec \"${drun}\"";
-                    "${modifier}+0" = "workspace number 10";
-                    "${modifier}+1" = "workspace number 1";
-                    "${modifier}+2" = "workspace number 2";
-                    "${modifier}+3" = "workspace number 3";
-                    "${modifier}+4" = "workspace number 4";
-                    "${modifier}+5" = "workspace number 5";
-                    "${modifier}+6" = "workspace number 6";
-                    "${modifier}+7" = "workspace number 7";
-                    "${modifier}+8" = "workspace number 8";
-                    "${modifier}+9" = "workspace number 9";
-                    "${modifier}+Shift+0" = "move container to workspace number 10";
-                    "${modifier}+Shift+1" = "move container to workspace number 1";
-                    "${modifier}+Shift+2" = "move container to workspace number 2";
-                    "${modifier}+Shift+3" = "move container to workspace number 3";
-                    "${modifier}+Shift+4" = "move container to workspace number 4";
-                    "${modifier}+Shift+5" = "move container to workspace number 5";
-                    "${modifier}+Shift+6" = "move container to workspace number 6";
-                    "${modifier}+Shift+7" = "move container to workspace number 7";
-                    "${modifier}+Shift+8" = "move container to workspace number 8";
-                    "${modifier}+Shift+9" = "move container to workspace number 9";
-                    "${modifier}+b" = "splith";
-                    "${modifier}+v" = "splitv";
                     "${modifier}+Alt+f" = "exec firefox";
                     "${modifier}+Alt+d" = "exec discord";
                     "${modifier}+Alt+c" = "exec code";
                     "${modifier}+Alt+s" = "exec steam";
                     "${modifier}+Shift+e" = "exec swaymsg exit";
                     "${modifier}+Shift+b" = "${config.xdg.configHome}/tofi/tofi_books.sh";
-                    "${modifier}+Shift+q" = "kill";
-                    "${modifier}+Shift+c" = "reload";
                     "${modifier}+Shift+v" = "exec copyq show";
-                    "${modifier}+h" = "focus left";
-                    "${modifier}+l" = "focus right";
-                    "${modifier}+j" = "focus down";
-                    "${modifier}+k" = "focus up";
-                    "${modifier}+Left" = "focus left";
-                    "${modifier}+Right" = "focus right";
-                    "${modifier}+Down" = "focus down";
-                    "${modifier}+Up" = "focus up";
-                    "${modifier}+Shift+h" = "focus left";
-                    "${modifier}+Shift+l" = "focus right";
-                    "${modifier}+Shift+j" = "focus down";
-                    "${modifier}+Shift+k" = "focus up";
-                    "${modifier}+Shift+Left" = "focus left";
-                    "${modifier}+Shift+Right" = "focus right";
-                    "${modifier}+Shift+Down" = "focus down";
-                    "${modifier}+Shift+Up" = "focus up";
-                    "${modifier}+s" = "layout stacking";
-                    "${modifier}+w" = "layout tabbed";
-                    "${modifier}+e" = "layout toggle split";
-                    "${modifier}+f" = "fullscreen toggle";
-                    "${modifier}+Shift+space" = "floating toggle";
-                    "${modifier}+space" = "focus mode_toggle";
-                    "${modifier}+a" = "focus parent";
-                    "${modifier}+Shift+minus" = "move scratchpad";
-                    "${modifier}+minus" = "scratchpad show";
-                    "${modifier}+r" = "mode \"resize\"";
                     "F11" = "fullscreen toggle";
                     "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
                     "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
@@ -196,11 +137,11 @@ in
                 };
                 modes = {
                     "${screenshot}" = {
-                        "1" = "exec 'grim -g \"$(slurp)\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
-                        "2" = "exec 'grim ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
-                        "3" = "exec 'grim -g \"$(slurp)\" - | wl_copy', mode \"default\"";
-                        "4" = "exec 'grim - | wl_copy', mode \"default\"";
-                        "5" = "exec 'grim -g \"$(slurp)\" - | swappy -f -', mode \"default\"";
+                        "1" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
+                        "2" = "exec '${pkgs.grim}/bin/grim ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
+                        "3" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy', mode \"default\"";
+                        "4" = "exec '${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy', mode \"default\"";
+                        "5" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f -', mode \"default\"";
                         Return = "mode \"default\"";
                         Escape = "mode \"default\"";
                         "${modifier}+Print" = "mode \"default\"";
@@ -226,6 +167,29 @@ in
                 ];
                 bars = [ ];
             };
+            extraConfig = ''
+# window corner radius in px
+corner_radius 15
+
+# Window background blur
+blur enable
+blur_xray off
+blur_passes 2
+blur_radius 10
+
+shadows enable
+shadows_on_csd off
+shadow_blur_radius 20
+shadow_color #0000007F
+
+# inactive window fade amount. 0.0 = no dimming, 1.0 = fully dimmed
+default_dim_inactive 0.2
+dim_inactive_colors.unfocused #000000FF
+dim_inactive_colors.urgent #900000FF
+
+# Move minimized windows into Scratchpad (enable|disable)
+scratchpad_minimize disable
+            '';
             xwayland = true;
             wrapperFeatures = {
                 base = true;
@@ -251,6 +215,78 @@ in
             systemdTarget = "sway-session.target";
         };
 
+        home.file."${config.xdg.configHome}/powercheck.sh" = {
+            enable = cfg.powercheck;
+            executable = true;
+            text = ''
+#!/bin/sh
+
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
+
+#Set percentage at which notifications should be sent
+warn_charge=${warnCharge}
+warn_discharge=${warnDischarge}
+
+battery_num=$(${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep -v 'unavailable' | ${pkgs.gnugrep}/bin/grep -o "Battery [0-9]" | ${pkgs.gnugrep}/bin/grep -o "[0-9]")
+
+if [[ $( ${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep "Battery ''${battery_num}: Discharging" | ${pkgs.coreutils-full}/bin/wc -l) == 1 ]]; then
+  current_charge=$(${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep -o "Battery ''${battery_num}: Discharging, [0-9]*%" | ${pkgs.gnugrep}/bin/grep -o "[0-9]*%" | ${pkgs.gnugrep}/bin/grep -o "[0-9]*")
+  if [[ $current_charge -le $warn_discharge ]]; then
+    ${pkgs.dunst}/bin/dunstify -r 7693 -u critical "Low Battery!" "Charge is at ''${current_charge} percent!"
+  fi
+#elif [[ $( acpi | grep "Battery ''${battery_num}: Charging" | wc -l) == 1 ]]; then
+#  current_charge=$(acpi | grep -o "Battery ''${battery_num}: Charging, [0-9]*%" | grep -o "[0-9]*%" | grep -o "[0-9]*")
+#  if [[ $current_charge -ge $warn_charge ]]; then
+#    dunstify -r 7693 -u critical "Stop Charging!" "Battery is at ''${current_charge} percent!"
+#  fi
+fi
+'';
+        };
+
+        systemd.user = {
+            timers.powercheck = (lib.mkIf cfg.powercheck {
+                Unit = { Description = "periodically run powercheck.sh"; };
+
+                Timer = { OnCalendar = "minutely"; };
+
+                Install = { WantedBy = [ "sway-session.target" ]; };
+            });
+
+            services = {
+                powercheck = {
+                    Unit = {
+                        Description = "powercheck";
+                    };
+
+                    Service = {
+                        Type = "simple";
+                        ExecStart = "${config.xdg.configHome}/powercheck.sh";
+                    };
+                };
+
+                polkit-mate-authentication-agent-1 = {
+                    Unit = {
+                        Description = "polkit-mate-authentication-agent-1";
+                        PartOf = [ "graphical-session.target" ];
+                        After = [ "graphical-session-pre.target" ];
+                    };
+                    
+                    Service = {
+                        Type = "simple";
+                        ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+                        ExecRestart = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+                        Restart = "on-failure";
+                        KillMode = "mixed";
+                        RestartSec = 1;
+                        TimeoutStopSec = 10;
+                    };
+
+                    Install = { WantedBy = [ "sway-session.target" ]; };
+                };
+            };
+        };
+
         services.swayidle = {
             enable = true;
             events = [
@@ -259,12 +295,12 @@ in
             ];
             systemdTarget = "sway-session.target";
             timeouts = [
-                { timeout = 300; command = "swaylock -f"; }
-                { timeout = 900; command = "swaymsg \"output * dpms off\""; }
+                { timeout = 15; command = "swaylock -f"; }
+                { timeout = 30; command = "swaymsg 'output * dpms off'"; }
                 {
                     timeout = 15; 
-                    command = "if pgrep -x swaylock; then swaymsg \"output * dpms off\"; fi"; 
-                    resumeCommand = "swaymsg \"output * dpms on\"";
+                    command = "if pgrep -x swaylock; then swaymsg 'output * dpms off'; fi"; 
+                    resumeCommand = "swaymsg 'output * dpms on'";
                 }
             ];
         };
@@ -664,4 +700,3 @@ in
         };
     };
 }
-

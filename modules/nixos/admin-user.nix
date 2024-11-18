@@ -33,6 +33,7 @@ in
                 "networkmanager"
                 "wheel"
                 "video"
+                "uinput"
             ];
             shell = pkgs.zsh;
             #openssh.authorizedKeys.keys = [ cfg.sshKey ];

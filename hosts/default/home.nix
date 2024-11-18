@@ -27,7 +27,10 @@
     # release notes.
     home.stateVersion = "24.05"; # Please read the comment before changing.
 
-    mine.sway = true;
+    mine.sway = {
+        enable = true;
+        powercheck = true;
+    };
     mine._1password = {
         enable = true;
         kwallet.enable = true;

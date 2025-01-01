@@ -27,16 +27,26 @@
     # release notes.
     home.stateVersion = "24.05"; # Please read the comment before changing.
 
-    mine.sway = {
-        enable = true;
-        powercheck = true;
-    };
-    mine._1password = {
-        enable = true;
-        kwallet.enable = true;
-        systemd = {
+    mine = {
+        sway = {
             enable = true;
-            target = "sway-session.target";
+            powercheck = true;
+        };
+        _1password = {
+            enable = true;
+            kwallet.enable = true;
+            systemd = {
+                enable = true;
+                target = "sway-session.target";
+            };
+        };
+        nvim = {
+    	    enable = true;
+            default = true;
+        };
+        isabelle = {
+            enable = false;
+            enableNeovimIntegration = true;
         };
     };
     

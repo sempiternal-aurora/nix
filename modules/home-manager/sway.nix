@@ -265,7 +265,7 @@ scratchpad_minimize disable
             systemdTarget = "sway-session.target";
         };
 
-        home.file."${config.xdg.configHome}/copyq/themes/dracula.ini" = {
+        xdg.configFile."copyq/themes/dracula.ini" = {
             enable = true;
             source = builtins.fetchGit {
                 url = "https://github.com/dracula/copyq.git";
@@ -274,7 +274,7 @@ scratchpad_minimize disable
             } + "/dracula.ini";
         };
 
-        home.file."${config.xdg.configHome}/powercheck.sh" = {
+        xdg.configFile."powercheck.sh" = {
             enable = cfg.powercheck;
             executable = true;
             text = ''

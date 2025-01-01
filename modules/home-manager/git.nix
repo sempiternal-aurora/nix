@@ -21,8 +21,8 @@
         ];
     };
 
-    home.file = {
-        "${config.xdg.configHome}/git/gitlab.conf" = {
+    xdg.configFile = {
+        "git/gitlab.conf" = {
             enable = true;
             text = ''
 [user]
@@ -30,7 +30,7 @@
     email = u7644255@anu.edu.au
             '';
         };
-        "${config.xdg.configHome}/git/github.conf" = {
+        "git/github.conf" = {
             enable = true;
             text = ''
 [user]

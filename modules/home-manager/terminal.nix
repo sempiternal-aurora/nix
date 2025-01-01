@@ -17,6 +17,13 @@
             size = 100000;
             share = true;
         };
+        historySubstringSearch = {
+            enable = true;
+            searchUpKey = [ "$terminfo[kcuu1]" "^[[A" ];
+            searchDownKey = [ "$terminfo[kcud1]" "^[[B" ];
+        };
+
+
 
         shellAliases = {
             lf    = "lfcd";

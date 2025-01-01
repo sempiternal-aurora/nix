@@ -5,11 +5,26 @@ let
     screenshot = "screenshot";
     screenshotDir = "~/Pictures/Screenshots";
     terminal = "${pkgs.kitty}/bin/kitty";
-    menu = "tofi-run | xargs swaymsg exec --";
-    drun = "tofi-drun | xargs swaymsg exec --";
-    font = (pkgs.nerdfonts.override { fonts = [ "Hasklig" ]; });
+    menu = "${pkgs.tofi}/bin/tofi-run | xargs swaymsg exec --";
+    drun = "${pkgs.tofi}/bin/tofi-drun | xargs swaymsg exec --";
+    font = pkgs.nerd-fonts.hasklug;
     warnDischarge = "10";
     warnCharge = "90";
+    swaylock = "${lib.getExe pkgs.swaylock-effects}";
+    pgrep = "${pkgs.procps}/bin/pgrep";
+    swaymsg = "${pkgs.swayfx}/bin/swaymsg";
+    playerctl = "${lib.getExe pkgs.playerctl}";
+    wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+    firefox = "${lib.getExe pkgs.firefox}";
+    kill = "${pkgs.procps}/bin/kill";
+    polkit-mate = lib.getExe pkgs.mate.mate-polkit;
+    acpi = lib.getExe pkgs.acpi;
+    grep = lib.getExe pkgs.gnugrep;
+    wc = "${pkgs.coreutils}/bin/wc";
+    dunstify = "${pkgs.dunst}/bin/dunstify";
+    grim = lib.getExe pkgs.grim;
+    swappy = lib.getExe pkgs.swappy;
+    slurp = lib.getExe pkgs.slurp;
 in
 {
     options = {
@@ -24,12 +39,24 @@ in
             font
             pkgs.adwaita-icon-theme
             pkgs.wl-clipboard
+            pkgs.dconf
+            pkgs.kitty
+            pkgs.firefox
+            pkgs.discord
+            pkgs.blueman
+            pkgs.vlc
+            pkgs.networkmanagerapplet
         ];
+
+        fonts.fontconfig = {
+            enable = true;
+            defaultFonts.monospace = [ "Hasklug Nerd Font Mono" ];
+        };
         
         programs.kitty = {
             enable = true;
             font = {
-                name = "HasklugNerdFontMono";
+                name = "Hasklug Nerd Font Mono";
                 size = 16;
             };
             settings = {
@@ -62,12 +89,35 @@ in
             };
         };
 
-        #home.pointerCursor = {
-        #    gtk.enable = true;
-        #    package = pkgs.posy-cursors;
-        #    name = "Posy_Cursor_Black";
-        #    size = 22;
-        #};
+        home.pointerCursor = {
+            gtk.enable = true;
+            x11.enable = true;
+            package = pkgs.fuchsia-cursor;
+            name = "Fuchsia";
+            size = 48;
+        };
+
+        gtk = {
+            enable = true;
+            cursorTheme = {
+                package = pkgs.fuchsia-cursor;
+                name = "Fuchsia";
+                size = 24;
+            };
+            font = {
+                package = font;
+                size = 12;
+                name = "Hasklug Nerd Font Regular";
+            };
+            theme = {
+                name = "Dracula";
+                package = pkgs.dracula-theme;
+            };
+            iconTheme = {
+                name = "Dracula";
+                package = pkgs.dracula-icon-theme;
+            };
+        };
 
         wayland.windowManager.sway = {
             enable = true;
@@ -78,7 +128,7 @@ in
                 terminal = terminal;
                 menu = menu;
                 fonts = {
-                    names = [ "HaskligNerdFontMono" ];
+                    names = [ "Hasklug Nerd Font Mono" ];
                     size = 16.0;
                 };
                 gaps = {
@@ -137,11 +187,11 @@ in
                 };
                 modes = {
                     "${screenshot}" = {
-                        "1" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
-                        "2" = "exec '${pkgs.grim}/bin/grim ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
-                        "3" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy', mode \"default\"";
-                        "4" = "exec '${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy', mode \"default\"";
-                        "5" = "exec '${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f -', mode \"default\"";
+                        "1" = "exec '${grim} -g \"$(${slurp})\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
+                        "2" = "exec '${grim} ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
+                        "3" = "exec '${grim} -g \"$(${slurp})\" - | ${wl-copy}', mode \"default\"";
+                        "4" = "exec '${grim} - | ${wl-copy}', mode \"default\"";
+                        "5" = "exec '${grim} -g \"$(${slurp})\" - | ${swappy} -f -', mode \"default\"";
                         Return = "mode \"default\"";
                         Escape = "mode \"default\"";
                         "${modifier}+Print" = "mode \"default\"";
@@ -215,6 +265,15 @@ scratchpad_minimize disable
             systemdTarget = "sway-session.target";
         };
 
+        home.file."${config.xdg.configHome}/copyq/themes/dracula.ini" = {
+            enable = true;
+            source = builtins.fetchGit {
+                url = "https://github.com/dracula/copyq.git";
+                ref = "master";
+                rev = "76ef555efc93df71e04ad7865222ff623cc582c7";
+            } + "/dracula.ini";
+        };
+
         home.file."${config.xdg.configHome}/powercheck.sh" = {
             enable = cfg.powercheck;
             executable = true;
@@ -228,12 +287,12 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
 warn_charge=${warnCharge}
 warn_discharge=${warnDischarge}
 
-battery_num=$(${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep -v 'unavailable' | ${pkgs.gnugrep}/bin/grep -o "Battery [0-9]" | ${pkgs.gnugrep}/bin/grep -o "[0-9]")
+battery_num=$(${acpi} | ${grep} -v 'unavailable' | ${grep} -o "Battery [0-9]" | ${grep} -o "[0-9]")
 
-if [[ $( ${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep "Battery ''${battery_num}: Discharging" | ${pkgs.coreutils-full}/bin/wc -l) == 1 ]]; then
-  current_charge=$(${pkgs.acpi}/bin/acpi | ${pkgs.gnugrep}/bin/grep -o "Battery ''${battery_num}: Discharging, [0-9]*%" | ${pkgs.gnugrep}/bin/grep -o "[0-9]*%" | ${pkgs.gnugrep}/bin/grep -o "[0-9]*")
+if [[ $( ${acpi} | ${grep} "Battery ''${battery_num}: Discharging" | ${wc} -l) == 1 ]]; then
+  current_charge=$(${acpi} | ${grep} -o "Battery ''${battery_num}: Discharging, [0-9]*%" | ${grep} -o "[0-9]*%" | ${grep} -o "[0-9]*")
   if [[ $current_charge -le $warn_discharge ]]; then
-    ${pkgs.dunst}/bin/dunstify -r 7693 -u critical "Low Battery!" "Charge is at ''${current_charge} percent!"
+    ${dunstify} -r 7693 -u critical "Low Battery!" "Charge is at ''${current_charge} percent!"
   fi
 #elif [[ $( acpi | grep "Battery ''${battery_num}: Charging" | wc -l) == 1 ]]; then
 #  current_charge=$(acpi | grep -o "Battery ''${battery_num}: Charging, [0-9]*%" | grep -o "[0-9]*%" | grep -o "[0-9]*")
@@ -275,7 +334,7 @@ fi
                     Service = {
                         Type = "simple";
                         ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
-                        ExecRestart = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+                        ExecReload = "${kill} -SIGUSR2 $MAINPID";
                         Restart = "on-failure";
                         KillMode = "mixed";
                         RestartSec = 1;
@@ -286,21 +345,27 @@ fi
                 };
             };
         };
+            
+        xdg.portal = {
+            enable = true;
+            extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+            configPackages = [ pkgs.swayfx ];
+        };
 
         services.swayidle = {
             enable = true;
             events = [
-                { event = "before-sleep"; command = "playerctl pause"; }
-                { event = "before-sleep"; command = "swaylock -f"; }
+                { event = "before-sleep"; command = "${playerctl} pause"; }
+                { event = "before-sleep"; command = "${swaylock} -f"; }
             ];
             systemdTarget = "sway-session.target";
             timeouts = [
-                { timeout = 15; command = "swaylock -f"; }
-                { timeout = 30; command = "swaymsg 'output * dpms off'"; }
+                { timeout = 300; command = "${swaylock} -f"; }
+                { timeout = 900; command = "${swaymsg} 'output * dpms off'"; }
                 {
                     timeout = 15; 
-                    command = "if pgrep -x swaylock; then swaymsg 'output * dpms off'; fi"; 
-                    resumeCommand = "swaymsg 'output * dpms on'";
+                    command = "if ${pgrep} -x swaylock; then ${swaymsg} 'output * dpms off'; fi"; 
+                    resumeCommand = "${swaymsg} 'output * dpms on'";
                 }
             ];
         };
@@ -337,7 +402,7 @@ fi
                     separator_color = "frame";
                     sort = "yes";
                     idle_threshold = 120;
-                    font = "HasklugNerdFontMono 20";
+                    font = "Hasklug Nerd Font Mono 20";
                     line_height = 0;
                     markup = "full";
                     format = "%s %p\\n%b";
@@ -354,8 +419,8 @@ fi
                     max_icon_size = 128;
                     stick_history = "yes";
                     history_length = 20;
-                    dmenu = "${pkgs.tofi}/bin/tofi --prompt-text \"dunst: \"";
-                    browser = "${pkgs.firefox}/usr/bin/firefox -new-tab";
+                    dmenu = menu;
+                    browser = "${firefox} -new-tab";
                     always_run_script = true;
                     title = "Dunst";
                     class = "Dunst";
@@ -395,7 +460,7 @@ fi
         programs.tofi = {
             enable = true;
             settings = {
-                font = "\"${font}/share/fonts/opentype/NerdFonts/HasklugNerdFont-Regular.otf\"";
+                font = "\"${font}/share/fonts/opentype/NerdFonts/Hasklug/HasklugNerdFont-Regular.otf\"";
                 font-size = 24;
                 hint-font = true;
                 text-color = "#FFFFFF";

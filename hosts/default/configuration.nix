@@ -18,7 +18,6 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
     # Use the latest linux kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-
     # Use the systemd-boot EFI boot loader.
     boot.loader = {
         systemd-boot.enable = true;
@@ -50,15 +49,18 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
         "1password"
     ];
 
-    services.fprintd.enable = true;
+    mine = {
+        keyboard = {
+            enable = true;
+            caps2esc = true;
+        };
 
-    hardware.brillo.enable = true;
+        greetd = {
+            enable = true;
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd \"systemd-cat --identifier=sway sway\"";
+        };
 
-    security.pam.services.swaylock = {};
-
-    mine.keyboard = {
-        enable = true;
-        caps2esc = true;
+        audio.enable = true;
     };
 
     # 1Password __MUST__ be installed as root

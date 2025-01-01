@@ -1,6 +1,13 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
+let
+    cfg = config.mine.audio;
+in
 {
-    config = {
+    options.mine.audio = {
+        enable = lib.mkEnableOption "Enable pipewire audio management";
+    };
+
+    config = lib.mkIf cfg.enable {
         # Enable sound.
         services.pipewire = {
             enable = true;

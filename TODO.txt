@@ -1,9 +1,7 @@
-fix swayidle
-move waybar css into nix
+Figure out if anything is happening with wifi
+Pick a nice cursor theme
 check for remaining configs to be ported
 dev environments?
-fix tofi desktop stuff - all from arch
-git config
 nvim config
 once you're sure there's nothing more to port in, nuke home directory, needs cleaning
  - Make sure all git repos are pushed beforehand

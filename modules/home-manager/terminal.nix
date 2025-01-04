@@ -6,6 +6,10 @@
 }:
 
 {
+    home.packages = [
+        pkgs.weechat
+    ];
+
     programs.zsh = {
         enable = true;
         autosuggestion.enable = true;
@@ -22,8 +26,6 @@
             searchUpKey = [ "$terminfo[kcuu1]" "^[[A" ];
             searchDownKey = [ "$terminfo[kcud1]" "^[[B" ];
         };
-
-
 
         shellAliases = {
             lf    = "lfcd";

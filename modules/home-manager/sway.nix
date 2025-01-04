@@ -324,6 +324,16 @@ fi
 '';
         };
 
+        xdg.configFile."handlr/handlr.toml" = {
+            enable = true;
+            text = ''
+enable_selector = true
+selector = "tofi --prompt-text='Open With ==>'"
+term_exec_args = "-e"
+expand_wildcards = false
+            '';
+        };
+
         systemd.user = {
             timers.powercheck = (lib.mkIf cfg.powercheck {
                 Unit = { Description = "periodically run powercheck.sh"; };

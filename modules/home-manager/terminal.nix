@@ -265,7 +265,7 @@
             e = "$$EDITOR \"$f\"";
         };
         commands = {
-            open = "%xdg-open $f";
+            open = "%handlr open $f";
             extract = "\${{set -f
                 case $f in
                     *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
@@ -302,7 +302,6 @@
 	                sudo $EDITOR $ans}}";
             trash = "%trash-put $fx";
             restore = "%trash-restore";
-
         };
         previewer = {
             source = "${pkgs.ctpv}/bin/ctpv";

@@ -11,6 +11,7 @@
 
     services.printing.enable = true;
     services.fprintd.enable = true;
+    services.usbmuxd.enable = true;
 
     security.polkit.enable = true;
     security.pam.services.swaylock = {};
@@ -27,11 +28,16 @@
             wget
             lf
             git
-            gcc
-            wgnord
+            libimobiledevice
         ];
+    };
 
-        pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
+    environment.sessionVariables = {
+        XDG_CACHE_HOME  = "$HOME/.cache";
+        XDG_CONFIG_HOME = "$HOME/.config";
+        XDG_DATA_HOME   = "$HOME/.local/share";
+        XDG_STATE_HOME  = "$HOME/.local/state";
+        NIX_BUILD_SHELL = "zsh";
     };
 }
 

@@ -47,6 +47,10 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
         "1password-gui"
         "1password-cli"
         "1password"
+        "steam"
+        "steam-original"
+        "steam-unwrapped"
+        "steam-run"
     ];
 
     mine = {
@@ -61,6 +65,10 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
         };
 
         audio.enable = true;
+        steam.enable = true;
+        lutris.enable = true;
+        itch.enable = true;
+        prism.enable = true;
     };
 
     # 1Password __MUST__ be installed as root
@@ -69,6 +77,12 @@ args@{ inputs, config, lib, pkgs, vars, ... }:
         enable = true;
         polkitPolicyOwners = [ vars.adminUser vars.localUser ];
     };
+
+    hardware.amdgpu.amdvlk = {
+        enable = true;
+        support32Bit.enable = true;
+    };
+ 
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.

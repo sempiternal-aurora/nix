@@ -6,6 +6,7 @@
         ./audio.nix
         ./console.nix
         ./system.nix
+        ./games.nix
         ./keyboard.nix
     ];
 }

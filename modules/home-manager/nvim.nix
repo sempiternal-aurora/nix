@@ -31,7 +31,26 @@ in
             # needed by treesitter
             pkgs.clang
             pkgs.clang-tools
+
+            # needed for telescope
+            pkgs.ripgrep
+            pkgs.fd
         ];
+
+        xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+                "application/json"      = [ "nvim.desktop" ];
+                "text/plain"            = [ "nvim.desktop" ];
+                "text/x-shellscript"    = [ "nvim.desktop" ];
+                "text/x-java"           = [ "nvim.desktop" ];
+                "text/simple"           = [ "nvim.desktop" ];
+                "text/x-c"              = [ "nvim.desktop" ];
+                "text/x-makefile"       = [ "nvim.desktop" ];
+                "text/x-asm"            = [ "nvim.desktop" ];
+                "text/x-script"         = [ "nvim.desktop" ];
+            };
+        };
 
         programs.neovim = {
             enable = true;

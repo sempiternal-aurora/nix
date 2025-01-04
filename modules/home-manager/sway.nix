@@ -46,11 +46,25 @@ in
             pkgs.blueman
             pkgs.vlc
             pkgs.networkmanagerapplet
+            pkgs.pwvucontrol
+            pkgs.handlr-regex
+            pkgs.image-roll
         ];
 
         fonts.fontconfig = {
             enable = true;
             defaultFonts.monospace = [ "Hasklug Nerd Font Mono" ];
+        };
+
+        xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+                "image/png"         = [ "image-roll.desktop" ];
+                "image/jpg"         = [ "image-roll.desktop" ];
+                "image/jpeg"        = [ "image-roll.desktop" ];
+                "application/pdf"   = [ "org.pwmt.zathura.desktop" ];
+                "video/mp4"         = [ "vlc.desktop" ];
+            };
         };
         
         programs.kitty = {
@@ -68,6 +82,13 @@ in
             };
             shellIntegration.enableZshIntegration = true;
             themeFile = "Dracula";
+        };
+
+        programs.zathura = {
+            enable = true;
+            options = {
+                selection-clipboard = "clipboard";
+            };
         };
 
         programs.swaylock = {
@@ -424,7 +445,7 @@ fi
                     always_run_script = true;
                     title = "Dunst";
                     class = "Dunst";
-                    corner-radius = 15;
+                    corner_radius = 15;
                     ignore_dbusclose = false;
                     force_xwayland = false;
                     force_xinerama = false;

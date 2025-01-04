@@ -6,5 +6,6 @@
         ./git.nix
         ./nvim.nix
         ./isabelle.nix
+        ./calibre.nix
     ];
 }

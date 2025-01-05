@@ -562,7 +562,7 @@ expand_wildcards = false
 
         xdg.configFile."waybar/style.css" = {
             enable = true;
-            source = ./style.css;
+            source = ./source/style.css;
         };
 
         programs.waybar = {

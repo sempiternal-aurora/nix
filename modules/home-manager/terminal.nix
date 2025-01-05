@@ -224,9 +224,9 @@
             shellopts = "-eu";
             ifs = "\\n";
             cleaner = "${pkgs.ctpv}/bin/ctpvclear";
-            drawbox = "true";
-            ignorecase = "true";
-            icons = "true";
+            drawbox = true;
+            ignorecase = true;
+            icons = true;
             info = "size";
         };
         keybindings = {
@@ -312,6 +312,11 @@
             &${pkgs.ctpv}/bin/ctpv -s $id
             &${pkgs.ctpv}/bin/ctpvquit $id
         '';
+    };
+
+    xdg.configFile."lf/icons" = {
+        enable = true;
+        source = ./source/icons;
     };
 
     programs.eza = {

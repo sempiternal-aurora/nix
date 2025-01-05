@@ -32,7 +32,7 @@ in
 # Get the list of all titles
 titles=$(${sqlite} -readonly /home/jellyfin/Calibre\ Library/metadata.db "select title from books;");
 
-choice=$(${echo} "$titles" | ${tofi} --horizontal false --result-spacing 5 --height 500 | ${sed} -e "s,',\',");
+choice=$(${echo} "$titles" | ${tofi} --horizontal false --result-spacing 5 --height 500 --history-file=$XDG_STATE_HOME/tofi-book-history | ${sed} -e "s,',\',");
 
 sqlquery="SELECT p.value FROM books AS b INNER JOIN books_custom_column_1_link AS bp ON b.id = bp.book INNER JOIN custom_column_1 AS p ON bp.value = p.id WHERE b.title = '$choice';";
 

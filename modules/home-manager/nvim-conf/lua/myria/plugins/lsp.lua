@@ -13,8 +13,21 @@ return {
         "j-hui/fidget.nvim",
         "onsails/lspkind.nvim",
     },
-
-    config = function()
+    opts = {
+		servers = {
+			lua_ls = {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim", "it", "describe", "before_each", "after_each" },
+                        }
+                    }
+                }
+            }
+        }
+	},
+    config = function(_, opts)
+        local servers = opts.servers
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -24,11 +37,17 @@ return {
             cmp_lsp.default_capabilities())
         local lspkind = require("lspkind")
 
+        for server, server_opts in pairs(servers) do
+            if server_opts then
+                server_opts.capabilities = capabilities
+                require("lspconfig")[server].setup(server_opts)
+            end
+        end
+
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
                 "rust_analyzer",
         		"pylsp",
         		"intelephense",
@@ -41,20 +60,6 @@ return {
 
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
-                    }
-                end,
-
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
                     }
                 end,
             }

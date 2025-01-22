@@ -11,3 +11,28 @@ vim.api.nvim_create_autocmd(
         end,
     }
 )
+
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    {
+        pattern = "*.js,*.vue,*.mjs,*.cjs",
+        group = "AutoFormat",
+        callback = function()
+            vim.cmd("silent !npx prettier --write %")
+            vim.cmd("edit")
+        end,
+    }
+)
+
+--vim.api.nvim_create_autocmd(
+--    "BufWritePost",
+--    {
+--        pattern = "*.rs",
+--        group = "AutoFormat",
+--        callback = function()
+--            vim.cmd("silent !cargo --quiet fmt")
+--            vim.cmd("edit")
+--        end,
+--    }
+--)
+

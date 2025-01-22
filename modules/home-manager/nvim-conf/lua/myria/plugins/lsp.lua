@@ -14,7 +14,7 @@ return {
         "onsails/lspkind.nvim",
     },
     opts = {
-		servers = {
+        servers = {
             rust_analyzer = {},
             pylsp = {},
             intelephense = {},
@@ -33,7 +33,7 @@ return {
                     },
                 },
             },
-			lua_ls = {
+            lua_ls = {
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -43,7 +43,7 @@ return {
                 }
             }
         },
-	},
+    },
     config = function(_, opts)
         local servers = opts.servers
         local cmp = require('cmp')
@@ -74,8 +74,8 @@ return {
                 "lua_ls",
                 "ts_ls",
                 "volar",
-        		"pylsp",
-        		"intelephense",
+                "pylsp",
+                "intelephense",
                 "jdtls",
             },
         })
@@ -107,8 +107,8 @@ return {
                 format = lspkind.cmp_format({
                     maxwidth = 50,
                     ellipsis_char = "...",
-				}),
-			},
+                }),
+            },
         })
 
         vim.diagnostic.config({

@@ -15,6 +15,24 @@ return {
     },
     opts = {
 		servers = {
+            rust_analyzer = {},
+            pylsp = {},
+            intelephense = {},
+            clangd = {},
+            jdtls = {},
+            volar = {},
+            ts_ls = {
+                filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+                init_options = {
+                    plugins = {
+                        {
+                            name = '@vue/typescript-plugin',
+                            location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                            languages = { 'vue' },
+                        },
+                    },
+                },
+            },
 			lua_ls = {
                 settings = {
                     Lua = {
@@ -24,7 +42,7 @@ return {
                     }
                 }
             }
-        }
+        },
 	},
     config = function(_, opts)
         local servers = opts.servers
@@ -37,9 +55,14 @@ return {
             cmp_lsp.default_capabilities())
         local lspkind = require("lspkind")
 
+        on_attach = function(_, bufnr)
+            vim.keyman.set('n', 'K', vim.lsp.buf.hover, { noremap=true, silent=true, buffer=bufnr})
+        end
+
         for server, server_opts in pairs(servers) do
             if server_opts then
                 server_opts.capabilities = capabilities
+                server_opts.on_attach = on_attach
                 require("lspconfig")[server].setup(server_opts)
             end
         end
@@ -48,21 +71,13 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "rust_analyzer",
+                "lua_ls",
+                "ts_ls",
+                "volar",
         		"pylsp",
         		"intelephense",
-                "clangd",
-                "ts_ls",
                 "jdtls",
             },
-            handlers = {
-                function(server_name) -- default handler (optional)
-
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
-            }
         })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }

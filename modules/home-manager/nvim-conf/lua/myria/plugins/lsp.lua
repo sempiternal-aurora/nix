@@ -1,8 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -16,7 +14,7 @@ return {
     opts = {
         servers = {
             rust_analyzer = {},
-            pylsp = {},
+            pyright = {},
             intelephense = {},
             clangd = {},
             jdtls = {},
@@ -69,17 +67,6 @@ return {
         end
 
         require("fidget").setup({})
-        require("mason").setup()
-        --require("mason-lspconfig").setup({
-        --    ensure_installed = {
-        --        "lua_ls",
-        --        "ts_ls",
-        --        "volar",
-        --        "pylsp",
-        --        "intelephense",
-        --        "jdtls",
-        --    },
-        --})
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

@@ -55,8 +55,8 @@ return {
             cmp_lsp.default_capabilities())
         local lspkind = require("lspkind")
 
-        on_attach = function(_, bufnr)
-            vim.keyman.set('n', 'K', vim.lsp.buf.hover, { noremap=true, silent=true, buffer=bufnr})
+        local on_attach = function(_, bufnr)
+            vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap=true, silent=true, buffer=bufnr})
         end
 
         for server, server_opts in pairs(servers) do

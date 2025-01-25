@@ -25,6 +25,7 @@ in
 
         home.packages = [
             pkgs.lua-language-server
+            pkgs.nil
             #pkgs.rust-analyzer
             #pkgs.ltex-ls
 

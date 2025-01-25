@@ -12,6 +12,11 @@
         pkgs.unzip
     ];
 
+    programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+    };
+
     programs.zsh = {
         enable = true;
         autosuggestion.enable = true;

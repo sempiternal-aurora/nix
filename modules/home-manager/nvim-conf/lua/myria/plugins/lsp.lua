@@ -21,6 +21,7 @@ return {
             clangd = {},
             jdtls = {},
             volar = {},
+            nil_ls = {},
             ts_ls = {
                 filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
                 init_options = {

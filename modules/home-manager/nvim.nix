@@ -24,7 +24,7 @@ in
         #};
 
         home.packages = [
-            #pkgs.lua-language-server
+            pkgs.lua-language-server
             #pkgs.rust-analyzer
             #pkgs.ltex-ls
 
@@ -32,7 +32,7 @@ in
             pkgs.clang
             pkgs.clang-tools
 
-            # needed for telescope
+            # needed by telescope
             pkgs.ripgrep
             pkgs.fd
         ];

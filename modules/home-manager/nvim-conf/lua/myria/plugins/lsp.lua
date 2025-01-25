@@ -69,16 +69,16 @@ return {
 
         require("fidget").setup({})
         require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "ts_ls",
-                "volar",
-                "pylsp",
-                "intelephense",
-                "jdtls",
-            },
-        })
+        --require("mason-lspconfig").setup({
+        --    ensure_installed = {
+        --        "lua_ls",
+        --        "ts_ls",
+        --        "volar",
+        --        "pylsp",
+        --        "intelephense",
+        --        "jdtls",
+        --    },
+        --})
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

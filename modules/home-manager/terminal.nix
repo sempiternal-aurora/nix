@@ -8,11 +8,14 @@
 {
     home.packages = [
         pkgs.weechat
+        pkgs.zip
+        pkgs.unzip
     ];
 
     programs.zsh = {
         enable = true;
         autosuggestion.enable = true;
+        enableCompletion = true;
         syntaxHighlighting.enable = true;
         autocd = true;
         history = {
@@ -20,11 +23,6 @@
             save = 100000;
             size = 100000;
             share = true;
-        };
-        historySubstringSearch = {
-            enable = true;
-            searchUpKey = [ "$terminfo[kcuu1]" "^[[A" ];
-            searchDownKey = [ "$terminfo[kcud1]" "^[[B" ];
         };
 
         shellAliases = {
@@ -36,6 +34,20 @@
             lfcd () {
                 cd "$(command lf -print-last-dir "$@")"
             }
+
+            # history substring search
+            autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+            zle -N up-line-or-beginning-search
+            zle -N down-line-or-beginning-search
+            bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
+            bindkey "^[[A" up-line-or-beginning-search
+            bindkey -M vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
+            bindkey -M vicmd "^[[A" up-line-or-beginning-search
+            bindkey -M vicmd "k" up-line-or-beginning-search
+            bindkey -M vicmd "$terminfo[kcud1]" down-line-or-beginning-search
+            bindkey -M vicmd "^[[B" down-line-or-beginning-search
+            bindkey -M vicmd "j" down-line-or-beginning-search
+
             unsetopt beep
             if [ "$COLUMNS" -lt "105" ]; then
                 echo "\n"

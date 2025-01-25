@@ -23,6 +23,7 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment = {
+        pathsToLink = [ "/share/zsh" ];
         systemPackages = with pkgs; [
             neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
             wget
@@ -37,7 +38,6 @@
         XDG_CONFIG_HOME = "$HOME/.config";
         XDG_DATA_HOME   = "$HOME/.local/share";
         XDG_STATE_HOME  = "$HOME/.local/state";
-        NIX_BUILD_SHELL = "zsh";
     };
 }
 

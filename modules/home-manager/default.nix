@@ -7,5 +7,6 @@
         ./nvim.nix
         ./isabelle.nix
         ./calibre.nix
+        ./jetbrains.nix
     ];
 }

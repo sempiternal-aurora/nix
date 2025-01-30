@@ -48,6 +48,10 @@
             enable = false;
             enableNeovimIntegration = true;
         };
+        jetbrains = {
+            enable = false;
+            intellij = false;
+        };
         calibre.enable = true;
     };
     
@@ -80,6 +84,7 @@
         "discord"
         "1password"
         "1password-gui"
+        "idea-ultimate"
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

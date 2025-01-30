@@ -17,7 +17,7 @@ return {
             pyright = {},
             intelephense = {},
             clangd = {},
-            jdtls = {},
+            --jdtls = {},
             volar = {},
             nil_ls = {},
             ts_ls = {

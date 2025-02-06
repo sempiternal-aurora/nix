@@ -5,5 +5,4 @@ return {
             python = { "ruff" },
         }
     end
-
 }

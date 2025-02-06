@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735979091,
-        "narHash": "sha256-WpFjt6+8UD81EP386c269ZTqpEmlGJgcPw+OB4b7EBs=",
+        "lastModified": 1738789832,
+        "narHash": "sha256-HdlMPfObPu5y7oDfH/w3vvlU3UTQ/bQjSULChZARm5M=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "11ab08541e61ac3bbf2ab27229f68622629401df",
+        "rev": "30ea6fed4e4b41693cebc2263373dd810de4de49",
         "type": "github"
       },
       "original": {
@@ -20,13 +20,45 @@
         "type": "github"
       }
     },
+    "isabelle-lsp-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729010055,
+        "narHash": "sha256-rtwhEB8Aq+2RbS4ZtydKmodwfk2N6LE5GIBdfu8Ru04=",
+        "owner": "Treeniks",
+        "repo": "isabelle-lsp.nvim",
+        "rev": "8eaf60f08d7f3ec6782d12327fa7e1b88545bd7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Treeniks",
+        "repo": "isabelle-lsp.nvim",
+        "type": "github"
+      }
+    },
+    "isabelle-syn-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1715734052,
+        "narHash": "sha256-f04jyExUwos9w89IeKbRdRMtWIsQYe0McAUoijq7mCA=",
+        "owner": "Treeniks",
+        "repo": "isabelle-syn.nvim",
+        "rev": "114b06dc34edf1707be7249b5a3815733e68d4c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Treeniks",
+        "repo": "isabelle-syn.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1735834308,
-        "narHash": "sha256-dklw3AXr3OGO4/XT1Tu3Xz9n/we8GctZZ75ZWVqAVhk=",
+        "lastModified": 1738680400,
+        "narHash": "sha256-ooLh+XW8jfa+91F1nhf9OF7qhuA/y1ChLx6lXDNeY5U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6df24922a1400241dae323af55f30e4318a6ca65",
+        "rev": "799ba5bffed04ced7067a91798353d360788b30d",
         "type": "github"
       },
       "original": {
@@ -39,6 +71,8 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "isabelle-lsp-nvim": "isabelle-lsp-nvim",
+        "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nixpkgs": "nixpkgs"
       }
     }

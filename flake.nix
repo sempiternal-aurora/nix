@@ -5,9 +5,24 @@
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
         home-manager = {
-          url = "github:nix-community/home-manager";
-          inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        isabelle-lsp-nvim = {
+            url = "github:Treeniks/isabelle-lsp.nvim";
+            flake = false;
+        };
+
+        isabelle-syn-nvim = {
+            url = "github:Treeniks/isabelle-syn.nvim";
+            flake = false;
+        };
+
+        #isabelle = {
+        #    url = "hg+https://isabelle-dev.sketis.net/source/isabelle";
+        #    flake = false;
+        #};
     };
 
     outputs = { self, nixpkgs, ... }@inputs: {

@@ -1,8 +1,8 @@
 { lib, config, ... }:
 let
     cfg = config.mine.keyboard;
-    tap-time = "150";
-    hold-time = "200";
+    tap-time = "50";
+    hold-time = "100";
 in
 {
     options.mine.keyboard = {

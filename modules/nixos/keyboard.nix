@@ -1,8 +1,8 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
     cfg = config.mine.keyboard;
-    tap-time = "50";
-    hold-time = "100";
+    tap-time = "150";
+    hold-time = "150";
 in
 {
     options.mine.keyboard = {
@@ -11,7 +11,16 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-        services.kanata = {
+        services.interception-tools = {
+            enable = true;
+            udevmonConfig = ''
+                - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+                  DEVICE:
+                    EVENTS:
+                      EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+            '';
+        };
+        /*services.kanata = {
             enable = true;
             keyboards.default.config = ''
                 (defsrc
@@ -28,7 +37,7 @@ in
                     caps
                 )
             '';
-        };
+        };*/
 
     };
 

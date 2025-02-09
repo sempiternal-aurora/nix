@@ -44,6 +44,7 @@ in
             ];
 
             plugins = with pkgs.vimPlugins; [
+                # colorscheme
                 {
                     plugin = dracula-nvim;
                     config = toLua ''
@@ -51,44 +52,38 @@ in
                         vim.cmd("colorscheme dracula")
                     '';
                 }
-                haskell-tools-nvim
-                plenary-nvim
-                nvim-web-devicons
+                # status line
                 {
-                    plugin = nvim-lint;
-                    config = toLua "require(\"lint\").linters_by_ft = { python = { \"ruff\" } }";
+                    plugin = lualine-nvim;
+                    config = toLua "require(\"lualine\").setup { options = { theme = \"dracula-nvim\" } }";
                 }
+                # git
                 {
                     plugin = vim-fugitive;
                     config = toLuaFile ./source/fugitive.lua;
                 }
                 {
-                    plugin = lualine-nvim;
-                    config = toLua "require(\"lualine\").setup { options = { theme = \"dracula-nvim\" } }";
+                    plugin = gitsigns-nvim;
+                    config = toLua "require(\"gitsigns\").setup()";
                 }
+                # pretty finding tui
                 {
                     plugin = telescope-nvim;
                     config = toLua "require('telescope').setup({})";
                 }
-                {
-                    plugin = (nvim-treesitter.withPlugins (p: with p; [
-                        c nix lua rust vimdoc haskell typescript javascript
-                        rust latex php python vim bash java css desktop diff
-                        git_config gitcommit gitignore ini json make markdown
-                        markdown_inline perl query toml yaml zathurarc
-                    ]));
-                    config = toLua ''
-                        require("nvim-treesitter.configs").setup({
-                            indent = { enable = true },
-                            highlight = { additional_vim_regex_highlighting = { "markdown" }, },
-                        })
-                    '';
-                }
+                # undo handling
                 undotree
+                # easy multi-file switching
                 {
                     plugin = harpoon2;
                     config = toLuaFile ./source/harpoon.lua;
                 }
+                # linting
+                {
+                    plugin = nvim-lint;
+                    config = toLua "require(\"lint\").linters_by_ft = { python = { \"ruff\" } }";
+                }
+                # completion support
                 {
                     plugin = nvim-cmp;
                     config = toLuaFile ./source/cmp.lua;
@@ -97,17 +92,59 @@ in
                 cmp-buffer
                 cmp-path
                 cmp-cmdline
+
+                # Snippets
                 luasnip
                 cmp_luasnip
+
+                # notifications bottom left
                 {
                     plugin = fidget-nvim;
                     config = toLua "require('fidget').setup({})";
                 }
+
+                # cool icons
                 lspkind-nvim
+                nvim-web-devicons
+
+                # comment selected lines
+                {
+                    plugin = comment-nvim;
+                    config = toLua ''
+                        require("Comment").setup { 
+                            toggler = {
+                                line = ",cc",
+                                block = ",Cc",
+                            },
+                            opleader = {
+                                line = ",c",
+                                block = ",C",
+                            },
+                            mappings = {
+                                basic = true,
+                                extra = false,
+                            },
+                        }
+                    '';
+                }
+                # language support
                 {
                     plugin = nvim-lspconfig;
                     config = toLuaFile ./source/lsp.lua;
                 }
+                {
+                    plugin = nvim-treesitter.withAllGrammars;
+                    config = toLua ''
+                        require("nvim-treesitter.configs").setup({
+                            indent = { enable = true },
+                            highlight = { 
+                                enable = true,
+                                additional_vim_regex_highlighting = { "markdown" }, 
+                            },
+                        })
+                    '';
+                }
+                haskell-tools-nvim
             ];
 
             extraLuaConfig = ''
@@ -136,7 +173,6 @@ in
                     builtin.grep_string({ search = vim.fn.input("Grep > ") })
                 end)
                 vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
-
 
                 vim.diagnostic.config({
                     -- update_in_insert = true,

@@ -10,6 +10,7 @@
         pkgs.weechat
         pkgs.zip
         pkgs.unzip
+        pkgs.mercurial
     ];
 
     programs.direnv = {

@@ -8,6 +8,10 @@
 
 let
     cfg = config.mine.isabelle;
+    isabelle-pkg = pkgs.callPackage ./isabelle-pkg.nix { 
+        inherit inputs; 
+        java = pkgs.jdk;
+    };
 in
 {
     options = {
@@ -23,6 +27,7 @@ in
                         isabelle-lsp-nvim = prev.vimUtils.buildVimPlugin {
                             name = "isabelle-lsp.nvim";
                             src = inputs.isabelle-lsp-nvim;
+                            dependencies = [ final.vimPlugins.nvim-lspconfig ];
                         };
                         isabelle-syn-nvim = prev.vimUtils.buildVimPlugin {
                             name = "isabelle-syn.nvim";
@@ -32,7 +37,7 @@ in
                 })
             ];
         };
-
+        
         programs.neovim.plugins = lib.mkIf cfg.enableNeovimIntegration (with pkgs.vimPlugins; [
             { 
                 plugin = isabelle-lsp-nvim;
@@ -41,15 +46,13 @@ in
             isabelle-syn-nvim
         ]);
 
-        home.packages = [ pkgs.isabelle ];
+        home.packages = [ isabelle-pkg ];
 
         home.file.".isabelle/isabelle-lsp" = {
             enable = cfg.enableNeovimIntegration;
             recursive = true;
-            source = pkgs.fetchhg {
-                url = "https://isabelle-dev.sketis.net/source/isabelle/";
-                rev = "92768949a923";
-            };
+            source = inputs.isabelle;
+            onChange = "pwd > ~/pwd.txt";
         };
     };
 }

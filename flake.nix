@@ -19,10 +19,10 @@
             flake = false;
         };
 
-        #isabelle = {
-        #    url = "hg+https://isabelle-dev.sketis.net/source/isabelle";
-        #    flake = false;
-        #};
+        isabelle = {
+            url = "hg+https://isabelle-dev.sketis.net/source/isabelle";
+            flake = false;
+        };
     };
 
     outputs = { self, nixpkgs, ... }@inputs: {

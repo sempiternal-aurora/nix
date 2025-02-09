@@ -20,6 +20,21 @@
         "type": "github"
       }
     },
+    "isabelle": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-cpSCIUzl0t/CwQBeU0mOB5Orwyd1e2H9L+vJkyXhIL4=",
+        "ref": "default",
+        "rev": "df68d656d5c46d4013f37f3af4f629c759c3f2f9",
+        "revCount": 82101,
+        "type": "hg",
+        "url": "https://isabelle-dev.sketis.net/source/isabelle"
+      },
+      "original": {
+        "type": "hg",
+        "url": "https://isabelle-dev.sketis.net/source/isabelle"
+      }
+    },
     "isabelle-lsp-nvim": {
       "flake": false,
       "locked": {
@@ -71,6 +86,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "isabelle": "isabelle",
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
         "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nixpkgs": "nixpkgs"

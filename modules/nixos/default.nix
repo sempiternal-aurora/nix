@@ -1,12 +1,12 @@
 {
-    imports = [
-        ./admin-user.nix
-        ./network.nix
-        ./local-user.nix
-        ./audio.nix
-        ./console.nix
-        ./system.nix
-        ./games.nix
-        ./keyboard.nix
-    ];
+  imports = [
+    ./admin-user.nix
+    ./network.nix
+    ./local-user.nix
+    ./audio.nix
+    ./console.nix
+    ./system.nix
+    ./games.nix
+    ./keyboard.nix
+  ];
 }

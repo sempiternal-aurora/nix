@@ -17,7 +17,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs = lib.mkIf cfg.enable {
+    nixpkgs = {
+      #lib.mkIf cfg.enableNeovimIntegration {
       overlays = [
         (final: prev: {
           vimPlugins =

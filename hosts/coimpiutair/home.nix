@@ -47,8 +47,8 @@
       enableNeovimIntegration = false;
     };
     jetbrains = {
-      enable = false;
-      intellij = false;
+      enable = true;
+      intellij = true;
     };
     calibre.enable = true;
   };

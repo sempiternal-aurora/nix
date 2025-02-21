@@ -1,3 +1,23 @@
+local configs = require("lspconfig.configs")
+
+vim.filetype.add({
+    extension = {
+        par = "parol",
+    },
+})
+
+if not configs.parol_ls then
+    configs.parol_ls = {
+        default_config = {
+            cmd = { "parol-ls", "--stdio" },
+            filetypes = { "parol" },
+            root_dir = function(fname)
+                return require("lspconfig").util.find_git_ancestor(fname)
+            end,
+        },
+    }
+end
+
 local servers = {
     rust_analyzer = {},
     pyright = {},
@@ -30,6 +50,7 @@ local servers = {
             },
         },
     },
+    parol_ls = {},
 }
 local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities =

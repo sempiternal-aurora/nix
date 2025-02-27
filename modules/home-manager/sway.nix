@@ -148,7 +148,7 @@ in {
     wayland.windowManager.sway = {
       enable = true;
       checkConfig = false; # Temporary build fix (see https://github.com/nix-community/home-manager/issues/5379 )
-      package = pkgs.swayfx;
+      package = null;
       config = {
         modifier = modifier;
         terminal = terminal;
@@ -270,21 +270,15 @@ in {
         base = true;
         gtk = true;
       };
-      extraSessionCommands = ''
-        # Firefox:
-        export MOX_ENABLE_WAYLAND=1
-        # SDL:
-        export SDL_VIDEODRIVER=wayland
-        # QT (needs qt5.qtwayland in systemPackages):
-        export QT_QPA_PLATFORM=wayland-egl
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-        # Fix for some Java AWT applications (e.g. Android Studio);
-        # use this if they aren't displayed properly:
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        # Hopefully fix nix and discord?
-        export NIXOS_OZONE_WL="1"
-      '';
       systemd.enable = true;
+    };
+    home.sessionVariables = {
+      MOX_ENABLE_WAYLAND = "1";
+      SDL_VIDEODRIVER = "wayland";
+      QT_QPA_PLATFORM = "wayland-egl";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      NIXOS_OZONE_WL = "1";
     };
 
     services.copyq = {
@@ -383,12 +377,6 @@ in {
           Install = {WantedBy = ["sway-session.target"];};
         };
       };
-    };
-
-    xdg.portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
-      configPackages = [pkgs.swayfx];
     };
 
     services.swayidle = {

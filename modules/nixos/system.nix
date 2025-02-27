@@ -18,6 +18,10 @@
   hardware.brillo.enable = true;
 
   programs.dconf.enable = true;
+  programs.sway = {
+    enable = true;
+    package = pkgs.swayfx;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

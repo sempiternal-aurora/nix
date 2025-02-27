@@ -8,5 +8,6 @@
     ./isabelle.nix
     ./calibre.nix
     ./jetbrains.nix
+    ./digital.nix
   ];
 }

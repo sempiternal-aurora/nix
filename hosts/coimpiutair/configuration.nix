@@ -34,13 +34,13 @@ args @ {
   admin-user = {
     enable = true;
     userName = vars.adminUser;
-    homeManager = (import ./home.nix (args // {userName = vars.adminUser;}));
+    homeManager = import ./home.nix (args // {userName = vars.adminUser;});
   };
 
   local-user = {
     enable = true;
     userName = vars.localUser;
-    homeManager = (import ./home.nix (args // {userName = vars.localUser;}));
+    homeManager = import ./home.nix (args // {userName = vars.localUser;});
   };
 
   networking.hostName = "coimpiutair"; # Define your hostname.
@@ -65,9 +65,10 @@ args @ {
     };
 
     greetd = {
-      enable = true;
+      enable = false;
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd \"systemd-cat --identifier=sway sway\"";
     };
+    ly.enable = true;
 
     audio.enable = true;
     steam.enable = true;

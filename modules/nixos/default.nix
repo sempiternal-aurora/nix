@@ -8,5 +8,6 @@
     ./system.nix
     ./games.nix
     ./keyboard.nix
+    ./wayland.nix
   ];
 }

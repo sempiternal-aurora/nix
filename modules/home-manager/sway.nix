@@ -198,7 +198,7 @@ in {
           "${modifier}+Alt+c" = "exec code";
           "${modifier}+Alt+s" = "exec steam";
           "${modifier}+Shift+e" = "exec swaymsg exit";
-          "${modifier}+Shift+b" = "${config.xdg.configHome}/tofi/tofi_books.sh";
+          "${modifier}+Shift+b" = "exec ${config.xdg.configHome}/tofi/tofi_books.sh";
           "${modifier}+Shift+v" = "exec copyq show";
           "F11" = "fullscreen toggle";
           "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";

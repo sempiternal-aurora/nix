@@ -29,6 +29,17 @@ in {
       vt = 1;
       settings.default_session.command = cfg.command;
     };
-    services.displayManager.ly.enable = lcfg.enable;
+    services.displayManager.ly = {
+      enable = lcfg.enable;
+      settings = lib.mkDefault {
+        brightness_down_cmd = "${pkgs.brillo}/bin/brillo -q -U 5";
+        brightness_up_cmd = "${pkgs.brillo}/bin/brillo -q -A 5";
+        brightness_down_key = "F7";
+        brightness_up_key = "F8";
+        clock = "%c";
+        default_input = "login";
+        tty = 1;
+      };
+    };
   };
 }

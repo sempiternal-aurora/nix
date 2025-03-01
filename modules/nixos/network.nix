@@ -9,6 +9,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # VPN Stuff
+  environment.systemPackages = [pkgs.globalprotect-openconnect];
+  services.globalprotect.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

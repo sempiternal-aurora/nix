@@ -12,6 +12,7 @@
         condition = "hasconfig:remote.*.url:git@github.com:*/**";
       }
     ];
+    maintenance.enable = true;
   };
 
   xdg.configFile = {

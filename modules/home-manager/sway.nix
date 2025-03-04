@@ -21,7 +21,7 @@
   swaymsg = "${pkgs.swayfx}/bin/swaymsg";
   playerctl = "${lib.getExe pkgs.playerctl}";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-  firefox = "${lib.getExe pkgs.firefox}";
+  zen = "${lib.getExe inputs.zen-browser.packages."x86_64-linux".twilight}";
   kill = "${pkgs.procps}/bin/kill";
   polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
@@ -45,7 +45,6 @@ in {
       pkgs.adwaita-icon-theme
       pkgs.wl-clipboard
       pkgs.dconf
-      pkgs.kitty
       pkgs.firefox
       pkgs.discord
       pkgs.blueman
@@ -54,6 +53,7 @@ in {
       pkgs.pwvucontrol
       pkgs.handlr-regex
       pkgs.image-roll
+      inputs.zen-browser.packages."x86_64-linux".twilight
     ];
 
     fonts.fontconfig = {
@@ -193,7 +193,7 @@ in {
         defaultWorkspace = "workspace number 1";
         keybindings = lib.mkOptionDefault {
           "${modifier}+Shift+d" = "exec \"${drun}\"";
-          "${modifier}+Alt+f" = "exec firefox";
+          "${modifier}+Alt+f" = "exec zen";
           "${modifier}+Alt+d" = "exec discord";
           "${modifier}+Alt+c" = "exec code";
           "${modifier}+Alt+s" = "exec steam";
@@ -459,7 +459,7 @@ in {
           stick_history = "yes";
           history_length = 20;
           dmenu = menu;
-          browser = "${firefox} -new-tab";
+          browser = "${zen} -new-tab";
           always_run_script = true;
           title = "Dunst";
           class = "Dunst";

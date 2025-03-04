@@ -9,5 +9,6 @@
     ./calibre.nix
     ./jetbrains.nix
     ./digital.nix
+    ./mathematica.nix
   ];
 }

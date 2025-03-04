@@ -9,6 +9,7 @@
     pkgs.zip
     pkgs.unzip
     pkgs.mercurial
+    pkgs.trash-cli
   ];
 
   programs.direnv = {

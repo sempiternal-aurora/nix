@@ -3,7 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 args @ {
   inputs,
-  config,
   lib,
   pkgs,
   vars,
@@ -84,6 +83,10 @@ args @ {
     polkitPolicyOwners = [vars.adminUser vars.localUser];
   };
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
   hardware.amdgpu.amdvlk = {
     enable = true;
     support32Bit.enable = true;

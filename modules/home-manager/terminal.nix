@@ -112,7 +112,8 @@
         "$rust"
         "$scala"
         "[](fg:#86BBD8 bg:#06969A)"
-        "$docker_context"
+        "$nix_shell"
+        "$direnv"
         "[](fg:#06969A bg:#33658A)"
         "$time"
         "[ ](fg:#33658A)"
@@ -126,7 +127,7 @@
       };
       os = {
         style = "bg:#9A348E";
-        disabled = true;
+        disabled = false;
       };
 
       directory = {
@@ -135,29 +136,39 @@
         truncation_length = 3;
         truncation_symbol = "…/";
         substitutions = {
-          "Documents" = "󰈙 ";
-          "Downloads" = " ";
-          "Music" = " ";
-          "Pictures" = " ";
+          "Documents" = "󰈙";
+          "Downloads" = "";
+          "Music" = "";
+          "Pictures" = "";
         };
       };
 
+      nix_shell = {
+        symbol = "󱄅";
+        style = "bg:#06969A";
+        impure_msg = "impure";
+        pure_msg = "pure";
+        format = "[ $symbol $state ]($style)";
+      };
+
       c = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
       };
 
       elixir = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       elm = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       git_branch = {
@@ -172,32 +183,36 @@
       };
 
       golang = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       gradle = {
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       haskell = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
       };
 
       java = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = false;
       };
 
       julia = {
-        symbol = " ";
+        symbol = "";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       nodejs = {
@@ -207,9 +222,10 @@
       };
 
       nim = {
-        symbol = "󰆥 ";
+        symbol = "󰆥";
         style = "bg:#86BBD8";
         format = "[ $symbol ($version) ]($style)";
+        disabled = true;
       };
 
       rust = {

@@ -1,7 +1,8 @@
-Pick a nice cursor theme
+Pick a nice cursor theme - See if dracula colours?
 check for remaining configs to be ported
-dev environments?
-ssh needs to be integrated somehow
+ssh needs to be integrated somehow - maybe 1password ssh keys
+Zen config
+Something else I'm forgetting
 once you're sure there's nothing more to port in, nuke home directory, needs cleaning
  - Make sure all git repos are pushed beforehand
 

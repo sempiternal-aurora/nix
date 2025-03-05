@@ -31,13 +31,17 @@
     };
 
     shellAliases = {
-      lf = "lfcd";
       pls = "sudo";
       bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
     };
     initExtra = ''
-      lfcd () {
-          cd "$(command lf -print-last-dir "$@")"
+      function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
       }
 
       # history substring search
@@ -55,17 +59,17 @@
 
       unsetopt beep
       if [ "$COLUMNS" -lt "105" ]; then
-          echo "\n"
+        echo "\n"
       elif [ "$TERM" = 'linux' ]; then
-          hyfetch -m 8bit
+        hyfetch -m 8bit
       else
-          hyfetch
+        hyfetch
       fi
       if [ "$TERM" = 'linux' ] || [ "$TERM" = 'dumb' ]; then
-          PS1='%b%F{grey}[%B%F{green}%n%b%f@%F{magenta}%m %B%F{blue}%~%b%F{grey}]%(#.#.$) '
-          RPS1='%B%F{cyan}%D{%d/%m/%y %H:%M}%f%b'
+        PS1='%b%F{grey}[%B%F{green}%n%b%f@%F{magenta}%m %B%F{blue}%~%b%F{grey}]%(#.#.$) '
+        RPS1='%B%F{cyan}%D{%d/%m/%y %H:%M}%f%b'
       else
-          eval "$(${pkgs.starship}/bin/starship init zsh)"
+        eval "$(${pkgs.starship}/bin/starship init zsh)"
       fi
     '';
   };
@@ -229,8 +233,42 @@
     };
   };
 
-  programs.lf = {
+  programs.yazi = {
     enable = true;
+    settings = {
+      manager = {
+        ratio = [
+          1
+          4
+          3
+        ];
+        sort_by = "natural";
+        sort_sensitive = true;
+        sort_reverse = false;
+        sort_dir_first = true;
+        linemode = "size";
+        show_hidden = false;
+        show_symlink = true;
+      };
+      preview = {
+        wrap = "yes";
+        tab-size = 4;
+        image-filter = "lanczos3";
+      };
+      open = {
+        play = [
+          {
+            run = "vlc \"$@\"";
+            orphan = true;
+            for = "unix";
+          }
+        ];
+      };
+    };
+  };
+
+  programs.lf = {
+    enable = false;
     settings = {
       ratios = [
         1
@@ -333,7 +371,7 @@
   };
 
   xdg.configFile."lf/icons" = {
-    enable = true;
+    enable = false;
     source = ./source/icons;
   };
 

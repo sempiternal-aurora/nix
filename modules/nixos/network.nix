@@ -8,6 +8,10 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
 
   # VPN Stuff
   environment.systemPackages = [pkgs.globalprotect-openconnect];

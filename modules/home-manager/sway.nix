@@ -2,26 +2,23 @@
   lib,
   config,
   pkgs,
-  inputs,
-  userName,
   ...
 }: let
   modifier = "Mod4";
   cfg = config.mine.sway;
-  screenshot = "screenshot";
   screenshotDir = "~/Pictures/Screenshots";
-  terminal = "${pkgs.kitty}/bin/kitty";
+  terminal = lib.getExe pkgs.kitty;
   menu = "${pkgs.tofi}/bin/tofi-run | xargs swaymsg exec --";
   drun = "${pkgs.tofi}/bin/tofi-drun | xargs swaymsg exec --";
   font = pkgs.nerd-fonts.hasklug;
   warnDischarge = "10";
   warnCharge = "90";
-  swaylock = "${lib.getExe pkgs.swaylock-effects}";
+  swaylock = lib.getExe pkgs.swaylock-effects;
   pgrep = "${pkgs.procps}/bin/pgrep";
   swaymsg = "${pkgs.swayfx}/bin/swaymsg";
-  playerctl = "${lib.getExe pkgs.playerctl}";
+  playerctl = lib.getExe pkgs.playerctl;
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-  firefox = "${lib.getExe pkgs.firefox}";
+  firefox = lib.getExe pkgs.firefox;
   kill = "${pkgs.procps}/bin/kill";
   polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
@@ -42,13 +39,10 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       font
-      pkgs.adwaita-icon-theme
       pkgs.wl-clipboard
       pkgs.dconf
       pkgs.discord
-      pkgs.blueman
       pkgs.vlc
-      pkgs.networkmanagerapplet
       pkgs.pwvucontrol
       pkgs.handlr-regex
       pkgs.image-roll
@@ -476,8 +470,8 @@ in {
     services.dunst = {
       enable = true;
       iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
+        package = pkgs.dracula-icon-theme;
+        name = "Dracula";
       };
       settings = {
         global = {

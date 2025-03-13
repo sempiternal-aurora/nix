@@ -49,6 +49,7 @@
     calibre.enable = true;
     digital.enable = true;
     mathematica.enable = true;
+    firefox.enable = true;
   };
 
   # Allow unfree licences for some packages

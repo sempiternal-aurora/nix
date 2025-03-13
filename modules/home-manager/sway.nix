@@ -256,13 +256,14 @@ in {
         defaultWorkspace = "workspace number 1";
         keybindings = lib.mkOptionDefault {
           "${modifier}+Shift+d" = "exec \"${drun}\"";
-          "${modifier}+Alt+f" = "exec zen";
+          "${modifier}+Alt+f" = "exec firefox";
           "${modifier}+Alt+d" = "exec discord";
           "${modifier}+Alt+c" = "exec code";
           "${modifier}+Alt+s" = "exec steam";
           "${modifier}+Shift+e" = "exec swaymsg exit";
           "${modifier}+Shift+b" = "exec ${config.xdg.configHome}/tofi/tofi_books.sh";
           "${modifier}+Shift+v" = "exec copyq show";
+          "${modifier}+l" = "exec swaylock";
           "F11" = "fullscreen toggle";
           "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
           "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
@@ -272,10 +273,10 @@ in {
           "XF86AudioPrev" = "exec playerctl previous";
           "XF86MonBrightnessUp" = "exec brillo -q -A 5";
           "XF86MonBrightnessDown" = "exec brillo -q -U 5";
-          "${modifier}+Print" = "mode \"${screenshot}\"";
+          "${modifier}+Print" = "mode \"screenshot\"";
         };
         modes = {
-          "${screenshot}" = {
+          "screenshot" = {
             "1" = "exec '${grim} -g \"$(${slurp})\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
             "2" = "exec '${grim} ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
             "3" = "exec '${grim} -g \"$(${slurp})\" - | ${wl-copy}', mode \"default\"";

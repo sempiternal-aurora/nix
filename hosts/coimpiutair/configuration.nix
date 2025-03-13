@@ -83,6 +83,7 @@ args @ {
     polkitPolicyOwners = [vars.adminUser vars.localUser];
   };
 
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

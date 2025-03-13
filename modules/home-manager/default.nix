@@ -10,5 +10,6 @@
     ./jetbrains.nix
     ./digital.nix
     ./mathematica.nix
+    ./firefox.nix
   ];
 }

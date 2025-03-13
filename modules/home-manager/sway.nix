@@ -21,7 +21,7 @@
   swaymsg = "${pkgs.swayfx}/bin/swaymsg";
   playerctl = "${lib.getExe pkgs.playerctl}";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-  zen = "${lib.getExe inputs.zen-browser.packages."x86_64-linux".twilight}";
+  firefox = "${lib.getExe pkgs.firefox}";
   kill = "${pkgs.procps}/bin/kill";
   polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
@@ -45,7 +45,6 @@ in {
       pkgs.adwaita-icon-theme
       pkgs.wl-clipboard
       pkgs.dconf
-      pkgs.firefox
       pkgs.discord
       pkgs.blueman
       pkgs.vlc
@@ -53,7 +52,6 @@ in {
       pkgs.pwvucontrol
       pkgs.handlr-regex
       pkgs.image-roll
-      inputs.zen-browser.packages."x86_64-linux".twilight
     ];
 
     fonts.fontconfig = {
@@ -63,28 +61,13 @@ in {
 
     xdg.mimeApps = {
       enable = true;
-      associations.added = {
-        "x-scheme-handler/http" = ["userapp-Zen-VFIO22.desktop;"];
-        "x-scheme-handler/https" = ["userapp-Zen-VFIO22.desktop;"];
-        "x-scheme-handler/chrome" = ["userapp-Zen-VFIO22.desktop;"];
-        "text/html" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/x-extension-htm" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/x-extension-html" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/x-extension-shtml" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/xhtml+xml" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/x-extension-xhtml" = ["userapp-Zen-VFIO22.desktop;"];
-        "application/x-extension-xht" = ["userapp-Zen-VFIO22.desktop;"];
-      };
+      associations.added = {};
       defaultApplications = {
         "image/png" = ["image-roll.desktop"];
         "image/jpg" = ["image-roll.desktop"];
         "image/jpeg" = ["image-roll.desktop"];
         "application/pdf" = ["org.pwmt.zathura.desktop"];
         "video/mp4" = ["vlc.desktop"];
-        "x-scheme-handler/http" = ["userapp-Zen-VFIO22.desktop"];
-        "x-scheme-handler/https" = ["userapp-Zen-VFIO22.desktop"];
-        "x-scheme-handler/chrome" = ["userapp-Zen-VFIO22.desktop"];
-        "text/html" = ["userapp-Zen-VFIO22.desktop"];
         "text/cache-manifest" = ["nvim.desktop"];
         "text/calendar" = ["nvim.desktop"];
         "text/coffeescript" = ["nvim.desktop"];
@@ -149,12 +132,6 @@ in {
         "text/x-vcard" = ["nvim.desktop"];
         "text/xml" = ["nvim.desktop"];
         "text/yaml" = ["nvim.desktop"];
-        "application/x-extension-htm" = ["userapp-Zen-VFIO22.desktop"];
-        "application/x-extension-html" = ["userapp-Zen-VFIO22.desktop"];
-        "application/x-extension-shtml" = ["userapp-Zen-VFIO22.desktop"];
-        "application/xhtml+xml" = ["userapp-Zen-VFIO22.desktop"];
-        "application/x-extension-xhtml" = ["userapp-Zen-VFIO22.desktop"];
-        "application/x-extension-xht" = ["userapp-Zen-VFIO22.desktop"];
       };
     };
 
@@ -545,7 +522,7 @@ in {
           stick_history = "yes";
           history_length = 20;
           dmenu = menu;
-          browser = "${zen} -new-tab";
+          browser = "${firefox} -new-tab";
           always_run_script = true;
           title = "Dunst";
           class = "Dunst";

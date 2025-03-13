@@ -11,6 +11,7 @@
   services.fprintd.enable = true;
   services.usbmuxd.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.fwupd.enable = true;
 
   security.polkit.enable = true;
   security.pam.services.swaylock = {};

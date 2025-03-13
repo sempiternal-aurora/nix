@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741635347,
-        "narHash": "sha256-2aYfV44h18alHXopyfL4D9GsnpE5XlSVkp4MGe586VU=",
+        "lastModified": 1741791118,
+        "narHash": "sha256-4Y427uj0eql4yRU5rely3EcOlB9q457UDbG9omPtXiA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7fb8678716c158642ac42f9ff7a18c0800fea551",
+        "rev": "18780912345970e5b546b1b085385789b6935a83",
         "type": "github"
       },
       "original": {
@@ -23,10 +23,10 @@
     "isabelle": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-S0W0L9Fw59jrJNNaom2HipiOUZ4gSAEIOqL7aRaWoEc=",
+        "narHash": "sha256-cjcML0iLKjs8nTZNPq4JKeJSyL1+z/PQoiv42f8V2lQ=",
         "ref": "default",
-        "rev": "f3db31c8acbcc9c3fc3cfc7786a66a81073037d0",
-        "revCount": 82247,
+        "rev": "71d9d59d6bb5423badc31655f17d865c5fc55b5a",
+        "revCount": 82250,
         "type": "hg",
         "url": "https://isabelle-dev.sketis.net/source/isabelle"
       },
@@ -83,6 +83,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1729125404,
+        "narHash": "sha256-2ZtXYNBPi9Ejeb2Heqh+yFTBcstapvtna8Vyl/ugb7w=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "7aafd5f0d772efbd2e611c132cc290c3508fe049",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -90,7 +105,29 @@
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
         "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nixpkgs": "nixpkgs",
+        "textfox": "textfox",
         "zen-browser": "zen-browser"
+      }
+    },
+    "textfox": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nur": "nur"
+      },
+      "locked": {
+        "lastModified": 1741716751,
+        "narHash": "sha256-NYZc6U1vZkmOw3zPtjzWOLCdr0NNJKj+LKdscnTk5FE=",
+        "owner": "adriankarlen",
+        "repo": "textfox",
+        "rev": "c49cd645f9b106755ae6ce7163334549e64fa748",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adriankarlen",
+        "repo": "textfox",
+        "type": "github"
       }
     },
     "zen-browser": {

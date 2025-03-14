@@ -46,6 +46,7 @@ in {
       pkgs.pwvucontrol
       pkgs.handlr-regex
       pkgs.image-roll
+      pkgs.teams-for-linux
     ];
 
     fonts.fontconfig = {

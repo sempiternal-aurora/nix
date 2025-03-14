@@ -158,6 +158,7 @@ in {
 
         ${builtins.readFile ./source/set.lua}
         ${builtins.readFile ./source/remap.lua}
+        local harpoon = require("harpoon")
 
         -- Plugin keybinds
         vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)

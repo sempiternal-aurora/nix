@@ -23,7 +23,7 @@ local servers = {
     pyright = {},
     intelephense = {},
     clangd = {},
-    --jdtls = {},
+    jdtls = {},
     volar = {},
     nil_ls = { settings = { nix = { flake = { autoArchive = true } } } },
     ts_ls = {

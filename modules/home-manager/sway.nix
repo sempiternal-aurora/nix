@@ -47,7 +47,9 @@ in {
       pkgs.handlr-regex
       pkgs.image-roll
       pkgs.teams-for-linux
+      pkgs.playerctl
     ];
+    services.playerctld.enable = true;
 
     fonts.fontconfig = {
       enable = true;

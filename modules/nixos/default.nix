@@ -9,5 +9,6 @@
     ./games.nix
     ./keyboard.nix
     ./wayland.nix
+    ./jellyfin.nix
   ];
 }

@@ -74,6 +74,7 @@ args @ {
     lutris.enable = true;
     itch.enable = true;
     prism.enable = true;
+    jellyfin.enable = true;
   };
 
   # 1Password __MUST__ be installed as root

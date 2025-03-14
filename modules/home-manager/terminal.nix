@@ -33,6 +33,7 @@
     shellAliases = {
       pls = "sudo";
       bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
+      nix-rebuild = "sudo nixos-rebuild switch --flake ~/nix#coimpiutair";
     };
     initExtra = ''
       function y() {

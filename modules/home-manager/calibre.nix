@@ -7,11 +7,11 @@
   cfg = config.mine.calibre;
   sqlite = "${pkgs.sqlite}/bin/sqlite3";
   tofi = "${pkgs.tofi}/bin/tofi";
-  echo = "${pkgs.coreutils}/bin/echo";
+  echo = "${pkgs.uutils-coreutils-noprefix}/bin/echo";
   sed = "${pkgs.gnused}/bin/sed";
   handlr = "${pkgs.handlr-regex}/bin/handlr";
   calibredb = "${pkgs.calibre}/bin/calibredb";
-  tail = "${pkgs.coreutils}/bin/tail";
+  tail = "${pkgs.uutils-coreutils-noprefix}/bin/tail";
 in {
   options = {
     mine.calibre.enable = lib.mkEnableOption "install calibre";

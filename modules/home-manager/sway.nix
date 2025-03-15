@@ -23,11 +23,13 @@
   polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
   grep = lib.getExe pkgs.gnugrep;
-  wc = "${pkgs.coreutils}/bin/wc";
+  wc = "${pkgs.uutils-coreutils-noprefix}/bin/wc";
   dunstify = "${pkgs.dunst}/bin/dunstify";
   grim = lib.getExe pkgs.grim;
   swappy = lib.getExe pkgs.swappy;
   slurp = lib.getExe pkgs.slurp;
+  nm-applet = lib.getExe pkgs.networkmanagerapplet;
+  blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
 in {
   options = {
     mine.sway = {

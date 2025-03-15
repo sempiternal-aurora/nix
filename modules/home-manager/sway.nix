@@ -299,10 +299,6 @@ in {
             "${modifier}+r" = "mode \"default\"";
           };
         };
-        startup = [
-          {command = "blueman-applet";}
-          {command = "nm-applet";}
-        ];
         bars = [];
       };
       extraConfig = ''
@@ -417,6 +413,46 @@ in {
           Service = {
             Type = "simple";
             ExecStart = "${config.xdg.configHome}/powercheck.sh";
+          };
+        };
+
+        blueman-applet = {
+          Unit = {
+            Description = "Blueman applet";
+            After = ["graphical-session.target"];
+            PartOf = ["graphical-session.target"];
+          };
+
+          Install = {WantedBy = ["sway-session.target"];};
+
+          Service = {
+            Type = "simple";
+            ExecStart = blueman-applet;
+            ExecReload = "${kill} -SIGUSR2 $MAINPID";
+            Restart = "on-failure";
+            KillMode = "mixed";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+          };
+        };
+
+        network-manager-applet = {
+          Unit = {
+            Description = "Network Manager applet";
+            After = ["graphical-session.target"];
+            PartOf = ["graphical-session.target"];
+          };
+
+          Install = {WantedBy = ["sway-session.target"];};
+
+          Service = {
+            Type = "simple";
+            ExecStart = nm-applet;
+            ExecReload = "${kill} -SIGUSR2 $MAINPID";
+            Restart = "on-failure";
+            KillMode = "mixed";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
           };
         };
 
@@ -556,8 +592,8 @@ in {
       };
     };
 
-    services.blueman-applet.enable = true;
-    services.network-manager-applet.enable = true;
+    # The package provides some icons that are good to have available.
+    xdg.systemDirs.data = ["${pkgs.networkmanagerapplet}/share"];
 
     programs.tofi = {
       enable = true;

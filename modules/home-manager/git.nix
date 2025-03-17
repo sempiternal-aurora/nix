@@ -11,6 +11,10 @@
         path = "${config.xdg.configHome}/git/github.conf";
         condition = "hasconfig:remote.*.url:git@github.com:*/**";
       }
+      {
+        path = "${config.xdg.configHome}/git/gitlab.conf";
+        condition = "hasconfig:remote.*.url:https://*:*@gitlab.cecs.anu.edu.au/**";
+      }
     ];
     maintenance.enable = true;
   };

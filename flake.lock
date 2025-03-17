@@ -23,10 +23,10 @@
     "isabelle": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-Tq7Gv3nwDErz02+hL7IpZ2anvaze3CAxH/cV3x5c3NM=",
+        "narHash": "sha256-hKIAAYz5cRtdAcbRzDYj5TnvL3BhRf+NjJpB/cvWd/8=",
         "ref": "default",
-        "rev": "365917fc6e313a31d13c234580b78947d5f2eb4c",
-        "revCount": 82273,
+        "rev": "d10a49b7b620d2ea8d34f2bd3c58720176a9894a",
+        "revCount": 82297,
         "type": "hg",
         "url": "https://isabelle-dev.sketis.net/source/isabelle"
       },
@@ -69,11 +69,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1741851582,
-        "narHash": "sha256-cPfs8qMccim2RBgtKGF+x9IBCduRvd/N5F4nYpU0TVE=",
+        "lastModified": 1742069588,
+        "narHash": "sha256-C7jVfohcGzdZRF6DO+ybyG/sqpo1h6bZi9T56sxLy+k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6607cf789e541e7873d40d3a8f7815ea92204f32",
+        "rev": "c80f6a7e10b39afcc1894e02ef785b1ad0b0d7e5",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742020525,
-        "narHash": "sha256-UMRzJNmCkl3zqwdaJm+G8z9z1M5Pk5KyLk9wvvggOks=",
+        "lastModified": 1742180312,
+        "narHash": "sha256-67nyifSJu0TnXReokhA+pQhqswg0ZOp033k+QboSL8s=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "b6b61a5d3671313c8d19e577f60f0d42ff64fc15",
+        "rev": "4dd2f79d89dc0ebbb1b3ebf96776383cc6d6989a",
         "type": "github"
       },
       "original": {

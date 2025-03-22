@@ -6,6 +6,7 @@
   ...
 }: let
   cfg = config.mine.isabelle;
+  toLua = str: "lua << EOF\n${str}\nEOF\n";
   isabelle-pkg = pkgs.callPackage ./isabelle-pkg.nix {
     inherit inputs;
     java = pkgs.jdk;
@@ -17,8 +18,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs = {
-      #lib.mkIf cfg.enableNeovimIntegration {
+    nixpkgs = lib.mkIf cfg.enableNeovimIntegration {
       overlays = [
         (final: prev: {
           vimPlugins =
@@ -44,18 +44,29 @@ in {
     programs.neovim.plugins = lib.mkIf cfg.enableNeovimIntegration (with pkgs.vimPlugins; [
       {
         plugin = isabelle-lsp-nvim;
-        config = "lua << EOF\n${builtins.readFile ./source/isabelle.lua}\nEOF\n";
+        config = toLua ''
+          local isabellelsp = require("isabelle-lsp")
+
+          isabellelsp.setup({
+              isabelle_path = "/home/myria/.isabelle/isabelle-lsp/bin/isabelle",
+              unicode_symbols = true,
+          })
+
+          local lspconfig = require("lspconfig")
+
+          lspconfig.isabelle.setup({})
+        '';
       }
       isabelle-syn-nvim
     ]);
 
     home.packages = [pkgs.isabelle];
 
-    home.file.".isabelle/isabelle-lsp" = {
-      enable = cfg.enableNeovimIntegration;
-      recursive = true;
-      source = inputs.isabelle;
-      onChange = "pwd > ~/pwd.txt";
-    };
+    # home.file.".isabelle/isabelle-lsp" = {
+    #   enable = cfg.enableNeovimIntegration;
+    #   recursive = true;
+    #   source = inputs.isabelle;
+    #   onChange = "pwd > ~/pwd.txt";
+    # };
   };
 }

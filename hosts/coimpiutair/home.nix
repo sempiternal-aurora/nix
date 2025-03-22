@@ -40,7 +40,7 @@
     };
     isabelle = {
       enable = true;
-      enableNeovimIntegration = false;
+      enableNeovimIntegration = true;
     };
     jetbrains = {
       enable = true;

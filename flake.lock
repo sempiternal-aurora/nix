@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742771635,
-        "narHash": "sha256-HQHzQPrg+g22tb3/K/4tgJjPzM+/5jbaujCZd8s2Mls=",
+        "lastModified": 1742851132,
+        "narHash": "sha256-8vEcDefstheV1whup+5fSpZu4g9Jr7WpYzOBKAMSHn4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ad0614a1ec9cce3b13169e20ceb7e55dfaf2a818",
+        "rev": "c4d5d72805d14ea43c140eeb70401bf84c0f11b4",
         "type": "github"
       },
       "original": {
@@ -23,10 +23,10 @@
     "isabelle": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-9MgARWIqnKEmm7LnL2i0QL8puggvBzvwLzo65iLo0zk=",
+        "narHash": "sha256-5hfLUGv/chQjtPwiPyAb5JhkvkR0SGxz+olboCdZhuA=",
         "ref": "default",
-        "rev": "933d8068a0233ee7f5f785ec01ef2cabaa8cd72d",
-        "revCount": 82324,
+        "rev": "1eb12389c49995f016f29dfc181ee0551a119090",
+        "revCount": 82338,
         "type": "hg",
         "url": "https://isabelle-dev.sketis.net/source/isabelle"
       },

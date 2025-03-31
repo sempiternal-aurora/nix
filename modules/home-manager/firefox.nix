@@ -88,6 +88,7 @@ in {
     textfox = {
       enable = true;
       profile = "default";
+      useLegacyExtensions = false;
       config = {
         tabs.horizontal.enable = true;
       };

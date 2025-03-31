@@ -90,6 +90,10 @@ in {
       profile = "default";
       useLegacyExtensions = false;
       config = {
+        font = {
+          family = "\"Hasklug Nerd Font Mono\", monospace";
+          size = "16px";
+        };
         tabs.horizontal.enable = true;
       };
     };

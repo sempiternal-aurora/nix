@@ -259,10 +259,10 @@ in {
           "${modifier}+Alt+d" = "exec discord";
           "${modifier}+Alt+c" = "exec code";
           "${modifier}+Alt+s" = "exec steam";
+          "${modifier}+q" = "exec swaylock";
           "${modifier}+Shift+e" = "exec swaymsg exit";
           "${modifier}+Shift+b" = "exec ${config.xdg.configHome}/tofi/tofi_books.sh";
           "${modifier}+Shift+v" = "exec copyq show";
-          "${modifier}+l" = "exec swaylock";
           "F11" = "fullscreen toggle";
           "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
           "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";

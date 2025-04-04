@@ -19,16 +19,6 @@
       flake = false;
     };
 
-    isabelle = {
-      url = "hg+https://isabelle-dev.sketis.net/source/isabelle";
-      flake = false;
-    };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     textfox = {
       url = "github:adriankarlen/textfox";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -45,6 +45,8 @@
     ];
   };
 
+  programs.spotify-player.enable = true;
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;

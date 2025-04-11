@@ -2,7 +2,7 @@
   services.printing = {
     enable = true;
     drivers = [
-      pkgs.brlazer
+      pkgs.brlaser
       pkgs.hplip
     ];
   };

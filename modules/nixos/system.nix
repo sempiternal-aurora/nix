@@ -7,7 +7,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
 
-  services.printing.enable = true;
   services.fprintd.enable = true;
   services.usbmuxd.enable = true;
   services.power-profiles-daemon.enable = true;

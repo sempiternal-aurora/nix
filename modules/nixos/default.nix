@@ -10,5 +10,6 @@
     ./keyboard.nix
     ./wayland.nix
     ./jellyfin.nix
+    ./printing.nix
   ];
 }

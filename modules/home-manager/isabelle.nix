@@ -35,9 +35,7 @@ in {
                 src = inputs.isabelle-syn-nvim;
               };
             };
-          isabelle = inputs.isabelle-nixpkgs.legacyPackages."${system}".isabelle.overrideAttrs (_: {
-            isabelle-components = [inputs.isabelle-nixpkgs.legacyPackages."${system}".isabelle-components.isabelle-linter];
-          });
+          isabelle = inputs.isabelle-nixpkgs.legacyPackages."${system}".isabelle;
         })
       ];
     };
@@ -61,7 +59,9 @@ in {
       isabelle-syn-nvim
     ]);
 
-    home.packages = [pkgs.isabelle];
+    home.packages = [
+      (pkgs.isabelle.withComponents (p: [p.isabelle-linter]))
+    ];
 
     # home.file.".isabelle/isabelle-lsp" = {
     #   enable = cfg.enableNeovimIntegration;

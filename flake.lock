@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "isabelle-nixpkgs": {
+      "locked": {
+        "lastModified": 1744187306,
+        "narHash": "sha256-eq2z1qqtWuWJ+8TFP/SsN72LlWgtrxp4nFzmgdRDW94=",
+        "owner": "jvanbruegge",
+        "repo": "nixpkgs",
+        "rev": "fa09ff7a7d38a618a9d8e2e614dae6b175993a37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jvanbruegge",
+        "ref": "isabelle-2025",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "isabelle-syn-nvim": {
       "flake": false,
       "locked": {
@@ -87,6 +103,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
+        "isabelle-nixpkgs": "isabelle-nixpkgs",
         "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nixpkgs": "nixpkgs",
         "textfox": "textfox"

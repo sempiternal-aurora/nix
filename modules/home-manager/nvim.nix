@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }: let
@@ -21,10 +20,7 @@ in {
       };
     };
 
-    programs.neovim = let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in {
+    programs.neovim = {
       enable = true;
       defaultEditor = cfg.default;
 
@@ -49,7 +45,8 @@ in {
         # colorscheme
         {
           plugin = dracula-nvim;
-          config = toLua ''
+          type = "lua";
+          config = ''
             require("dracula").setup({ colors = { comment = "#B2A4D4", } })
             vim.cmd("colorscheme dracula")
           '';
@@ -57,43 +54,51 @@ in {
         # status line
         {
           plugin = lualine-nvim;
-          config = toLua "require(\"lualine\").setup { options = { theme = \"dracula-nvim\" } }";
+          type = "lua";
+          config = "require('lualine').setup { options = { theme = 'dracula-nvim' } }";
         }
         # git
         {
           plugin = vim-fugitive;
-          config = toLuaFile ./source/fugitive.lua;
+          type = "lua";
+          config = builtins.readFile ./source/fugitive.lua;
         }
         {
           plugin = gitsigns-nvim;
-          config = toLua "require(\"gitsigns\").setup()";
+          type = "lua";
+          config = "require('gitsigns').setup()";
         }
         # pretty finding tui
         {
           plugin = telescope-nvim;
-          config = toLua "require('telescope').setup({})";
+          type = "lua";
+          config = "require('telescope').setup({})";
         }
         # undo handling
         undotree
         # easy multi-file switching
         {
           plugin = harpoon2;
-          config = toLuaFile ./source/harpoon.lua;
+          type = "lua";
+          config = builtins.readFile ./source/harpoon.lua;
         }
         # linting
         {
           plugin = nvim-lint;
-          config = toLuaFile ./source/lint.lua;
+          type = "lua";
+          config = builtins.readFile ./source/lint.lua;
         }
         # formatting
         {
           plugin = conform-nvim;
-          config = toLuaFile ./source/conform.lua;
+          type = "lua";
+          config = builtins.readFile ./source/conform.lua;
         }
         # completion support
         {
           plugin = nvim-cmp;
-          config = toLuaFile ./source/cmp.lua;
+          type = "lua";
+          config = builtins.readFile ./source/cmp.lua;
         }
         cmp-nvim-lsp
         cmp-buffer
@@ -107,7 +112,8 @@ in {
         # notifications bottom left
         {
           plugin = fidget-nvim;
-          config = toLua "require('fidget').setup({})";
+          type = "lua";
+          config = "require('fidget').setup({})";
         }
 
         # cool icons
@@ -117,7 +123,8 @@ in {
         # comment selected lines
         {
           plugin = comment-nvim;
-          config = toLua ''
+          type = "lua";
+          config = ''
             require("Comment").setup {
                 toggler = {
                     line = ",cc",
@@ -137,11 +144,13 @@ in {
         # language support
         {
           plugin = nvim-lspconfig;
-          config = toLuaFile ./source/lsp.lua;
+          type = "lua";
+          config = builtins.readFile ./source/lsp.lua;
         }
         {
           plugin = nvim-treesitter.withAllGrammars;
-          config = toLua ''
+          type = "lua";
+          config = ''
             require("nvim-treesitter.configs").setup({
                 indent = { enable = true },
                 highlight = {

@@ -81,6 +81,10 @@ in {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
             installation_mode = "force_installed";
           };
+          "{2766e9f7-7bf2-4c72-81b9-d119eb54c753}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/remove-youtube-shorts/latest.xpi";
+            installation_mode = "force_installed";
+          };
         };
       };
     };

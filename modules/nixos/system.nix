@@ -9,6 +9,7 @@
 
   services.fprintd.enable = true;
   services.usbmuxd.enable = true;
+  services.udisk2.enable = true;
   services.power-profiles-daemon.enable = true;
   services.fwupd.enable = true;
 

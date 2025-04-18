@@ -24,6 +24,7 @@
   acpi = lib.getExe pkgs.acpi;
   grep = lib.getExe pkgs.gnugrep;
   wc = "${pkgs.uutils-coreutils-noprefix}/bin/wc";
+  sleep = "${pkgs.uutils-coreutils-noprefix}/bin/sleep";
   dunstify = "${pkgs.dunst}/bin/dunstify";
   grim = lib.getExe pkgs.grim;
   swappy = lib.getExe pkgs.swappy;
@@ -428,6 +429,27 @@ in {
           Service = {
             Type = "simple";
             ExecStart = blueman-applet;
+            ExecReload = "${kill} -SIGUSR2 $MAINPID";
+            Restart = "on-failure";
+            KillMode = "mixed";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+          };
+        };
+
+        udiskie = {
+          Unit = {
+            Description = "udiskie mount daemon";
+            After = ["graphical-session-pre.target"];
+            PartOf = ["graphical-session.target"];
+          };
+
+          Install = {WantedBy = ["sway-session.target"];};
+
+          Service = {
+            Type = "simple";
+            ExecStartPre = sleep + " 1";
+            ExecStart = "${pkgs.udiskie}/bin/udiskie";
             ExecReload = "${kill} -SIGUSR2 $MAINPID";
             Restart = "on-failure";
             KillMode = "mixed";
@@ -920,7 +942,11 @@ in {
 
     services.udiskie = {
       enable = true;
-      tray = "always";
+      settings = {
+        program_options = {
+          terminal = "${terminal} -d";
+        };
+      };
     };
   };
 }

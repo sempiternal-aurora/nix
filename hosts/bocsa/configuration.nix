@@ -50,6 +50,7 @@ args @ {
   #    enable = true;
   #    caps2esc = true;
   #};
+  mine.udisks2.enable = true;
 
   # 1Password __MUST__ be installed as root
   #programs._1password.enable = true;

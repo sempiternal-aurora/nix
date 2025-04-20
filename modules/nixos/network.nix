@@ -26,7 +26,7 @@
 
     # VPN Stuff
     environment.systemPackages =
-      lib.lists.mkOptional
+      lib.lists.optional
       config.mine.globalprotect.enable
       pkgs.globalprotect-openconnect;
     services.globalprotect.enable = true;

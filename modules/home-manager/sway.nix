@@ -342,7 +342,7 @@ in {
     };
 
     services.copyq = {
-      enable = true;
+      enable = false;
       systemdTarget = "sway-session.target";
     };
 

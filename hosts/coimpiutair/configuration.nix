@@ -97,13 +97,23 @@ args @ {
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd \"systemd-cat --identifier=sway sway\"";
     };
     ly.enable = true;
-
+    sway.enable = true;
     audio.enable = true;
     steam.enable = true;
     lutris.enable = true;
     itch.enable = true;
     prism.enable = true;
     jellyfin.enable = true;
+    tailscale.enable = true;
+    globalprotect.enable = true;
+    bluetooth.enable = true;
+    printing.enable = true;
+    brillo.enable = true;
+    fprintd.enable = true;
+    udisks2.enable = true;
+    usbhotspot.enable = true;
+    yazi.enable = true;
+    uutils.enable = true;
   };
 
   # 1Password __MUST__ be installed as root

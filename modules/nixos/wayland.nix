@@ -1,14 +1,20 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  options = {mine.sway.enable = lib.mkEnableOption "sway tiling window manager";};
   config = {
     xdg.portal = {
-      enable = true;
+      enable = config.mine.sway.enable;
       extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
       configPackages = [pkgs.swayfx];
       wlr.enable = true;
     };
 
     programs.sway = {
-      enable = true;
+      enable = config.mine.sway.enable;
       package = pkgs.swayfx;
     };
   };

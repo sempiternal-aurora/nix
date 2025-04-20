@@ -24,8 +24,8 @@ in {
       keyMap = "us";
     };
 
-    services.greetd = lib.mkIf cfg.enable {
-      enable = true;
+    services.greetd = {
+      enable = cfg.enable;
       vt = 1;
       settings.default_session.command = cfg.command;
     };

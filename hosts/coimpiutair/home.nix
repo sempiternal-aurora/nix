@@ -22,6 +22,23 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   mine = {
+    terminal = {
+      newsboat = true;
+      spotify-player = true;
+      weechat = true;
+      trash = true;
+      mercurial = true;
+      zip = true;
+      zsh = true;
+      zoxide = true;
+      btop = true;
+      hyfetch = true;
+      eza = true;
+      lf = true;
+      yazi = true;
+      starship = true;
+    };
+    direnv.enable = true;
     sway = {
       enable = true;
       powercheck = true;

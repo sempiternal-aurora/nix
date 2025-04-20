@@ -1,53 +1,69 @@
-{pkgs, ...}: {
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # Set your time zone.
-  time.timeZone = "Australia/Canberra";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_AU.UTF-8";
-
-  services.fprintd.enable = true;
-  services.usbmuxd.enable = true;
-  services.udisks2.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.fwupd.enable = true;
-
-  security.polkit.enable = true;
-  security.pam.services.swaylock = {};
-
-  hardware.brillo.enable = true;
-
-  programs.dconf.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment = {
-    pathsToLink = ["/share/zsh"];
-    systemPackages = with pkgs; [
-      (lib.hiPrio uutils-coreutils-noprefix)
-      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
-      yazi
-      git
-      libimobiledevice
-    ];
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  options = {
+    mine.fprintd.enable = lib.mkEnableOption "fingerprint support";
+    mine.usbhotspot.enable = lib.mkEnableOption "apple usb mobile hotspot support";
+    mine.udisks2.enable = lib.mkEnableOption "permission to other than root mount";
+    mine.brillo.enable = lib.mkEnableOption "brightness cli controls";
+    mine.yazi.enable = lib.mkEnableOption "rust terminal file manager";
+    mine.uutils.enable = lib.mkEnableOption "uutils coreutils rust replacement";
   };
+  config = {
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # environment.etc = {
-  #   "1password/custom_allowed_browsers" = {
-  #     text = ''
-  #       zen-bin
-  #       zen
-  #     '';
-  #     mode = "0755";
-  #   };
-  # };
+    # Set your time zone.
+    time.timeZone = "Australia/Canberra";
 
-  environment.sessionVariables = {
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_STATE_HOME = "$HOME/.local/state";
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_AU.UTF-8";
+
+    services.fprintd.enable = config.mine.fprintd.enable;
+    services.usbmuxd.enable = config.mine.usbhotspot.enable;
+    services.udisks2.enable = config.mine.udisks2.enable;
+    services.power-profiles-daemon.enable = true;
+    services.fwupd.enable = true;
+
+    security.polkit.enable = true;
+    security.pam.services.swaylock = {};
+
+    hardware.brillo.enable = config.mine.brillo.enable;
+
+    programs.dconf.enable = true;
+
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    environment = {
+      pathsToLink = ["/share/zsh"];
+      systemPackages =
+        [
+          pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+          pkgs.wget
+          pkgs.git
+        ]
+        ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
+        ++ lib.lists.optional config.mine.usbhotspot.enable pkgs.libimobiledevice
+        ++ lib.lists.optional config.mine.uutils.enable (lib.hiPrio pkgs.uutils-coreutils-noprefix);
+    };
+
+    # environment.etc = {
+    #   "1password/custom_allowed_browsers" = {
+    #     text = ''
+    #       zen-bin
+    #       zen
+    #     '';
+    #     mode = "0755";
+    #   };
+    # };
+
+    environment.sessionVariables = {
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+    };
   };
 }

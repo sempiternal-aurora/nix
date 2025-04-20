@@ -7,6 +7,7 @@ args @ {
   lib,
   pkgs,
   vars,
+  modulesPath,
   ...
 }: {
   imports = [
@@ -17,6 +18,7 @@ args @ {
     ./hardware-configuration.nix
     ../../modules/nixos
     inputs.home-manager.nixosModules.default
+    (modulesPath + "/installer/cd-dvd/iso-image.nix")
   ];
 
   # Use the latest linux kernel
@@ -31,7 +33,7 @@ args @ {
   admin-user = {
     enable = true;
     userName = vars.adminUser;
-    homeManager = (import ./home.nix (args // {userName = vars.adminUser;}));
+    homeManager = import ./home.nix (args // {userName = vars.adminUser;});
   };
 
   local-user.enable = false;

@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745128386,
-        "narHash": "sha256-xnNxL9lZC5Ez8AxTgHZZu8pYSNM34+5GD5jGSs8Vq4M=",
+        "lastModified": 1745205007,
+        "narHash": "sha256-k67bEcLkSo13TIBfs0CGYkJjG12aaikabMtxWbSeqr0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f98314bb064cf8f8446c44afbadaaad2505875a7",
+        "rev": "3fbe9a2b76ff5c4dcb2a2a2027dac31cfc993c8c",
         "type": "github"
       },
       "original": {
@@ -36,22 +36,6 @@
         "type": "github"
       }
     },
-    "isabelle-nixpkgs": {
-      "locked": {
-        "lastModified": 1744187306,
-        "narHash": "sha256-eq2z1qqtWuWJ+8TFP/SsN72LlWgtrxp4nFzmgdRDW94=",
-        "owner": "jvanbruegge",
-        "repo": "nixpkgs",
-        "rev": "fa09ff7a7d38a618a9d8e2e614dae6b175993a37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jvanbruegge",
-        "ref": "isabelle-2025",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "isabelle-syn-nvim": {
       "flake": false,
       "locked": {
@@ -70,11 +54,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1745130558,
-        "narHash": "sha256-KiWqlPB/CyKO27O9PEagsUC4AraTxvySlh4yT3/nvF4=",
+        "lastModified": 1745175377,
+        "narHash": "sha256-qho2uNwI7tX4vIY4QIbMWWo0cVcptUfSXJSEQ0M/q3Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b60fc969f4ec7adee83bac5664c4025606e7023c",
+        "rev": "dfef6b0bb2df864b02b01634cbf2c69a471040d8",
         "type": "github"
       },
       "original": {
@@ -103,7 +87,6 @@
       "inputs": {
         "home-manager": "home-manager",
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
-        "isabelle-nixpkgs": "isabelle-nixpkgs",
         "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nixpkgs": "nixpkgs",
         "textfox": "textfox"

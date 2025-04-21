@@ -7,11 +7,6 @@
 }: let
   cfg = config.mine.isabelle;
   toLua = str: "lua << EOF\n${str}\nEOF\n";
-  system = "x86_64-linux";
-  isabelle-pkg = pkgs.callPackage ./isabelle-pkg.nix {
-    inherit inputs;
-    java = pkgs.jdk;
-  };
 in {
   options = {
     mine.isabelle.enable = lib.mkEnableOption "Install Isabelle";
@@ -35,7 +30,6 @@ in {
                 src = inputs.isabelle-syn-nvim;
               };
             };
-          isabelle = inputs.isabelle-nixpkgs.legacyPackages."${system}".isabelle;
         })
       ];
     };

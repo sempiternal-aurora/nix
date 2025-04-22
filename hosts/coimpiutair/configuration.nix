@@ -114,6 +114,7 @@ args @ {
     usbhotspot.enable = true;
     yazi.enable = true;
     uutils.enable = true;
+    docs.enable = true;
   };
 
   # 1Password __MUST__ be installed as root

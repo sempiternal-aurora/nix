@@ -11,5 +11,6 @@
     ./wayland.nix
     ./jellyfin.nix
     ./printing.nix
+    ./documentation.nix
   ];
 }

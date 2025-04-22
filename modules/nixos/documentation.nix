@@ -13,6 +13,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
+      pkgs.man-pages
+      pkgs.man-pages-posix
+    ];
     documentation = {
       enable = true;
       doc.enable = true;

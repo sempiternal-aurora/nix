@@ -44,6 +44,7 @@
       powercheck = true;
     };
     zoom.enable = true;
+    teams.enable = true;
     _1password = {
       enable = true;
       kwallet.enable = true;

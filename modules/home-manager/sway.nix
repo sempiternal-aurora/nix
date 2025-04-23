@@ -38,6 +38,7 @@ in {
       powercheck = lib.mkEnableOption "enable low power notifications";
     };
     mine.zoom.enable = lib.mkEnableOption "enable zoom module";
+    mine.teams.enable = lib.mkEnableOption "enable teams module";
   };
 
   config = lib.mkIf cfg.enable {
@@ -51,9 +52,10 @@ in {
         pkgs.pwvucontrol
         pkgs.handlr-regex
         pkgs.image-roll
-        pkgs.teams-for-linux
         pkgs.playerctl
+        pkgs.rquickshare
       ]
+      ++ lib.lists.optional config.mine.teams.enable pkgs.teams-for-linux
       ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
     services.playerctld.enable = true;
 

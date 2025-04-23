@@ -78,7 +78,7 @@
       "1password-gui"
       "idea-ultimate"
       "mathematica"
-      "zoom-us"
+      "zoom"
     ];
 
   # Home Manager can also manage your environment variables through

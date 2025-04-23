@@ -83,7 +83,7 @@ in {
         bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
         nix-rebuild = "sudo nixos-rebuild switch --flake ~/nix#coimpiutair";
       };
-      initExtra = ''
+      initContent = ''
         function y() {
           local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
           yazi "$@" --cwd-file="$tmp"

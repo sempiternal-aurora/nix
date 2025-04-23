@@ -43,6 +43,7 @@
       enable = true;
       powercheck = true;
     };
+    zoom.enable = true;
     _1password = {
       enable = true;
       kwallet.enable = true;
@@ -77,6 +78,7 @@
       "1password-gui"
       "idea-ultimate"
       "mathematica"
+      "zoom-us"
     ];
 
   # Home Manager can also manage your environment variables through

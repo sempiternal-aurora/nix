@@ -84,6 +84,7 @@ args @ {
       "steam-original"
       "steam-unwrapped"
       "steam-run"
+      "zoom-us"
     ];
 
   mine = {

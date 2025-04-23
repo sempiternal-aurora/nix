@@ -37,21 +37,24 @@ in {
       enable = lib.mkEnableOption "enable sway module";
       powercheck = lib.mkEnableOption "enable low power notifications";
     };
+    mine.zoom.enable = lib.mkEnableOption "enable zoom module";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      font
-      pkgs.wl-clipboard
-      pkgs.dconf
-      pkgs.discord
-      pkgs.vlc
-      pkgs.pwvucontrol
-      pkgs.handlr-regex
-      pkgs.image-roll
-      pkgs.teams-for-linux
-      pkgs.playerctl
-    ];
+    home.packages =
+      [
+        font
+        pkgs.wl-clipboard
+        pkgs.dconf
+        pkgs.discord
+        pkgs.vlc
+        pkgs.pwvucontrol
+        pkgs.handlr-regex
+        pkgs.image-roll
+        pkgs.teams-for-linux
+        pkgs.playerctl
+      ]
+      + lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
     services.playerctld.enable = true;
 
     fonts.fontconfig = {

@@ -54,7 +54,7 @@ in {
         pkgs.teams-for-linux
         pkgs.playerctl
       ]
-      + lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
+      ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
     services.playerctld.enable = true;
 
     fonts.fontconfig = {

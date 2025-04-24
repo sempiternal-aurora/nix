@@ -31,6 +31,7 @@
   slurp = lib.getExe pkgs.slurp;
   nm-applet = lib.getExe pkgs.networkmanagerapplet;
   blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
+  rquickshare = lib.getExe pkgs.rquickshare;
 in {
   options = {
     mine.sway = {
@@ -434,6 +435,26 @@ in {
           Service = {
             Type = "simple";
             ExecStart = blueman-applet;
+            ExecReload = "${kill} -SIGUSR2 $MAINPID";
+            Restart = "on-failure";
+            KillMode = "mixed";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+          };
+        };
+
+        rquickshare = {
+          Unit = {
+            Description = "RQuickShare";
+            After = ["graphical-session.target"];
+            PartOf = ["graphical-session.target"];
+          };
+
+          Install = {WantedBy = ["sway-session.target"];};
+
+          Service = {
+            Type = "simple";
+            ExecStart = rquickshare;
             ExecReload = "${kill} -SIGUSR2 $MAINPID";
             Restart = "on-failure";
             KillMode = "mixed";

@@ -140,11 +140,11 @@ args @ {
     priority = 2;
   };
   swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024;
-      priority = 1;
-    }
+    # {
+    #   device = "/var/lib/swapfile";
+    #   size = 16 * 1024;
+    #   priority = 1;
+    # }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

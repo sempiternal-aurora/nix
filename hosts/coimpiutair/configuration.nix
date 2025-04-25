@@ -135,7 +135,17 @@ args @ {
     support32Bit.enable = true;
   };
 
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    priority = 2;
+  };
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024;
+      priority = 1;
+    }
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

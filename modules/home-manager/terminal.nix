@@ -87,14 +87,17 @@ in {
           fi
         '';
       };
-      plugins.dracula = {
-        name = "dracula";
-        src = pkgs.fetchFromiGitHub {
-          owner = "dracula";
-          repo = "fish";
-          rev = "269cd7d76d5104fdc2721db7b8848f6224bdf554";
-        };
-      };
+      plugins = [
+        {
+          name = "dracula";
+          src = pkgs.fetchFromGitHub {
+            owner = "dracula";
+            repo = "fish";
+            rev = "269cd7d76d5104fdc2721db7b8848f6224bdf554";
+            hash = "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY=";
+          };
+        }
+      ];
       shellAliases = {
         pls = "sudo";
         bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";

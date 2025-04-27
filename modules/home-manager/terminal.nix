@@ -78,13 +78,11 @@ in {
           rm -f -- "$tmp"
         '';
         fish_greeting = ''
-          if [ "$COLUMNS" -lt "105" ]; then
-            echo "\n"
-          elif [ "$TERM" = 'linux' ]; then
+          if test "$TERM" = 'linux'
             hyfetch -m 8bit
           else
             hyfetch
-          fi
+          end
         '';
       };
       plugins = [

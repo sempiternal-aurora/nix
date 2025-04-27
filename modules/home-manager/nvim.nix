@@ -47,7 +47,7 @@ in {
           plugin = dracula-nvim;
           type = "lua";
           config = ''
-            require("dracula").setup({ colors = { comment = "#B2A4D4", } })
+            require("dracula").setup { colors = { comment = "#B2A4D4" } }
             vim.cmd("colorscheme dracula")
           '';
         }
@@ -72,7 +72,7 @@ in {
         {
           plugin = telescope-nvim;
           type = "lua";
-          config = "require('telescope').setup({})";
+          config = "require('telescope').setup {}";
         }
         # undo handling
         undotree
@@ -126,18 +126,18 @@ in {
           type = "lua";
           config = ''
             require("Comment").setup {
-                toggler = {
-                    line = ",cc",
-                    block = ",Cc",
-                },
-                opleader = {
-                    line = ",c",
-                    block = ",C",
-                },
-                mappings = {
-                    basic = true,
-                    extra = false,
-                },
+              toggler = {
+                line = ",cc",
+                block = ",Cc",
+              },
+              opleader = {
+                line = ",c",
+                block = ",C",
+              },
+              mappings = {
+                basic = true,
+                extra = false,
+              },
             }
           '';
         }
@@ -152,11 +152,11 @@ in {
           type = "lua";
           config = ''
             require("nvim-treesitter.configs").setup({
-                indent = { enable = true },
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { "markdown" },
-                },
+              indent = { enable = true },
+              highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = { "markdown" },
+              },
             })
           '';
         }
@@ -178,28 +178,28 @@ in {
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
         vim.keymap.set('n', '<C-p>', builtin.git_files, {})
         vim.keymap.set('n', '<leader>pws', function()
-            local word = vim.fn.expand("<cword>")
-            builtin.grep_string({ search = word })
+          local word = vim.fn.expand("<cword>")
+          builtin.grep_string({ search = word })
         end)
         vim.keymap.set('n', '<leader>pWs', function()
-            local word = vim.fn.expand("<cWORD>")
-            builtin.grep_string({ search = word })
+          local word = vim.fn.expand("<cWORD>")
+          builtin.grep_string({ search = word })
         end)
         vim.keymap.set('n', '<leader>ps', function()
-            builtin.grep_string({ search = vim.fn.input("Grep > ") })
+          builtin.grep_string({ search = vim.fn.input("Grep > ") })
         end)
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
-            },
+          -- update_in_insert = true,
+          float = {
+            focusable = false,
+            style = "minimal",
+            border = "rounded",
+            source = "always",
+            header = "",
+            prefix = "",
+          },
         })
       '';
     };

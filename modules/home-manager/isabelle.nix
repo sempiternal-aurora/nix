@@ -6,7 +6,6 @@
   ...
 }: let
   cfg = config.mine.isabelle;
-  toLua = str: "lua << EOF\n${str}\nEOF\n";
 in {
   options = {
     mine.isabelle.enable = lib.mkEnableOption "Install Isabelle";
@@ -37,12 +36,13 @@ in {
     programs.neovim.plugins = lib.mkIf cfg.enableNeovimIntegration (with pkgs.vimPlugins; [
       {
         plugin = isabelle-lsp-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           local isabellelsp = require("isabelle-lsp")
 
           isabellelsp.setup({
-              isabelle_path = "${pkgs.isabelle}/bin/isabelle",
-              unicode_symbols = true,
+            isabelle_path = "${pkgs.isabelle}/bin/isabelle",
+            unicode_symbols = true,
           })
 
           local lspconfig = require("lspconfig")

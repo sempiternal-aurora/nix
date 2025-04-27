@@ -35,7 +35,7 @@
       btop = true;
       hyfetch = true;
       eza = true;
-      lf = true;
+      lf = false;
       yazi = true;
       starship = true;
     };

@@ -364,7 +364,7 @@ in {
         shadow_color #0000007F
 
         # inactive window fade amount. 0.0 = no dimming, 1.0 = fully dimmed
-        default_dim_inactive 0.2
+        default_dim_inactive 0.05
         dim_inactive_colors.unfocused #000000FF
         dim_inactive_colors.urgent #900000FF
 

@@ -30,7 +30,7 @@ in {
         "networkmanager"
         "video"
       ];
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       #openssh.authorizedKeys.keys = [ cfg.sshKey ];
     };
 
@@ -43,6 +43,6 @@ in {
       users.${cfg.userName} = cfg.homeManager;
     };
 
-    programs.zsh.enable = true;
+    programs.fish.enable = true;
   };
 }

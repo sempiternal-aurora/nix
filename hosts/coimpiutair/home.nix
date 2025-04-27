@@ -30,6 +30,7 @@
       mercurial = true;
       zip = true;
       zsh = true;
+      fish = true;
       zoxide = true;
       btop = true;
       hyfetch = true;

@@ -7,7 +7,8 @@
   modifier = "Mod4";
   cfg = config.mine.sway;
   screenshotDir = "~/Pictures/Screenshots";
-  terminal = lib.getExe pkgs.kitty;
+  # terminal = lib.getExe pkgs.kitty;
+  terminal = lib.getExe pkgs.ghostty;
   menu = "${pkgs.tofi}/bin/tofi-run | xargs swaymsg exec --";
   drun = "${pkgs.tofi}/bin/tofi-drun | xargs swaymsg exec --";
   font = pkgs.nerd-fonts.hasklug;
@@ -32,6 +33,7 @@
   nm-applet = lib.getExe pkgs.networkmanagerapplet;
   blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
   rquickshare = lib.getExe pkgs.rquickshare;
+  fish = lib.getExe pkgs.fish;
 in {
   options = {
     mine.sway = {
@@ -142,7 +144,7 @@ in {
     };
 
     programs.kitty = {
-      enable = true;
+      enable = false;
       font = {
         name = "Hasklug Nerd Font Mono";
         size = 16;
@@ -156,6 +158,44 @@ in {
       };
       shellIntegration.enableZshIntegration = true;
       themeFile = "Dracula";
+    };
+
+    programs.ghostty = {
+      enable = true;
+      settings = {
+        font-family = "Hasklug Nerd Font Mono";
+        font-size = "16";
+        theme = "dracula";
+        command = "${fish} --interactive";
+      };
+      themes = {
+        dracula = {
+          palette = [
+            "0=#21222c"
+            "1=#ff5555"
+            "2=#50fa7b"
+            "3=#f1fa8c"
+            "4=#bd93f9"
+            "5=#ff79c6"
+            "6=#8be9fd"
+            "7=#f8f8f2"
+            "8=#6272a4"
+            "9=#ff6e6e"
+            "10=#69ff94"
+            "11=#ffffa5"
+            "12=#d6acff"
+            "13=#ff92df"
+            "14=#a4ffff"
+            "15=#ffffff"
+          ];
+          background = "282a36";
+          foreground = "f8f8f2";
+          cursor-color = "f8f8f2";
+          cursor-text = "282a36";
+          selection-foreground = "f8f8f2";
+          selection-background = "44475a";
+        };
+      };
     };
 
     programs.zathura = {
@@ -355,10 +395,11 @@ in {
     xdg.configFile."copyq/themes/dracula.ini" = {
       enable = true;
       source =
-        builtins.fetchGit {
-          url = "https://github.com/dracula/copyq.git";
-          ref = "master";
+        pkgs.fetchFromGitHub {
+          owner = "dracula";
+          repo = "copyq";
           rev = "76ef555efc93df71e04ad7865222ff623cc582c7";
+          hash = "sha256-knJxlkd0+Qbb1+JgUA2qWNpUoW3G2BVCAmjsdLBGU1k=";
         }
         + "/dracula.ini";
     };

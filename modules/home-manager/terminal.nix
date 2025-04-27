@@ -14,6 +14,7 @@ in {
     mine.terminal.mercurial = lib.mkEnableOption "mercurial: alternative version control software";
     mine.terminal.zip = lib.mkEnableOption "zip: exactly as it says on the tin";
     mine.terminal.zsh = lib.mkEnableOption "zsh: shell";
+    mine.terminal.fish = lib.mkEnableOption "fish: shell";
     mine.terminal.zoxide = lib.mkEnableOption "zoxide: advanced cd alternative";
     mine.terminal.btop = lib.mkEnableOption "btop: hardware monitor";
     mine.terminal.hyfetch = lib.mkEnableOption "hyfetch: pretty hardware info stuff";
@@ -65,12 +66,49 @@ in {
 
     programs.spotify-player.enable = cfg.spotify-player;
 
+    programs.fish = {
+      enable = cfg.fish;
+      functions = {
+        y = ''
+          set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          yazi $argv --cwd-file="$tmp"
+          if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+          end
+          rm -f -- "$tmp"
+        '';
+        fish_greeting = ''
+          if [ "$COLUMNS" -lt "105" ]; then
+            echo "\n"
+          elif [ "$TERM" = 'linux' ]; then
+            hyfetch -m 8bit
+          else
+            hyfetch
+          fi
+        '';
+      };
+      plugins.dracula = {
+        name = "dracula";
+        src = pkgs.fetchFromiGitHub {
+          owner = "dracula";
+          repo = "fish";
+          rev = "269cd7d76d5104fdc2721db7b8848f6224bdf554";
+        };
+      };
+      shellAliases = {
+        pls = "sudo";
+        bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
+        nix-rebuild = "sudo nixos-rebuild switch --flake ~/nix#coimpiutair";
+      };
+    };
+
     programs.zsh = {
       enable = cfg.zsh;
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       autocd = true;
+      defaultKeymap = "viins";
       history = {
         append = true;
         save = 100000;
@@ -97,14 +135,56 @@ in {
         autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
         zle -N up-line-or-beginning-search
         zle -N down-line-or-beginning-search
-        bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
-        bindkey "^[[A" up-line-or-beginning-search
-        bindkey -M vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
-        bindkey -M vicmd "^[[A" up-line-or-beginning-search
-        bindkey -M vicmd "k" up-line-or-beginning-search
-        bindkey -M vicmd "$terminfo[kcud1]" down-line-or-beginning-search
-        bindkey -M vicmd "^[[B" down-line-or-beginning-search
-        bindkey -M vicmd "j" down-line-or-beginning-search
+
+
+        key[Home]="''${terminfo[khome]}"
+        key[End]="''${terminfo[kend]}"
+        key[Insert]="''${terminfo[kich1]}"
+        key[Backspace]="''${terminfo[kbs]}"
+        key[Delete]="''${terminfo[kdch1]}"
+        key[Up]="''${terminfo[kcuu1]}"
+        key[Down]="''${terminfo[kcud1]}"
+        key[Left]="''${terminfo[kcub1]}"
+        key[Right]="''${terminfo[kcuf1]}"
+        key[PageUp]="''${terminfo[kpp]}"
+        key[PageDown]="''${terminfo[knp]}"
+        key[Shift-Tab]="''${terminfo[kcbt]}"
+        key[h]="h"
+        key[j]="j"
+        key[k]="k"
+        key[l]="l"
+
+        # setup key accordingly
+        [[ -n "''${key[Home]}"      ]] && bindkey -- "''${key[Home]}"       beginning-of-line
+        [[ -n "''${key[End]}"       ]] && bindkey -- "''${key[End]}"        end-of-line
+        [[ -n "''${key[Insert]}"    ]] && bindkey -- "''${key[Insert]}"     overwrite-mode
+        [[ -n "''${key[Backspace]}" ]] && bindkey -- "''${key[Backspace]}"  backward-delete-char
+        [[ -n "''${key[Delete]}"    ]] && bindkey -- "''${key[Delete]}"     delete-char
+        [[ -n "''${key[Up]}"        ]] && bindkey -- "''${key[Up]}"         up-line-or-beginning-search
+        [[ -n "''${key[Down]}"      ]] && bindkey -- "''${key[Down]}"       down-line-or-beginning-search
+        [[ -n "''${key[Left]}"      ]] && bindkey -- "''${key[Left]}"       backward-char
+        [[ -n "''${key[Right]}"     ]] && bindkey -- "''${key[Right]}"      forward-char
+        [[ -n "''${key[PageUp]}"    ]] && bindkey -- "''${key[PageUp]}"     beginning-of-buffer-or-history
+        [[ -n "''${key[PageDown]}"  ]] && bindkey -- "''${key[PageDown]}"   end-of-buffer-or-history
+        [[ -n "''${key[Shift-Tab]}" ]] && bindkey -- "''${key[Shift-Tab]}"  reverse-menu-complete
+
+        # vicmd key setup
+        [[ -n "''${key[Home]}"      ]] && bindkey -M vicmd -- "''${key[Home]}"       beginning-of-line
+        [[ -n "''${key[End]}"       ]] && bindkey -M vicmd -- "''${key[End]}"        end-of-line
+        [[ -n "''${key[Insert]}"    ]] && bindkey -M vicmd -- "''${key[Insert]}"     overwrite-mode
+        [[ -n "''${key[Backspace]}" ]] && bindkey -M vicmd -- "''${key[Backspace]}"  backward-delete-char
+        [[ -n "''${key[Delete]}"    ]] && bindkey -M vicmd -- "''${key[Delete]}"     delete-char
+        [[ -n "''${key[Up]}"        ]] && bindkey -M vicmd -- "''${key[Up]}"         up-line-or-beginning-search
+        [[ -n "''${key[Down]}"      ]] && bindkey -M vicmd -- "''${key[Down]}"       down-line-or-beginning-search
+        [[ -n "''${key[Left]}"      ]] && bindkey -M vicmd -- "''${key[Left]}"       backward-char
+        [[ -n "''${key[Right]}"     ]] && bindkey -M vicmd -- "''${key[Right]}"      forward-char
+        [[ -n "''${key[k]}"         ]] && bindkey -M vicmd -- "''${key[k]}"          up-line-or-beginning-search
+        [[ -n "''${key[j]}"         ]] && bindkey -M vicmd -- "''${key[j]}"          down-line-or-beginning-search
+        [[ -n "''${key[h]}"         ]] && bindkey -M vicmd -- "''${key[h]}"          backward-char
+        [[ -n "''${key[l]}"         ]] && bindkey -M vicmd -- "''${key[l]}"          forward-char
+        [[ -n "''${key[PageUp]}"    ]] && bindkey -M vicmd -- "''${key[PageUp]}"     beginning-of-buffer-or-history
+        [[ -n "''${key[PageDown]}"  ]] && bindkey -M vicmd -- "''${key[PageDown]}"   end-of-buffer-or-history
+        [[ -n "''${key[Shift-Tab]}" ]] && bindkey -M vicmd -- "''${key[Shift-Tab]}"  reverse-menu-complete
 
         unsetopt beep
         if [ "$COLUMNS" -lt "105" ]; then

@@ -34,6 +34,28 @@
   blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
   rquickshare = lib.getExe pkgs.rquickshare;
   fish = lib.getExe pkgs.fish;
+  powercheck = pkgs.writeShellScriptBin "powercheck" ''
+    export DISPLAY=:0
+    export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
+
+    #Set percentage at which notifications should be sent
+    warn_charge=${warnCharge}
+    warn_discharge=${warnDischarge}
+
+    battery_num=$(${acpi} | ${grep} -v 'unavailable' | ${grep} -o "Battery [0-9]" | ${grep} -o "[0-9]")
+
+    if [[ $( ${acpi} | ${grep} "Battery ''${battery_num}: Discharging" | ${wc} -l) == 1 ]]; then
+      current_charge=$(${acpi} | ${grep} -o "Battery ''${battery_num}: Discharging, [0-9]*%" | ${grep} -o "[0-9]*%" | ${grep} -o "[0-9]*")
+      if [[ $current_charge -le $warn_discharge ]]; then
+        ${dunstify} -r 7693 -u critical "Low Battery!" "Charge is at ''${current_charge} percent!"
+      fi
+    #elif [[ $( acpi | grep "Battery ''${battery_num}: Charging" | wc -l) == 1 ]]; then
+    #  current_charge=$(acpi | grep -o "Battery ''${battery_num}: Charging, [0-9]*%" | grep -o "[0-9]*%" | grep -o "[0-9]*")
+    #  if [[ $current_charge -ge $warn_charge ]]; then
+    #    dunstify -r 7693 -u critical "Stop Charging!" "Battery is at ''${current_charge} percent!"
+    #  fi
+    fi
+  '';
 in {
   options = {
     mine.sway = {
@@ -406,35 +428,6 @@ in {
         + "/dracula.ini";
     };
 
-    xdg.configFile."powercheck.sh" = {
-      enable = cfg.powercheck;
-      executable = true;
-      text = ''
-        #!/bin/sh
-
-        export DISPLAY=:0
-        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
-
-        #Set percentage at which notifications should be sent
-        warn_charge=${warnCharge}
-        warn_discharge=${warnDischarge}
-
-        battery_num=$(${acpi} | ${grep} -v 'unavailable' | ${grep} -o "Battery [0-9]" | ${grep} -o "[0-9]")
-
-        if [[ $( ${acpi} | ${grep} "Battery ''${battery_num}: Discharging" | ${wc} -l) == 1 ]]; then
-          current_charge=$(${acpi} | ${grep} -o "Battery ''${battery_num}: Discharging, [0-9]*%" | ${grep} -o "[0-9]*%" | ${grep} -o "[0-9]*")
-          if [[ $current_charge -le $warn_discharge ]]; then
-            ${dunstify} -r 7693 -u critical "Low Battery!" "Charge is at ''${current_charge} percent!"
-          fi
-        #elif [[ $( acpi | grep "Battery ''${battery_num}: Charging" | wc -l) == 1 ]]; then
-        #  current_charge=$(acpi | grep -o "Battery ''${battery_num}: Charging, [0-9]*%" | grep -o "[0-9]*%" | grep -o "[0-9]*")
-        #  if [[ $current_charge -ge $warn_charge ]]; then
-        #    dunstify -r 7693 -u critical "Stop Charging!" "Battery is at ''${current_charge} percent!"
-        #  fi
-        fi
-      '';
-    };
-
     xdg.configFile."handlr/handlr.toml" = {
       enable = true;
       text = ''
@@ -447,7 +440,7 @@ in {
 
     systemd.user = {
       timers.powercheck = lib.mkIf cfg.powercheck {
-        Unit = {Description = "periodically run powercheck.sh";};
+        Unit = {Description = "periodically run powercheck";};
 
         Timer = {OnCalendar = "minutely";};
 
@@ -462,7 +455,7 @@ in {
 
           Service = {
             Type = "simple";
-            ExecStart = "${config.xdg.configHome}/powercheck.sh";
+            ExecStart = "${powercheck}/bin/powercheck";
           };
         };
 

@@ -167,6 +167,8 @@ in {
         font-size = "16";
         theme = "dracula";
         command = "${fish} --interactive";
+        maximize = true;
+        background-opacity = 0.9;
       };
       themes = {
         dracula = {

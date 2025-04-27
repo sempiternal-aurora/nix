@@ -545,7 +545,7 @@ in {
     programs.hyfetch = {
       enable = cfg.hyfetch;
       settings = {
-        preset = "nonbinary";
+        preset = "voidgirl";
         mode = "rgb";
         light_dark = "dark";
         lightness = 0.65;

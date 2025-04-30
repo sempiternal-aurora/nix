@@ -26,7 +26,10 @@ in {
       programs.gpg.enable = true;
       services.gpg-agent = {
         enable = true;
-        pinentryPackage = pkgs.pinentry-qt;
+        pinentry = {
+          package = pkgs.pinentry-qt;
+          program = "pinentry-qt";
+        };
       };
     })
     (lib.mkIf cfg.systemd.enable {

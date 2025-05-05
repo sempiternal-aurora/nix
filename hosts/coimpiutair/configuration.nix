@@ -147,6 +147,19 @@ args @ {
     # }
   ];
 
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 10d";
+    };
+    settings = {
+      auto-optimise-store = true;
+    };
+    extraOptions = ''
+      keep-outputs = true
+    '';
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

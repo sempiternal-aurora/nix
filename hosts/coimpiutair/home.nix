@@ -38,6 +38,7 @@
       lf = false;
       yazi = true;
       starship = true;
+      yt-dlp = true;
     };
     direnv.enable = true;
     sway = {

@@ -22,6 +22,7 @@ in {
     mine.terminal.lf = lib.mkEnableOption "lf: hardware file manager";
     mine.terminal.yazi = lib.mkEnableOption "yazi: rust hardware file manager";
     mine.terminal.starship = lib.mkEnableOption "starship: terminal prompt string generator";
+    mine.terminal.yt-dlp = lib.mkEnableOption "yt-dlp: cmd-line youtube video downloader";
     mine.direnv.enable = lib.mkEnableOption "install direnv for reproducible development environments";
   };
   config = {
@@ -29,7 +30,8 @@ in {
       lib.lists.optionals cfg.zip [pkgs.zip pkgs.unzip]
       ++ lib.lists.optional cfg.weechat pkgs.weechat
       ++ lib.lists.optional cfg.trash pkgs.trash-cli
-      ++ lib.lists.optional cfg.mercurial pkgs.mercurial;
+      ++ lib.lists.optional cfg.mercurial pkgs.mercurial
+      ++ lib.lists.optional cfg.yt-dlp pkgs.yt-dlp;
 
     programs.direnv = {
       enable = config.mine.direnv.enable;

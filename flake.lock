@@ -100,11 +100,11 @@
         "nur": "nur"
       },
       "locked": {
-        "lastModified": 1746441606,
-        "narHash": "sha256-Ech6EnX4SLjM8gE5QDEfZPXlbAjjhamscECia+W3wrs=",
+        "lastModified": 1746518940,
+        "narHash": "sha256-nZp6cGH++JueVyG6ypVlNQqPPmwN+UN4s0QLKp8wM10=",
         "owner": "adriankarlen",
         "repo": "textfox",
-        "rev": "42da6fa9ffce9db8014c528c88c33711eca36b78",
+        "rev": "31912c0f3756b0ead01031b75aca0458fa759aff",
         "type": "github"
       },
       "original": {

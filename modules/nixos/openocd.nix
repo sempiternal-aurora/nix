@@ -16,5 +16,8 @@ in {
     environment.systemPackages = [
       pkgs.openocd
     ];
+    services.udev.packages = [
+      pkgs.openocd
+    ];
   };
 }

@@ -12,5 +12,6 @@
     ./jellyfin.nix
     ./printing.nix
     ./documentation.nix
+    ./openocd.nix
   ];
 }

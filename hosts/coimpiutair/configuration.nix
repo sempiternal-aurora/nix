@@ -116,6 +116,7 @@ args @ {
     yazi.enable = true;
     uutils.enable = true;
     docs.enable = true;
+    openocd.enable = true;
   };
 
   # 1Password __MUST__ be installed as root

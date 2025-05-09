@@ -160,6 +160,7 @@ args @ {
     };
     settings = {
       auto-optimise-store = true;
+      trusted-users = ["root" "aurora"];
     };
     extraOptions = ''
       keep-outputs = true

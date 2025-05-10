@@ -34,6 +34,7 @@
   blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
   rquickshare = lib.getExe pkgs.rquickshare;
   fish = lib.getExe pkgs.fish;
+  dracula-cursors = pkgs.callPackage ./dracula-cursors.nix {};
   powercheck = pkgs.writeShellScriptBin "powercheck" ''
     export DISPLAY=:0
     export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
@@ -251,16 +252,16 @@ in {
     home.pointerCursor = {
       gtk.enable = true;
       x11.enable = true;
-      package = pkgs.fuchsia-cursor;
-      name = "Fuchsia";
+      package = dracula-cursors;
+      name = "Dracula-cursors";
       size = 48;
     };
 
     gtk = {
       enable = true;
       cursorTheme = {
-        package = pkgs.fuchsia-cursor;
-        name = "Fuchsia";
+        package = dracula-cursors;
+        name = "Dracula-cursors";
         size = 24;
       };
       font = {

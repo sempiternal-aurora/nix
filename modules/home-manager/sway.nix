@@ -252,7 +252,7 @@ in {
     home.pointerCursor = {
       gtk.enable = true;
       x11.enable = true;
-      package = dracula-cursors;
+      package = pkgs.dracula-theme;
       name = "Dracula-cursors";
       size = 48;
     };
@@ -260,7 +260,7 @@ in {
     gtk = {
       enable = true;
       cursorTheme = {
-        package = dracula-cursors;
+        package = pkgs.dracula-theme;
         name = "Dracula-cursors";
         size = 24;
       };

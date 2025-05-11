@@ -71,14 +71,6 @@ in {
     programs.fish = {
       enable = cfg.fish;
       functions = {
-        y = ''
-          set tmp (mktemp -t "yazi-cwd.XXXXXX")
-          yazi $argv --cwd-file="$tmp"
-          if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-            builtin cd -- "$cwd"
-          end
-          rm -f -- "$tmp"
-        '';
         fish_greeting = ''
           if test "$TERM" = 'linux'
             hyfetch -m 8bit

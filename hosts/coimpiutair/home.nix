@@ -104,6 +104,14 @@
     EDITOR = "nvim";
   };
 
+  nix = {
+    gc = {
+      automatic = true;
+      frequency = "weekly";
+      options = "--delete-older-than 10d";
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

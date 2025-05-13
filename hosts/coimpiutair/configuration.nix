@@ -87,6 +87,10 @@ args @ {
       "zoom"
     ];
 
+  environment.systemPackages = [
+    pkgs.framework-tool
+  ];
+
   mine = {
     keyboard = {
       enable = true;

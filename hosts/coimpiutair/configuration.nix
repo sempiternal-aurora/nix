@@ -1,13 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-args @ {
+args@{
   inputs,
   lib,
   pkgs,
   vars,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     # You will need to generate a hardware configuration with hardware by running
@@ -29,7 +30,7 @@ args @ {
         }
       );
       # Tell Linux that we're compiling with Clang and LLVM.
-      extraMakeFlags = ["LLVM=1"];
+      extraMakeFlags = [ "LLVM=1" ];
 
       # If you'd like to edit your kernel configuration, use
       # `structuredExtraConfig`. For example, some options available to us
@@ -43,11 +44,11 @@ args @ {
         RUST = lib.kernel.yes;
       };
     }).overrideAttrs
-    # Work around another NixOS specific issue where builds with WERROR=y
-    # are stopped by a benign error. See reference 1 below for details.
-    # Technically, this fix is only necessary with WERROR=y but the issue
-    # still causes a warning on builds where WERROR is unset.
-    {env.NIX_CFLAGS_COMPILE = "-Wno-unused-command-line-argument";}
+      # Work around another NixOS specific issue where builds with WERROR=y
+      # are stopped by a benign error. See reference 1 below for details.
+      # Technically, this fix is only necessary with WERROR=y but the issue
+      # still causes a warning on builds where WERROR is unset.
+      { env.NIX_CFLAGS_COMPILE = "-Wno-unused-command-line-argument"; }
   );
 
   # Use the systemd-boot EFI boot loader.
@@ -62,19 +63,20 @@ args @ {
   admin-user = {
     enable = true;
     userName = vars.adminUser;
-    homeManager = import ./home.nix (args // {userName = vars.adminUser;});
+    homeManager = import ./home.nix (args // { userName = vars.adminUser; });
   };
 
   local-user = {
     enable = true;
     userName = vars.localUser;
-    homeManager = import ./home.nix (args // {userName = vars.localUser;});
+    homeManager = import ./home.nix (args // { userName = vars.localUser; });
   };
 
   networking.hostName = "coimpiutair"; # Define your hostname.
 
   # Allow unfree licences for some packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
       "1password-gui"
@@ -127,7 +129,10 @@ args @ {
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [vars.adminUser vars.localUser];
+    polkitPolicyOwners = [
+      vars.adminUser
+      vars.localUser
+    ];
   };
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -160,7 +165,10 @@ args @ {
     };
     settings = {
       auto-optimise-store = true;
-      trusted-users = ["root" "aurora"];
+      trusted-users = [
+        "root"
+        "aurora"
+      ];
     };
     extraOptions = ''
       keep-outputs = true

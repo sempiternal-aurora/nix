@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mine.calibre;
   sqlite = "${pkgs.sqlite}/bin/sqlite3";
   tofi = "${pkgs.tofi}/bin/tofi";
@@ -58,7 +59,8 @@
       IFS=$'\n'
     done
   '';
-in {
+in
+{
   options = {
     mine.calibre.enable = lib.mkEnableOption "install calibre";
   };

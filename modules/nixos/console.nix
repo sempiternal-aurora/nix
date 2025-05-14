@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.mine.greetd;
   lcfg = config.mine.ly;
-in {
+in
+{
   options.mine.greetd = {
     enable = lib.mkEnableOption "Enable greetd tui greeting service";
     command = lib.mkOption {
@@ -20,7 +22,7 @@ in {
   config = {
     console = {
       font = "ter-i28b";
-      packages = with pkgs; [terminus_font];
+      packages = with pkgs; [ terminus_font ];
       keyMap = "us";
     };
 

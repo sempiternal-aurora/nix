@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-args @ {
+args@{
   inputs,
   config,
   lib,
@@ -9,7 +9,8 @@ args @ {
   vars,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     # You will need to generate a hardware configuration with hardware by running
@@ -33,7 +34,7 @@ args @ {
   admin-user = {
     enable = true;
     userName = vars.adminUser;
-    homeManager = import ./home.nix (args // {userName = vars.adminUser;});
+    homeManager = import ./home.nix (args // { userName = vars.adminUser; });
   };
 
   local-user.enable = false;
@@ -41,7 +42,8 @@ args @ {
   networking.hostName = "bocsa"; # Define your hostname.
 
   # Allow unfree licences for some packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       # empty :3
     ];

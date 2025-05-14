@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     mine.tailscale.enable = lib.mkEnableOption "install tailscale client";
     mine.globalprotect.enable = lib.mkEnableOption "globalprotect vpn gui";
@@ -25,10 +26,7 @@
     };
 
     # VPN Stuff
-    environment.systemPackages =
-      lib.lists.optional
-      config.mine.globalprotect.enable
-      pkgs.globalprotect-openconnect;
+    environment.systemPackages = lib.lists.optional config.mine.globalprotect.enable pkgs.globalprotect-openconnect;
     services.globalprotect.enable = true;
 
     # Open ports in the firewall.

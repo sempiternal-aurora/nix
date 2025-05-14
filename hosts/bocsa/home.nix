@@ -6,7 +6,8 @@
   lib,
   userName ? "user",
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/home-manager
   ];
@@ -45,7 +46,8 @@
   ];
 
   # Allow unfree licences for some packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       #"discord"
       #"1password"

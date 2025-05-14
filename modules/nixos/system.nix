@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     mine.fprintd.enable = lib.mkEnableOption "fingerprint support";
     mine.usbhotspot.enable = lib.mkEnableOption "apple usb mobile hotspot support";
@@ -13,7 +14,10 @@
     mine.uutils.enable = lib.mkEnableOption "uutils coreutils rust replacement";
   };
   config = {
-    nix.settings.experimental-features = ["nix-command" "flakes"];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # Set your time zone.
     time.timeZone = "Australia/Canberra";
@@ -28,7 +32,7 @@
     services.fwupd.enable = true;
 
     security.polkit.enable = true;
-    security.pam.services.swaylock = {};
+    security.pam.services.swaylock = { };
 
     hardware.brillo.enable = config.mine.brillo.enable;
 
@@ -37,7 +41,7 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment = {
-      pathsToLink = ["/share/zsh"];
+      pathsToLink = [ "/share/zsh" ];
       systemPackages =
         [
           pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.

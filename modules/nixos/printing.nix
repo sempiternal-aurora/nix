@@ -3,8 +3,11 @@
   lib,
   config,
   ...
-}: {
-  options = {mine.printing.enable = lib.mkEnableOption "printing daemon CUPS";};
+}:
+{
+  options = {
+    mine.printing.enable = lib.mkEnableOption "printing daemon CUPS";
+  };
   config = {
     services.printing = {
       enable = config.mine.printing.enable;

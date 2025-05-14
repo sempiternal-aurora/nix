@@ -25,39 +25,41 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
-    nixosConfigurations.default = self.nixosConfigurations.coimpiutair;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.default = self.nixosConfigurations.coimpiutair;
 
-    nixosConfigurations.coimpiutair = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs;
-        vars = {
-          adminUser = "aurora";
-          localUser = "myria";
+      nixosConfigurations.coimpiutair = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          vars = {
+            adminUser = "aurora";
+            localUser = "myria";
+          };
         };
+        modules = [
+          ./hosts/coimpiutair/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
       };
-      modules = [
-        ./hosts/coimpiutair/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
-    };
 
-    nixosConfigurations.bocsa = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs;
-        vars = {
-          adminUser = "aurora";
-          localUser = "myria";
+      nixosConfigurations.bocsa = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          vars = {
+            adminUser = "aurora";
+            localUser = "myria";
+          };
         };
+        modules = [
+          ./hosts/bocsa/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
       };
-      modules = [
-        ./hosts/bocsa/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
     };
-  };
 }

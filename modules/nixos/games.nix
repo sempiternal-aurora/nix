@@ -3,12 +3,14 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   scfg = config.mine.steam;
   lcfg = config.mine.lutris;
   icfg = config.mine.itch;
   pcfg = config.mine.prism;
-in {
+in
+{
   options = {
     mine.steam.enable = lib.mkEnableOption "install steam";
     mine.lutris.enable = lib.mkEnableOption "install lutris";

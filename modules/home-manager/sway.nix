@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   modifier = "Mod4";
   cfg = config.mine.sway;
   screenshotDir = "~/Pictures/Screenshots";
@@ -34,7 +35,6 @@
   blueman-applet = "${pkgs.blueman}/bin/blueman-applet";
   rquickshare = lib.getExe pkgs.rquickshare;
   fish = lib.getExe pkgs.fish;
-  dracula-cursors = pkgs.callPackage ./dracula-cursors.nix {};
   powercheck = pkgs.writeShellScriptBin "powercheck" ''
     export DISPLAY=:0
     export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
@@ -57,7 +57,8 @@
     #  fi
     fi
   '';
-in {
+in
+{
   options = {
     mine.sway = {
       enable = lib.mkEnableOption "enable sway module";
@@ -87,82 +88,82 @@ in {
 
     fonts.fontconfig = {
       enable = true;
-      defaultFonts.monospace = ["Hasklug Nerd Font Mono"];
+      defaultFonts.monospace = [ "Hasklug Nerd Font Mono" ];
     };
 
     xdg.mimeApps = {
       enable = true;
-      associations.added = {};
+      associations.added = { };
       defaultApplications = {
-        "image/png" = ["image-roll.desktop"];
-        "image/jpg" = ["image-roll.desktop"];
-        "image/jpeg" = ["image-roll.desktop"];
-        "application/pdf" = ["org.pwmt.zathura.desktop"];
-        "video/mp4" = ["vlc.desktop"];
-        "text/cache-manifest" = ["nvim.desktop"];
-        "text/calendar" = ["nvim.desktop"];
-        "text/coffeescript" = ["nvim.desktop"];
-        "text/css" = ["nvim.desktop"];
-        "text/csv" = ["nvim.desktop"];
-        "text/jade" = ["nvim.desktop"];
-        "text/jsx" = ["nvim.desktop"];
-        "text/less" = ["nvim.desktop"];
-        "text/markdown" = ["nvim.desktop"];
-        "text/mathml" = ["nvim.desktop"];
-        "text/mdx" = ["nvim.desktop"];
-        "text/n3" = ["nvim.desktop"];
-        "text/plain" = ["nvim.desktop"];
-        "text/prs.lines.tag" = ["nvim.desktop"];
-        "text/richtext" = ["nvim.desktop"];
-        "text/rtf" = ["nvim.desktop"];
-        "text/sgml" = ["nvim.desktop"];
-        "text/shex" = ["nvim.desktop"];
-        "text/slim" = ["nvim.desktop"];
-        "text/spdx" = ["nvim.desktop"];
-        "text/stylus" = ["nvim.desktop"];
-        "text/tab-separated-values" = ["nvim.desktop"];
-        "text/troff" = ["nvim.desktop"];
-        "text/turtle" = ["nvim.desktop"];
-        "text/uri-list" = ["nvim.desktop"];
-        "text/vcard" = ["nvim.desktop"];
-        "text/vnd.curl" = ["nvim.desktop"];
-        "text/vnd.curl.dcurl" = ["nvim.desktop"];
-        "text/vnd.curl.mcurl" = ["nvim.desktop"];
-        "text/vnd.curl.scurl" = ["nvim.desktop"];
-        "text/vnd.dvb.subtitle" = ["nvim.desktop"];
-        "text/vnd.familysearch.gedcom" = ["nvim.desktop"];
-        "text/vnd.fly" = ["nvim.desktop"];
-        "text/vnd.fmi.flexstor" = ["nvim.desktop"];
-        "text/vnd.graphviz" = ["nvim.desktop"];
-        "text/vnd.in3d.3dml" = ["nvim.desktop"];
-        "text/vnd.in3d.spot" = ["nvim.desktop"];
-        "text/vnd.sun.j2me.app-descriptor" = ["nvim.desktop"];
-        "text/vnd.wap.wml" = ["nvim.desktop"];
-        "text/vnd.wap.wmlscript" = ["nvim.desktop"];
-        "text/vtt" = ["nvim.desktop"];
-        "text/x-asm" = ["nvim.desktop"];
-        "text/x-c" = ["nvim.desktop"];
-        "text/x-component" = ["nvim.desktop"];
-        "text/x-fortran" = ["nvim.desktop"];
-        "text/x-handlebars-template" = ["nvim.desktop"];
-        "text/x-java-source" = ["nvim.desktop"];
-        "text/x-lua" = ["nvim.desktop"];
-        "text/x-markdown" = ["nvim.desktop"];
-        "text/x-nfo" = ["nvim.desktop"];
-        "text/x-opml" = ["nvim.desktop"];
-        "text/x-org" = ["nvim.desktop"];
-        "text/x-pascal" = ["nvim.desktop"];
-        "text/x-processing" = ["nvim.desktop"];
-        "text/x-sass" = ["nvim.desktop"];
-        "text/x-scss" = ["nvim.desktop"];
-        "text/x-setext" = ["nvim.desktop"];
-        "text/x-sfv" = ["nvim.desktop"];
-        "text/x-suse-ymp" = ["nvim.desktop"];
-        "text/x-uuencode" = ["nvim.desktop"];
-        "text/x-vcalendar" = ["nvim.desktop"];
-        "text/x-vcard" = ["nvim.desktop"];
-        "text/xml" = ["nvim.desktop"];
-        "text/yaml" = ["nvim.desktop"];
+        "image/png" = [ "image-roll.desktop" ];
+        "image/jpg" = [ "image-roll.desktop" ];
+        "image/jpeg" = [ "image-roll.desktop" ];
+        "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+        "video/mp4" = [ "vlc.desktop" ];
+        "text/cache-manifest" = [ "nvim.desktop" ];
+        "text/calendar" = [ "nvim.desktop" ];
+        "text/coffeescript" = [ "nvim.desktop" ];
+        "text/css" = [ "nvim.desktop" ];
+        "text/csv" = [ "nvim.desktop" ];
+        "text/jade" = [ "nvim.desktop" ];
+        "text/jsx" = [ "nvim.desktop" ];
+        "text/less" = [ "nvim.desktop" ];
+        "text/markdown" = [ "nvim.desktop" ];
+        "text/mathml" = [ "nvim.desktop" ];
+        "text/mdx" = [ "nvim.desktop" ];
+        "text/n3" = [ "nvim.desktop" ];
+        "text/plain" = [ "nvim.desktop" ];
+        "text/prs.lines.tag" = [ "nvim.desktop" ];
+        "text/richtext" = [ "nvim.desktop" ];
+        "text/rtf" = [ "nvim.desktop" ];
+        "text/sgml" = [ "nvim.desktop" ];
+        "text/shex" = [ "nvim.desktop" ];
+        "text/slim" = [ "nvim.desktop" ];
+        "text/spdx" = [ "nvim.desktop" ];
+        "text/stylus" = [ "nvim.desktop" ];
+        "text/tab-separated-values" = [ "nvim.desktop" ];
+        "text/troff" = [ "nvim.desktop" ];
+        "text/turtle" = [ "nvim.desktop" ];
+        "text/uri-list" = [ "nvim.desktop" ];
+        "text/vcard" = [ "nvim.desktop" ];
+        "text/vnd.curl" = [ "nvim.desktop" ];
+        "text/vnd.curl.dcurl" = [ "nvim.desktop" ];
+        "text/vnd.curl.mcurl" = [ "nvim.desktop" ];
+        "text/vnd.curl.scurl" = [ "nvim.desktop" ];
+        "text/vnd.dvb.subtitle" = [ "nvim.desktop" ];
+        "text/vnd.familysearch.gedcom" = [ "nvim.desktop" ];
+        "text/vnd.fly" = [ "nvim.desktop" ];
+        "text/vnd.fmi.flexstor" = [ "nvim.desktop" ];
+        "text/vnd.graphviz" = [ "nvim.desktop" ];
+        "text/vnd.in3d.3dml" = [ "nvim.desktop" ];
+        "text/vnd.in3d.spot" = [ "nvim.desktop" ];
+        "text/vnd.sun.j2me.app-descriptor" = [ "nvim.desktop" ];
+        "text/vnd.wap.wml" = [ "nvim.desktop" ];
+        "text/vnd.wap.wmlscript" = [ "nvim.desktop" ];
+        "text/vtt" = [ "nvim.desktop" ];
+        "text/x-asm" = [ "nvim.desktop" ];
+        "text/x-c" = [ "nvim.desktop" ];
+        "text/x-component" = [ "nvim.desktop" ];
+        "text/x-fortran" = [ "nvim.desktop" ];
+        "text/x-handlebars-template" = [ "nvim.desktop" ];
+        "text/x-java-source" = [ "nvim.desktop" ];
+        "text/x-lua" = [ "nvim.desktop" ];
+        "text/x-markdown" = [ "nvim.desktop" ];
+        "text/x-nfo" = [ "nvim.desktop" ];
+        "text/x-opml" = [ "nvim.desktop" ];
+        "text/x-org" = [ "nvim.desktop" ];
+        "text/x-pascal" = [ "nvim.desktop" ];
+        "text/x-processing" = [ "nvim.desktop" ];
+        "text/x-sass" = [ "nvim.desktop" ];
+        "text/x-scss" = [ "nvim.desktop" ];
+        "text/x-setext" = [ "nvim.desktop" ];
+        "text/x-sfv" = [ "nvim.desktop" ];
+        "text/x-suse-ymp" = [ "nvim.desktop" ];
+        "text/x-uuencode" = [ "nvim.desktop" ];
+        "text/x-vcalendar" = [ "nvim.desktop" ];
+        "text/x-vcard" = [ "nvim.desktop" ];
+        "text/xml" = [ "nvim.desktop" ];
+        "text/yaml" = [ "nvim.desktop" ];
       };
     };
 
@@ -288,7 +289,7 @@ in {
         terminal = terminal;
         menu = menu;
         fonts = {
-          names = ["Hasklug Nerd Font Mono"];
+          names = [ "Hasklug Nerd Font Mono" ];
           size = 16.0;
         };
         gaps = {
@@ -348,7 +349,8 @@ in {
         };
         modes = {
           "screenshot" = {
-            "1" = "exec '${grim} -g \"$(${slurp})\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
+            "1" =
+              "exec '${grim} -g \"$(${slurp})\" ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
             "2" = "exec '${grim} ${screenshotDir}/ps_$(date +\"%Y%m%d%H%M%S\").png', mode \"default\"";
             "3" = "exec '${grim} -g \"$(${slurp})\" - | ${wl-copy}', mode \"default\"";
             "4" = "exec '${grim} - | ${wl-copy}', mode \"default\"";
@@ -371,7 +373,7 @@ in {
             "${modifier}+r" = "mode \"default\"";
           };
         };
-        bars = [];
+        bars = [ ];
       };
       extraConfig = ''
         # window corner radius in px
@@ -441,11 +443,17 @@ in {
 
     systemd.user = {
       timers.powercheck = lib.mkIf cfg.powercheck {
-        Unit = {Description = "periodically run powercheck";};
+        Unit = {
+          Description = "periodically run powercheck";
+        };
 
-        Timer = {OnCalendar = "minutely";};
+        Timer = {
+          OnCalendar = "minutely";
+        };
 
-        Install = {WantedBy = ["sway-session.target"];};
+        Install = {
+          WantedBy = [ "sway-session.target" ];
+        };
       };
 
       services = {
@@ -463,11 +471,13 @@ in {
         blueman-applet = {
           Unit = {
             Description = "Blueman applet";
-            After = ["graphical-session.target"];
-            PartOf = ["graphical-session.target"];
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
           };
 
-          Install = {WantedBy = ["sway-session.target"];};
+          Install = {
+            WantedBy = [ "sway-session.target" ];
+          };
 
           Service = {
             Type = "simple";
@@ -483,11 +493,13 @@ in {
         rquickshare = {
           Unit = {
             Description = "RQuickShare";
-            After = ["graphical-session.target"];
-            PartOf = ["graphical-session.target"];
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
           };
 
-          Install = {WantedBy = ["sway-session.target"];};
+          Install = {
+            WantedBy = [ "sway-session.target" ];
+          };
 
           Service = {
             Type = "simple";
@@ -503,11 +515,13 @@ in {
         udiskie = {
           Unit = {
             Description = "udiskie mount daemon";
-            After = ["graphical-session-pre.target"];
-            PartOf = ["graphical-session.target"];
+            After = [ "graphical-session-pre.target" ];
+            PartOf = [ "graphical-session.target" ];
           };
 
-          Install = {WantedBy = ["sway-session.target"];};
+          Install = {
+            WantedBy = [ "sway-session.target" ];
+          };
 
           Service = {
             Type = "simple";
@@ -524,11 +538,13 @@ in {
         network-manager-applet = {
           Unit = {
             Description = "Network Manager applet";
-            After = ["graphical-session.target"];
-            PartOf = ["graphical-session.target"];
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
           };
 
-          Install = {WantedBy = ["sway-session.target"];};
+          Install = {
+            WantedBy = [ "sway-session.target" ];
+          };
 
           Service = {
             Type = "simple";
@@ -544,8 +560,8 @@ in {
         polkit-mate-authentication-agent-1 = {
           Unit = {
             Description = "polkit-mate-authentication-agent-1";
-            PartOf = ["graphical-session.target"];
-            After = ["graphical-session-pre.target"];
+            PartOf = [ "graphical-session.target" ];
+            After = [ "graphical-session-pre.target" ];
           };
 
           Service = {
@@ -558,7 +574,9 @@ in {
             TimeoutStopSec = 10;
           };
 
-          Install = {WantedBy = ["sway-session.target"];};
+          Install = {
+            WantedBy = [ "sway-session.target" ];
+          };
         };
       };
     };
@@ -678,7 +696,7 @@ in {
     };
 
     # The package provides some icons that are good to have available.
-    xdg.systemDirs.data = ["${pkgs.networkmanagerapplet}/share"];
+    xdg.systemDirs.data = [ "${pkgs.networkmanagerapplet}/share" ];
 
     programs.tofi = {
       enable = true;
@@ -780,8 +798,18 @@ in {
         ipc = true;
         bar_id = "bar-0";
 
-        modules-left = ["sway/workspaces" "sway/mode"];
-        modules-center = ["cpu#1" "cpu#2" "memory#1" "memory#2" "temperature#1" "temperature#2"];
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+        ];
+        modules-center = [
+          "cpu#1"
+          "cpu#2"
+          "memory#1"
+          "memory#2"
+          "temperature#1"
+          "temperature#2"
+        ];
         modules-right = [
           "idle_inhibitor"
           "pulseaudio"
@@ -801,12 +829,12 @@ in {
           disable-click = false;
           all-outputs = true;
           persistent-workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "4" = [];
-            "5" = [];
-            "6" = [];
+            "1" = [ ];
+            "2" = [ ];
+            "3" = [ ];
+            "4" = [ ];
+            "5" = [ ];
+            "6" = [ ];
           };
           format = "{icon}";
           format-icons = {
@@ -823,7 +851,7 @@ in {
           interval = 2;
           #device = "amdgpu_bl0";
           format = "{icon}";
-          format-icons = [""];
+          format-icons = [ "" ];
           on-scroll-up = "brillo -q -A 5";
           on-scroll-down = "brillo -q -U 5";
           smooth-scrolling-threshold = 1;
@@ -853,7 +881,19 @@ in {
           format-charging = "󰂄";
           format-plugged = "";
           format-full = "󰁹";
-          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          format-icons = [
+            "󰂎"
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
           format-time = "{H}h {M}min";
           tooltip = true;
         };
@@ -941,7 +981,11 @@ in {
             headset = "󰋎";
             phone = "";
             portable = "";
-            default = ["󰕿" "󰖀" "󰕾"];
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
           };
           scroll-step = 5.0;
           on-click = "amixer set Master toggle";

@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.mine.mathematica;
-in {
+in
+{
   options = {
     mine.mathematica.enable = lib.mkEnableOption "Enable Mathematica";
     mine.mathematica.version = lib.mkOption {

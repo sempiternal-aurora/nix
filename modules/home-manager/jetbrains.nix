@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mine.jetbrains;
-in {
+in
+{
   options = {
     mine.jetbrains.enable = lib.mkEnableOption "Whether to include jetbrains tools";
     mine.jetbrains.intellij = lib.mkEnableOption "Whether to install intellij";

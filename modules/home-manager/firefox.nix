@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.mine.firefox;
-in {
+in
+{
   imports = [
     inputs.textfox.homeManagerModules.default
   ];

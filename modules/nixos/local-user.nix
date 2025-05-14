@@ -5,9 +5,11 @@
   inputs,
   vars,
   ...
-}: let
+}:
+let
   cfg = config.local-user;
-in {
+in
+{
   options = {
     local-user.enable = lib.mkEnableOption "enable user module";
     local-user.userName = lib.mkOption {

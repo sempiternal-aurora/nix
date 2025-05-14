@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mine.nvim;
-in {
+in
+{
   options = {
     mine.nvim.enable = lib.mkEnableOption "enable neovim";
     mine.nvim.default = lib.mkEnableOption "set nvim as the default editor";
@@ -15,8 +17,8 @@ in {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/json" = ["nvim.desktop"];
-        "text/*" = ["nvim.desktop"];
+        "application/json" = [ "nvim.desktop" ];
+        "text/*" = [ "nvim.desktop" ];
       };
     };
 
@@ -34,7 +36,7 @@ in {
 
         # nix config
         nil
-        alejandra
+        nixfmt-rfc-style
 
         # lua config
         lua-language-server

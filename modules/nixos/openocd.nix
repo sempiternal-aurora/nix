@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.mine.openocd;
-in {
+in
+{
   options = {
     mine.openocd = {
       enable = lib.mkEnableOption "Enable OpenOCD";

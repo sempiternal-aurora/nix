@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.mine.digital;
-in {
+in
+{
   options = {
     mine.digital.enable = lib.mkEnableOption "Enable Digital";
   };

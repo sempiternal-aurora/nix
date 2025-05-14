@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mine.terminal;
-in {
+in
+{
   options = {
     mine.terminal.newsboat = lib.mkEnableOption "newsboat: rss aggregation engine";
     mine.terminal.spotify-player = lib.mkEnableOption "spotify-player: cmd-line spotify client";
@@ -27,7 +29,10 @@ in {
   };
   config = {
     home.packages =
-      lib.lists.optionals cfg.zip [pkgs.zip pkgs.unzip]
+      lib.lists.optionals cfg.zip [
+        pkgs.zip
+        pkgs.unzip
+      ]
       ++ lib.lists.optional cfg.weechat pkgs.weechat
       ++ lib.lists.optional cfg.trash pkgs.trash-cli
       ++ lib.lists.optional cfg.mercurial pkgs.mercurial
@@ -42,27 +47,27 @@ in {
       enable = cfg.newsboat;
       autoReload = true;
       urls = [
-        {url = "https://archlinux.org/feeds/news/";}
-        {url = "https://www.kernel.org/feeds/kdist.xml";}
-        {url = "https://www.sandraandwoo.com/feed";}
-        {url = "https://www.theshovel.com.au/rss";}
-        {url = "https://foxes-in-love.tumblr.com/rss";}
-        {url = "https://another-piece-of-candy.thecomicseries.com/rss";}
-        {url = "https://trick.pika.page/posts_feed";}
-        {url = "https://xkcd.com/atom.xml";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCo0-VCHchPIG3JtJlIQnFew";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0e3QhIYukixgh5VVpKHH9Q";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCePQNin7n0WbY9tEts6oGnw";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UClt01z1wHHT7c5lKcU8pxRQ";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCpa-Zb0ZcQjTCPP1Dx_1M8Q";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCFQMnBA3CS502aghlcr0_aw";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC3XTzVzaHQEd30rQbuvCtTQ";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCICVWhQj3-pqLt45Ww32ARg";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCFhXFikryT4aFcLkLw2LBLA";}
-        {url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCfPUcG3oCmXEYgdFuwlFh8w";}
+        { url = "https://archlinux.org/feeds/news/"; }
+        { url = "https://www.kernel.org/feeds/kdist.xml"; }
+        { url = "https://www.sandraandwoo.com/feed"; }
+        { url = "https://www.theshovel.com.au/rss"; }
+        { url = "https://foxes-in-love.tumblr.com/rss"; }
+        { url = "https://another-piece-of-candy.thecomicseries.com/rss"; }
+        { url = "https://trick.pika.page/posts_feed"; }
+        { url = "https://xkcd.com/atom.xml"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCo0-VCHchPIG3JtJlIQnFew"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0e3QhIYukixgh5VVpKHH9Q"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCePQNin7n0WbY9tEts6oGnw"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UClt01z1wHHT7c5lKcU8pxRQ"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCpa-Zb0ZcQjTCPP1Dx_1M8Q"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCFQMnBA3CS502aghlcr0_aw"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC3XTzVzaHQEd30rQbuvCtTQ"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCICVWhQj3-pqLt45Ww32ARg"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCFhXFikryT4aFcLkLw2LBLA"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCfPUcG3oCmXEYgdFuwlFh8w"; }
       ];
     };
 
@@ -201,7 +206,7 @@ in {
     programs.zoxide = {
       enable = cfg.zoxide;
       enableZshIntegration = true;
-      options = ["--cmd cd"];
+      options = [ "--cmd cd" ];
     };
 
     programs.btop = {

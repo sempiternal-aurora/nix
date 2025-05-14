@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.mine.audio;
-in {
+in
+{
   options.mine.audio = {
     enable = lib.mkEnableOption "Enable pipewire audio management";
   };

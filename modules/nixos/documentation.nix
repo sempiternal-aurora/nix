@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.mine.docs;
-in {
+in
+{
   options = {
     mine.docs = {
       enable = lib.mkEnableOption "man pages";

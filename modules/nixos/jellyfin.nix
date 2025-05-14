@@ -1,11 +1,12 @@
 {
   lib,
   config,
-  pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mine.jellyfin;
-in {
+in
+{
   options.mine.jellyfin.enable = lib.mkEnableOption "Enable local jellyfin media server";
 
   config = lib.mkIf cfg.enable {

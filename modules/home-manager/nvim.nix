@@ -169,6 +169,7 @@ in
 
         ${builtins.readFile ./source/set.lua}
         ${builtins.readFile ./source/remap.lua}
+        ${builtins.readFile ./source/langs.lua}
         local harpoon = require("harpoon")
 
         -- Plugin keybinds

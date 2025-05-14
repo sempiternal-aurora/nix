@@ -36,11 +36,15 @@ args@{
       # `structuredExtraConfig`. For example, some options available to us
       # when compiling with Clang and linking with LLD:
       structuredExtraConfig = {
+        # Optimisation flags
+        MNATIVE_AMD = lib.kernel.yes;
         CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
 
+        # Clang flags
         CFI_CLANG = lib.kernel.yes;
         LTO_CLANG_FULL = lib.kernel.yes;
 
+        # Rust flags
         RUST = lib.kernel.yes;
       };
     }).overrideAttrs

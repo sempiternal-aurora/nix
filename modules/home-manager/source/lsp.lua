@@ -25,6 +25,7 @@ local servers = {
     clangd = {},
     jdtls = {},
     volar = {},
+    ocamllsp = {},
     nil_ls = { settings = { nix = { flake = { autoArchive = true } } } },
     ts_ls = {
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },

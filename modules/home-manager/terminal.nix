@@ -55,6 +55,7 @@ in
         { url = "https://another-piece-of-candy.thecomicseries.com/rss"; }
         { url = "https://trick.pika.page/posts_feed"; }
         { url = "https://xkcd.com/atom.xml"; }
+        { url = "https://www.imfineimfine.com/feed"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCo0-VCHchPIG3JtJlIQnFew"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0e3QhIYukixgh5VVpKHH9Q"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCePQNin7n0WbY9tEts6oGnw"; }

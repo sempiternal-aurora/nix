@@ -41,6 +41,12 @@ in
         # lua config
         lua-language-server
         stylua
+
+        # latex config
+        texliveFull
+        tex-fmt
+        texlab
+        ltex-ls-plus
       ];
 
       plugins = with pkgs.vimPlugins; [

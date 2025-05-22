@@ -26,6 +26,20 @@ local servers = {
     jdtls = {},
     volar = {},
     ocamllsp = {},
+    texlab = {
+        settings = {
+            texlab = {
+                build = {
+                    onSave = true,
+                },
+                chktex = {
+                    onEdit = true,
+                    onOpenAndSave = true,
+                },
+            },
+        },
+    },
+    ltex_plus = { settings = { ltex = { language = "en-GB" } } },
     nil_ls = { settings = { nix = { flake = { autoArchive = true } } } },
     ts_ls = {
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },

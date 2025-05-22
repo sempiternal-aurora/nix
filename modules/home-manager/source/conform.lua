@@ -4,6 +4,8 @@ require("conform").setup({
         lua = { "stylua" },
         python = { "isort", "ruff_format" },
         rust = { "rustfmt" },
+        bib = { "tex-fmt" },
+        tex = { "tex-fmt" },
     },
     formatters = {
         stylua = {

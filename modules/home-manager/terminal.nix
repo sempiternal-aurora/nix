@@ -212,7 +212,14 @@ in
 
     programs.btop = {
       enable = cfg.btop;
-      settings.color_theme = "dracula";
+      settings = {
+        color_theme = "dracula";
+        proc_per_core = true;
+        theme_background = false;
+        vim_keys = true;
+        proc_sorting = "cpu lazy";
+        proc_gradient = false;
+      };
     };
 
     programs.starship = {

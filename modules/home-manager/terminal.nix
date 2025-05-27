@@ -69,6 +69,7 @@ in
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCFhXFikryT4aFcLkLw2LBLA"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCfPUcG3oCmXEYgdFuwlFh8w"; }
+        { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCqoZ40XymtdcOp2YOoMw9uw"; }
       ];
     };
 

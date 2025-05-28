@@ -31,6 +31,7 @@ args@{
       );
       # Tell Linux that we're compiling with Clang and LLVM.
       extraMakeFlags = [ "LLVM=1" ];
+      withRust = true;
 
       # If you'd like to edit your kernel configuration, use
       # `structuredExtraConfig`. For example, some options available to us
@@ -38,14 +39,15 @@ args@{
       structuredExtraConfig = {
         # Optimisation flags
         MNATIVE_AMD = lib.kernel.yes;
+        GENERIC_CPU = lib.kernel.no;
+        CC_OPTIMIZE_FOR_PERFORMANCE = lib.kernel.no;
         CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
 
         # Clang flags
         CFI_CLANG = lib.kernel.yes;
         LTO_CLANG_FULL = lib.kernel.yes;
-
-        # Rust flags
-        RUST = lib.kernel.yes;
+        LTO_NONE = lib.kernel.no;
+        LTO_CLANG_THIN = lib.kernel.no;
       };
     }).overrideAttrs
       # Work around another NixOS specific issue where builds with WERROR=y

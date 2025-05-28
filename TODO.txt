@@ -2,6 +2,7 @@ Pick a nice cursor theme - See if dracula colours?
 check for remaining configs to be ported
 ssh needs to be integrated somehow - maybe 1password ssh keys
 Fix JTDLS
+Fix linux config
 Fix Context menu for DUNST items
 once you're sure there's nothing more to port in, nuke home directory, needs cleaning
  - Make sure all git repos are pushed beforehand

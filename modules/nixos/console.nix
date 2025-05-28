@@ -21,8 +21,9 @@ in
 
   config = {
     console = {
-      font = "ter-i28b";
-      packages = with pkgs; [ terminus_font ];
+      earlySetup = true;
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-i28b.psf.gz";
+      packages = [ pkgs.terminus_font ];
       keyMap = "us";
     };
 

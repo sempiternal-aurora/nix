@@ -34,6 +34,7 @@
       fish = true;
       zoxide = true;
       btop = true;
+      comma = true;
       hyfetch = true;
       eza = true;
       lf = false;

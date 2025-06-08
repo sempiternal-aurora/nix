@@ -660,7 +660,7 @@ in
           max_icon_size = 128;
           stick_history = "yes";
           history_length = 20;
-          dmenu = menu;
+          dmenu = "${pkgs.tofi}/bin/tofi";
           browser = "${firefox} -new-tab";
           always_run_script = true;
           title = "Dunst";

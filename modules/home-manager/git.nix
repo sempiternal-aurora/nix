@@ -3,6 +3,7 @@
   programs.git = {
     enable = true;
     extraConfig.init.defaultBranch = "main";
+    delta.enable = true;
     includes = [
       {
         path = "${config.xdg.configHome}/git/gitlab.conf";

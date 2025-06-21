@@ -64,8 +64,8 @@ in
       enable = lib.mkEnableOption "enable sway module";
       powercheck = lib.mkEnableOption "enable low power notifications";
       wallpaper = lib.mkOption {
-        default = ./source/Wallpapers/black-hole.jpg;
-        type = lib.types.path;
+        default = "~/Pictures/Wallpapers/wallpaper";
+        type = lib.types.str;
       };
     };
     mine.zoom.enable = lib.mkEnableOption "enable zoom module";

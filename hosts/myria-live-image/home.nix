@@ -43,6 +43,7 @@
     sway = {
       enable = true;
       powercheck = true;
+      wallpaper = "${./black-hole.jpg}";
     };
     nvim = {
       enable = true;

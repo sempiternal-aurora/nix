@@ -44,8 +44,6 @@
       enable = true;
       powercheck = true;
     };
-    zoom.enable = true;
-    teams.enable = true;
     nvim = {
       enable = true;
       default = true;
@@ -54,12 +52,7 @@
       enable = true;
       enableNeovimIntegration = true;
     };
-    jetbrains = {
-      enable = true;
-      intellij = true;
-    };
     digital.enable = true;
-    mathematica.enable = true;
     firefox.enable = true;
   };
 

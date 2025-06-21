@@ -63,6 +63,10 @@ in
     mine.sway = {
       enable = lib.mkEnableOption "enable sway module";
       powercheck = lib.mkEnableOption "enable low power notifications";
+      wallpaper = lib.mkOption {
+        default = ./source/Wallpapers/black-hole.jpg;
+        type = lib.types.path;
+      };
     };
     mine.zoom.enable = lib.mkEnableOption "enable zoom module";
     mine.teams.enable = lib.mkEnableOption "enable teams module";
@@ -242,7 +246,7 @@ in
         ring-color = "f5c2e7";
         key-hl-color = "b4b3fe";
         inside-color = "1e1e2e";
-        image = "~/Pictures/Wallpapers/wallpaper";
+        image = cfg.wallpaper;
         effect-scale = 0.4;
         effect-vignette = "0.2:0.5";
         effect-blur = "4x2";
@@ -314,7 +318,7 @@ in
           titlebar = false;
         };
         output = {
-          "*".bg = "~/Pictures/Wallpapers/wallpaper fill";
+          "*".bg = "${cfg.wallpaper}";
           eDP-1 = {
             scale = "1";
             resolution = "2256x1504";

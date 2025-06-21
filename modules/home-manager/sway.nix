@@ -66,6 +66,7 @@ in
     };
     mine.zoom.enable = lib.mkEnableOption "enable zoom module";
     mine.teams.enable = lib.mkEnableOption "enable teams module";
+    mine.qbittorrent.enable = lib.mkEnableOption "enable qbittorrent";
   };
 
   config = lib.mkIf cfg.enable {
@@ -83,7 +84,8 @@ in
         pkgs.rquickshare
       ]
       ++ lib.lists.optional config.mine.teams.enable pkgs.teams-for-linux
-      ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
+      ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us
+      ++ lib.lists.optional config.mine.qbittorrent.enable pkgs.qbittorrent;
     services.playerctld.enable = true;
 
     fonts.fontconfig = {

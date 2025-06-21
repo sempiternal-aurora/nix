@@ -318,7 +318,7 @@ in
           titlebar = false;
         };
         output = {
-          "*".bg = "${cfg.wallpaper}";
+          "*".bg = "${cfg.wallpaper} fill";
           eDP-1 = {
             scale = "1";
             resolution = "2256x1504";

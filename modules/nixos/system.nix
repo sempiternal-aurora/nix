@@ -49,7 +49,10 @@
           pkgs.git
         ]
         ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
-        ++ lib.lists.optional config.mine.usbhotspot.enable pkgs.libimobiledevice
+        ++ lib.lists.optionals config.mine.usbhotspot.enable [
+          pkgs.libimobiledevice
+          pkgs.usb-modeswitch
+        ]
         ++ lib.lists.optional config.mine.uutils.enable (lib.hiPrio pkgs.uutils-coreutils-noprefix);
     };
 

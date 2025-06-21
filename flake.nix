@@ -34,6 +34,20 @@
     {
       nixosConfigurations.default = self.nixosConfigurations.coimpiutair;
 
+      nixosConfigurations.myria-live-image = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+          vars = {
+            adminUser = "nixos";
+          };
+        };
+        modules = [
+          ./hosts/myria-live-image/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+
       nixosConfigurations.coimpiutair = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;

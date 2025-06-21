@@ -46,7 +46,7 @@
     sway = {
       enable = true;
       powercheck = true;
-      wallpaper = ../../modules/home-manager/source/Wallpapers/black-hole.jpg;
+      wallpaper = ../../modules/home-manager/source/Wallpapers/Shadow_Wallpaper_v2.png;
     };
     zoom.enable = true;
     teams.enable = true;

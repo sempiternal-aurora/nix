@@ -11,6 +11,7 @@ in
   options = {
     mine.nvim.enable = lib.mkEnableOption "enable neovim";
     mine.nvim.default = lib.mkEnableOption "set nvim as the default editor";
+    mine.nvim.latex = lib.mkEnableOption "add inbuilt latex lsp support";
   };
 
   config = lib.mkIf cfg.enable {
@@ -41,7 +42,7 @@ in
         # lua config
         lua-language-server
         stylua
-
+      ] ++ lib.lists.optionals cfg.latex [
         # latex config
         texliveFull
         tex-fmt

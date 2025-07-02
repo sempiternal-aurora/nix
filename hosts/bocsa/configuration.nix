@@ -1,25 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
 args@{
   inputs,
   config,
   lib,
   pkgs,
   vars,
-  modulesPath,
   ...
 }:
 {
   imports = [
     # Include the results of the hardware scan.
-    # You will need to generate a hardware configuration with hardware by running
-    # > sudo nixos-generate-config
-    # and copying the result from /etc/nixos
     ./hardware-configuration.nix
     ../../modules/nixos
     inputs.home-manager.nixosModules.default
-    (modulesPath + "/installer/cd-dvd/iso-image.nix")
   ];
 
   # Use the latest linux kernel
@@ -27,8 +23,15 @@ args@{
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "/dev/sda";
+    };
   };
 
   admin-user = {
@@ -41,25 +44,37 @@ args@{
 
   networking.hostName = "bocsa"; # Define your hostname.
 
+
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
-      # empty :3
+      "discord"
+      "1password-gui"
+      "1password-cli"
+      "1password"
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
+      "zoom"
     ];
 
-  #mine.keyboard = {
-  #    enable = true;
-  #    caps2esc = true;
-  #};
-  mine.udisks2.enable = true;
+  mine = {
+    keyboard = {
+      enable = true;
+      caps2esc = true;
+    };
 
-  # 1Password __MUST__ be installed as root
-  #programs._1password.enable = true;
-  #programs._1password-gui = {
-  #    enable = true;
-  #    polkitPolicyOwners = [ vars.adminUser vars.localUser ];
-  #};
+    jellyfin.enable = true;
+    tailscale.enable = true;
+    printing.enable = true;
+    udisks2.enable = true;
+    usbhotspot.enable = true;
+    yazi.enable = true;
+    uutils.enable = true;
+    docs.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -72,7 +87,7 @@ args@{
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  #system.copySystemConfiguration = true; # Unavailable with flakes
+  # system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -91,5 +106,6 @@ args@{
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
+
 }

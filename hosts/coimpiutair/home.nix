@@ -61,6 +61,7 @@
     nvim = {
       enable = true;
       default = true;
+      latex = true;
     };
     isabelle = {
       enable = true;

@@ -66,8 +66,7 @@
         specialArgs = {
           inherit inputs;
           vars = {
-            adminUser = "aurora";
-            localUser = "myria";
+            adminUser = "nyla";
           };
         };
         modules = [

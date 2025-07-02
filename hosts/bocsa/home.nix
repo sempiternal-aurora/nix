@@ -26,24 +26,27 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  mine.sway = {
-    enable = false;
-    powercheck = true;
-  };
-  mine._1password = {
-    enable = false;
-    kwallet.enable = false;
-    systemd = {
-      enable = false;
-      target = "sway-session.target";
+  mine = {
+    terminal = {
+      newsboat = true;
+      weechat = true;
+      trash = true;
+      mercurial = true;
+      zip = true;
+      zsh = true;
+      fish = true;
+      zoxide = true;
+      btop = true;
+      hyfetch = true;
+      eza = true;
+      yazi = true;
+      starship = true;
+    };
+    nvim = {
+      enable = true;
+      default = true;
     };
   };
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    zsh
-  ];
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =

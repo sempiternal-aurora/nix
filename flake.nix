@@ -51,6 +51,7 @@
         specialArgs = {
           inputs = inputs // {
             textfox = inputs.textfox-unstable;
+            home-manager = inputs.home-manager-unstable;
           };
           vars = {
             adminUser = "nixos";
@@ -67,6 +68,7 @@
         specialArgs = {
           inputs = inputs // {
             textfox = inputs.textfox-unstable-small;
+            home-manager = inputs.home-manager-unstable-small;
           };
           vars = {
             adminUser = "aurora";
@@ -84,6 +86,7 @@
         specialArgs = {
           inputs = inputs // {
             textfox = inputs.textfox-unstable;
+            home-manager = inputs.home-manager-unstable;
           };
           vars = {
             adminUser = "nyla";

@@ -2,11 +2,17 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
+    home-manager-unstable-small = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable-small";
+    };
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     isabelle-lsp-nvim = {
@@ -19,38 +25,49 @@
       flake = false;
     };
 
-    textfox = {
+    textfox-unstable = {
       url = "github:adriankarlen/textfox";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    textfox-unstable-small = {
+      url = "github:adriankarlen/textfox";
+      inputs.nixpkgs.follows = "nixpkgs-unstable-small";
     };
   };
 
   outputs =
     {
       self,
-      nixpkgs,
+      nixpkgs-unstable-small,
+      nixpkgs-unstable,
       ...
     }@inputs:
     {
       nixosConfigurations.default = self.nixosConfigurations.coimpiutair;
 
-      nixosConfigurations.myria-live-image = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.myria-live-image = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs;
+          inputs = inputs // {
+            textfox = inputs.textfox-unstable;
+          };
           vars = {
             adminUser = "nixos";
           };
         };
         modules = [
           ./hosts/myria-live-image/configuration.nix
-          inputs.home-manager.nixosModules.default
+          inputs.home-manager-unstable.nixosModules.default
         ];
       };
 
-      nixosConfigurations.coimpiutair = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.coimpiutair = nixpkgs-unstable-small.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {
-          inherit inputs;
+          inputs = inputs // {
+            textfox = inputs.textfox-unstable-small;
+          };
           vars = {
             adminUser = "aurora";
             localUser = "myria";
@@ -58,20 +75,23 @@
         };
         modules = [
           ./hosts/coimpiutair/configuration.nix
-          inputs.home-manager.nixosModules.default
+          inputs.home-manager-unstable-small.nixosModules.default
         ];
       };
 
-      nixosConfigurations.bocsa = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.bocsa = nixpkgs-unstable.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {
-          inherit inputs;
+          inputs = inputs // {
+            textfox = inputs.textfox-unstable;
+          };
           vars = {
             adminUser = "nyla";
           };
         };
         modules = [
           ./hosts/bocsa/configuration.nix
-          inputs.home-manager.nixosModules.default
+          inputs.home-manager-unstable.nixosModules.default
         ];
       };
     };

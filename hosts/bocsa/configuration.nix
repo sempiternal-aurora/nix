@@ -4,7 +4,6 @@
 
 args@{
   inputs,
-  config,
   lib,
   pkgs,
   vars,
@@ -43,7 +42,6 @@ args@{
   local-user.enable = false;
 
   networking.hostName = "bocsa"; # Define your hostname.
-
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =

@@ -55,6 +55,7 @@
           };
           vars = {
             adminUser = "nixos";
+            configuration = "myria-live-image";
           };
         };
         modules = [
@@ -73,6 +74,7 @@
           vars = {
             adminUser = "aurora";
             localUser = "myria";
+            configuration = "coimpiutair";
           };
         };
         modules = [
@@ -90,6 +92,7 @@
           };
           vars = {
             adminUser = "nyla";
+            configuration = "bocsa";
           };
         };
         modules = [

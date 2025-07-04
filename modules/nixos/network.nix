@@ -12,7 +12,13 @@
   };
   config = {
     networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
-    networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    networking.networkmanager = {
+      enable = true; # Easiest to use and most distros use this by default.
+      plugins = [
+        pkgs.networkmanager-openvpn
+        pkgs.networkmanager-openconnect
+      ];
+    };
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";

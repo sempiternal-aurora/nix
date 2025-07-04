@@ -64,7 +64,10 @@ args@{
       caps2esc = true;
     };
 
-    jellyfin.enable = true;
+    jellyfin = {
+      enable = true;
+      openFirewall = true;
+    };
     tailscale.enable = true;
     printing.enable = true;
     udisks2.enable = true;

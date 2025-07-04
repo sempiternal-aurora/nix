@@ -51,6 +51,7 @@ in
       enable = cfg.newsboat;
       autoReload = true;
       urls = [
+        { url = "https://discourse.nixos.org/t/breaking-changes-announcement-for-unstable/17574.rss"; }
         { url = "https://archlinux.org/feeds/news/"; }
         { url = "https://www.kernel.org/feeds/kdist.xml"; }
         { url = "https://www.sandraandwoo.com/feed"; }

@@ -101,6 +101,8 @@ in
           size = "16px";
         };
         tabs.horizontal.enable = true;
+        displayNavButtons = true;
+        displayUrlbarIcons = true;
       };
     };
   };

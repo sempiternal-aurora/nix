@@ -30,17 +30,18 @@ in
     mine.direnv.enable = lib.mkEnableOption "install direnv for reproducible development environments";
   };
   config = {
-    home.packages =
-      [ pkgs.lolcat ]
-      ++ lib.lists.optionals cfg.zip [
-        pkgs.zip
-        pkgs.unzip
-      ]
-      ++ lib.lists.optional cfg.weechat pkgs.weechat
-      ++ lib.lists.optional cfg.trash pkgs.trash-cli
-      ++ lib.lists.optional cfg.mercurial pkgs.mercurial
-      ++ lib.lists.optional cfg.yt-dlp pkgs.yt-dlp
-      ++ lib.lists.optional cfg.comma pkgs.comma;
+    home.packages = [
+      pkgs.lolcat
+    ]
+    ++ lib.lists.optionals cfg.zip [
+      pkgs.zip
+      pkgs.unzip
+    ]
+    ++ lib.lists.optional cfg.weechat pkgs.weechat
+    ++ lib.lists.optional cfg.trash pkgs.trash-cli
+    ++ lib.lists.optional cfg.mercurial pkgs.mercurial
+    ++ lib.lists.optional cfg.yt-dlp pkgs.yt-dlp
+    ++ lib.lists.optional cfg.comma pkgs.comma;
 
     programs.direnv = {
       enable = config.mine.direnv.enable;
@@ -104,7 +105,6 @@ in
         }
       ];
       shellAliases = {
-        cat = "lolcat";
         pls = "sudo";
         bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
         nix-rebuild = "nixos-rebuild switch --flake ~/nix#${vars.configuration} --sudo";

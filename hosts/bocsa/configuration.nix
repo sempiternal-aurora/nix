@@ -77,6 +77,30 @@ args@{
     docs.enable = true;
   };
 
+  zramSwap = {
+    enable = true;
+    priority = 2;
+  };
+
+  nix = {
+    # gc = {
+    #   automatic = true;
+    #   dates = "weekly";
+    #   options = "--delete-older-than 10d";
+    # };
+    settings = {
+      # auto-optimise-store = true;
+      trusted-users = [
+        "root"
+        vars.adminUser
+      ];
+    };
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

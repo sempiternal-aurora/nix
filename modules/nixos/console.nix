@@ -29,7 +29,6 @@ in
 
     services.greetd = {
       enable = cfg.enable;
-      vt = 1;
       settings.default_session.command = cfg.command;
     };
     services.displayManager.ly = {

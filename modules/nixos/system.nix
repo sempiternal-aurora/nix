@@ -42,18 +42,17 @@
     # $ nix search wget
     environment = {
       pathsToLink = [ "/share/zsh" ];
-      systemPackages =
-        [
-          pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-          pkgs.wget
-          pkgs.git
-        ]
-        ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
-        ++ lib.lists.optionals config.mine.usbhotspot.enable [
-          pkgs.libimobiledevice
-          pkgs.usb-modeswitch
-        ]
-        ++ lib.lists.optional config.mine.uutils.enable (lib.hiPrio pkgs.uutils-coreutils-noprefix);
+      systemPackages = [
+        pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+        pkgs.wget
+        pkgs.git
+      ]
+      ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
+      ++ lib.lists.optionals config.mine.usbhotspot.enable [
+        pkgs.libimobiledevice
+        pkgs.usb-modeswitch
+      ]
+      ++ lib.lists.optional config.mine.uutils.enable (lib.hiPrio pkgs.uutils-coreutils-noprefix);
     };
 
     # environment.etc = {
@@ -65,6 +64,8 @@
     #     mode = "0755";
     #   };
     # };
+
+    environment.enableAllTerminfo = true;
 
     environment.sessionVariables = {
       XDG_CACHE_HOME = "$HOME/.cache";

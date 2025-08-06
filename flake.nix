@@ -2,13 +2,7 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    home-manager-unstable-small = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable-small";
-    };
 
     home-manager-unstable = {
       url = "github:nix-community/home-manager";
@@ -28,11 +22,6 @@
     textfox-unstable = {
       url = "github:adriankarlen/textfox";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    textfox-unstable-small = {
-      url = "github:adriankarlen/textfox";
-      inputs.nixpkgs.follows = "nixpkgs-unstable-small";
     };
   };
 

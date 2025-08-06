@@ -64,7 +64,7 @@ args@{
       caps2esc = true;
     };
 
-    jellyfin = {
+    media = {
       enable = true;
       openFirewall = true;
     };

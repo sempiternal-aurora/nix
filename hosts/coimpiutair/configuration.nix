@@ -179,7 +179,7 @@ args@{
     lutris.enable = true;
     itch.enable = true;
     prism.enable = true;
-    jellyfin.enable = true;
+    media.enable = true;
     tailscale.enable = true;
     globalprotect.enable = true;
     bluetooth.enable = true;

@@ -49,7 +49,6 @@
     };
     zoom.enable = true;
     teams.enable = true;
-    qbittorrent.enable = true;
     _1password = {
       enable = true;
       kwallet.enable = true;

@@ -9,7 +9,7 @@
     ./games.nix
     ./keyboard.nix
     ./wayland.nix
-    ./jellyfin.nix
+    ./media.nix
     ./printing.nix
     ./documentation.nix
     ./openocd.nix

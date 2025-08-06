@@ -39,7 +39,6 @@
   outputs =
     {
       self,
-      nixpkgs-unstable-small,
       nixpkgs-unstable,
       ...
     }@inputs:
@@ -64,12 +63,12 @@
         ];
       };
 
-      nixosConfigurations.coimpiutair = nixpkgs-unstable-small.lib.nixosSystem {
+      nixosConfigurations.coimpiutair = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           inputs = inputs // {
-            textfox = inputs.textfox-unstable-small;
-            home-manager = inputs.home-manager-unstable-small;
+            textfox = inputs.textfox-unstable;
+            home-manager = inputs.home-manager-unstable;
           };
           vars = {
             adminUser = "aurora";
@@ -79,7 +78,7 @@
         };
         modules = [
           ./hosts/coimpiutair/configuration.nix
-          inputs.home-manager-unstable-small.nixosModules.default
+          inputs.home-manager-unstable.nixosModules.default
         ];
       };
 

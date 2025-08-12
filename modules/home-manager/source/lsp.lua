@@ -67,6 +67,22 @@ local servers = {
     },
     parol_ls = {},
 }
+
+if string.find(vim.loop.cwd() or "", "fioxa") then
+    servers.rust_analyzer.settings = {
+        ["rust-analyzer"] = {
+            check = {
+                target = "x86_64-unknown-none",
+                allTargets = false,
+            },
+            cargo = {
+                target = "x86_64-unknown-none",
+                allTargets = false,
+            },
+        },
+    }
+end
+
 local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities =
     vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())

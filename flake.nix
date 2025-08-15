@@ -22,19 +22,18 @@
     textfox-unstable = {
       url = "github:adriankarlen/textfox";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.nur.follows = "nur-unstable";
     };
 
-    nur-unstable = {
-      url = "github:nix-community/nur";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.flake-parts.follows = "flake-parts-unstable";
-    };
-
-    flake-parts-unstable = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
-    };
+    # nur-unstable = {
+    #   url = "github:nix-community/nur";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   inputs.flake-parts.follows = "flake-parts-unstable";
+    # };
+    #
+    # flake-parts-unstable = {
+    #   url = "github:hercules-ci/flake-parts";
+    #   inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
+    # };
   };
 
   outputs =

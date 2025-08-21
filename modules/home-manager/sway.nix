@@ -84,6 +84,7 @@ in
       pkgs.image-roll
       pkgs.playerctl
       pkgs.rquickshare
+      pkgs.viu
     ]
     ++ lib.lists.optional config.mine.teams.enable pkgs.teams-for-linux
     ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;

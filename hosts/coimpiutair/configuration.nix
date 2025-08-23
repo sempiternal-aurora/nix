@@ -20,105 +20,106 @@ args@{
   ];
 
   # Use the latest linux kernel
-  boot.kernelPackages = pkgs.linuxPackagesFor (
-    (pkgs.linux_zen.override {
-      stdenv = pkgs.overrideCC pkgs.llvmPackages_latest.stdenv (
-        # Tell our C compiler (Clang) to use LLVM bintools--normally GNU
-        # binutils are used even with Clang as the compiler.
-        pkgs.llvmPackages_latest.stdenv.cc.override {
-          bintools = pkgs.llvmPackages_latest.bintools;
-        }
-      );
-      # Tell Linux that we're compiling with Clang and LLVM.
-      extraMakeFlags = [ "LLVM=1" ];
-      withRust = true;
-
-      # If you'd like to edit your kernel configuration, use
-      # `structuredExtraConfig`. For example, some options available to us
-      # when compiling with Clang and linking with LLD:
-      structuredExtraConfig = {
-        # Optimisation flags
-        MZEN4 = lib.kernel.yes;
-        CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
-
-        # Clang flags
-        CFI_CLANG = lib.kernel.yes;
-        LTO_CLANG_FULL = lib.kernel.yes;
-
-        # Rust support
-        RUST = lib.kernel.yes;
-      };
-
-      argsOverride = {
-        ignoreConfigErrors = true;
-        # Tell Linux that we're compiling with Clang and LLVM.
-        extraMakeFlags = [ "LLVM=1" ];
-
-        # If you'd like to edit your kernel configuration, use
-        # `structuredExtraConfig`. For example, some options available to us
-        # when compiling with Clang and linking with LLD:
-        structuredExtraConfig = {
-          # Optimisation flags
-          MZEN4 = lib.kernel.yes;
-          CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
-
-          # Clang flags
-          CFI_CLANG = lib.kernel.yes;
-          LTO_CLANG_FULL = lib.kernel.yes;
-          RUST = lib.kernel.yes;
-
-          # Zen Interactive tuning
-          ZEN_INTERACTIVE = lib.kernel.yes;
-
-          # FQ-Codel Packet Scheduling
-          NET_SCH_DEFAULT = lib.kernel.yes;
-          DEFAULT_FQ_CODEL = lib.kernel.yes;
-
-          # Preempt (low-latency)
-          PREEMPT = lib.mkOverride 90 lib.kernel.yes;
-          PREEMPT_VOLUNTARY = lib.mkOverride 90 lib.kernel.no;
-
-          # Preemptible tree-based hierarchical RCU
-          TREE_RCU = lib.kernel.yes;
-          PREEMPT_RCU = lib.kernel.yes;
-          RCU_EXPERT = lib.kernel.yes;
-          TREE_SRCU = lib.kernel.yes;
-          TASKS_RCU_GENERIC = lib.kernel.yes;
-          TASKS_RCU = lib.kernel.yes;
-          TASKS_RUDE_RCU = lib.kernel.yes;
-          TASKS_TRACE_RCU = lib.kernel.yes;
-          RCU_STALL_COMMON = lib.kernel.yes;
-          RCU_NEED_SEGCBLIST = lib.kernel.yes;
-          RCU_FANOUT = lib.kernel.freeform "64";
-          RCU_FANOUT_LEAF = lib.kernel.freeform "16";
-          RCU_BOOST = lib.kernel.yes;
-          RCU_BOOST_DELAY = lib.kernel.option (lib.kernel.freeform "500");
-          RCU_NOCB_CPU = lib.kernel.yes;
-          RCU_LAZY = lib.kernel.yes;
-          RCU_DOUBLE_CHECK_CB_TIME = lib.kernel.yes;
-
-          # BFQ I/O scheduler
-          IOSCHED_BFQ = lib.mkOverride 90 lib.kernel.yes;
-
-          # Futex WAIT_MULTIPLE implementation for Wine / Proton Fsync.
-          FUTEX = lib.kernel.yes;
-          FUTEX_PI = lib.kernel.yes;
-
-          # NT synchronization primitive emulation
-          NTSYNC = lib.kernel.yes;
-
-          # Preemptive Full Tickless Kernel at 1000Hz
-          HZ = lib.kernel.freeform "1000";
-          HZ_1000 = lib.kernel.yes;
-        };
-      };
-    }).overrideAttrs
-      # Work around another NixOS specific issue where builds with WERROR=y
-      # are stopped by a benign error. See reference 1 below for details.
-      # Technically, this fix is only necessary with WERROR=y but the issue
-      # still causes a warning on builds where WERROR is unset.
-      { env.NIX_CFLAGS_COMPILE = "-Wno-unused-command-line-argument"; }
-  );
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackagesFor (
+  #   (pkgs.linux_zen.override {
+  #     stdenv = pkgs.overrideCC pkgs.llvmPackages_latest.stdenv (
+  #       # Tell our C compiler (Clang) to use LLVM bintools--normally GNU
+  #       # binutils are used even with Clang as the compiler.
+  #       pkgs.llvmPackages_latest.stdenv.cc.override {
+  #         bintools = pkgs.llvmPackages_latest.bintools;
+  #       }
+  #     );
+  #     # Tell Linux that we're compiling with Clang and LLVM.
+  #     extraMakeFlags = [ "LLVM=1" ];
+  #     withRust = true;
+  #
+  #     # If you'd like to edit your kernel configuration, use
+  #     # `structuredExtraConfig`. For example, some options available to us
+  #     # when compiling with Clang and linking with LLD:
+  #     structuredExtraConfig = {
+  #       # Optimisation flags
+  #       MZEN4 = lib.kernel.yes;
+  #       CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
+  #
+  #       # Clang flags
+  #       CFI_CLANG = lib.kernel.yes;
+  #       LTO_CLANG_FULL = lib.kernel.yes;
+  #
+  #       # Rust support
+  #       RUST = lib.kernel.yes;
+  #     };
+  #
+  #     argsOverride = {
+  #       ignoreConfigErrors = true;
+  #       # Tell Linux that we're compiling with Clang and LLVM.
+  #       extraMakeFlags = [ "LLVM=1" ];
+  #
+  #       # If you'd like to edit your kernel configuration, use
+  #       # `structuredExtraConfig`. For example, some options available to us
+  #       # when compiling with Clang and linking with LLD:
+  #       structuredExtraConfig = {
+  #         # Optimisation flags
+  #         MZEN4 = lib.kernel.yes;
+  #         CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.kernel.yes;
+  #
+  #         # Clang flags
+  #         CFI_CLANG = lib.kernel.yes;
+  #         LTO_CLANG_FULL = lib.kernel.yes;
+  #         RUST = lib.kernel.yes;
+  #
+  #         # Zen Interactive tuning
+  #         ZEN_INTERACTIVE = lib.kernel.yes;
+  #
+  #         # FQ-Codel Packet Scheduling
+  #         NET_SCH_DEFAULT = lib.kernel.yes;
+  #         DEFAULT_FQ_CODEL = lib.kernel.yes;
+  #
+  #         # Preempt (low-latency)
+  #         PREEMPT = lib.mkOverride 90 lib.kernel.yes;
+  #         PREEMPT_VOLUNTARY = lib.mkOverride 90 lib.kernel.no;
+  #
+  #         # Preemptible tree-based hierarchical RCU
+  #         TREE_RCU = lib.kernel.yes;
+  #         PREEMPT_RCU = lib.kernel.yes;
+  #         RCU_EXPERT = lib.kernel.yes;
+  #         TREE_SRCU = lib.kernel.yes;
+  #         TASKS_RCU_GENERIC = lib.kernel.yes;
+  #         TASKS_RCU = lib.kernel.yes;
+  #         TASKS_RUDE_RCU = lib.kernel.yes;
+  #         TASKS_TRACE_RCU = lib.kernel.yes;
+  #         RCU_STALL_COMMON = lib.kernel.yes;
+  #         RCU_NEED_SEGCBLIST = lib.kernel.yes;
+  #         RCU_FANOUT = lib.kernel.freeform "64";
+  #         RCU_FANOUT_LEAF = lib.kernel.freeform "16";
+  #         RCU_BOOST = lib.kernel.yes;
+  #         RCU_BOOST_DELAY = lib.kernel.option (lib.kernel.freeform "500");
+  #         RCU_NOCB_CPU = lib.kernel.yes;
+  #         RCU_LAZY = lib.kernel.yes;
+  #         RCU_DOUBLE_CHECK_CB_TIME = lib.kernel.yes;
+  #
+  #         # BFQ I/O scheduler
+  #         IOSCHED_BFQ = lib.mkOverride 90 lib.kernel.yes;
+  #
+  #         # Futex WAIT_MULTIPLE implementation for Wine / Proton Fsync.
+  #         FUTEX = lib.kernel.yes;
+  #         FUTEX_PI = lib.kernel.yes;
+  #
+  #         # NT synchronization primitive emulation
+  #         NTSYNC = lib.kernel.yes;
+  #
+  #         # Preemptive Full Tickless Kernel at 1000Hz
+  #         HZ = lib.kernel.freeform "1000";
+  #         HZ_1000 = lib.kernel.yes;
+  #       };
+  #     };
+  #   }).overrideAttrs
+  #     # Work around another NixOS specific issue where builds with WERROR=y
+  #     # are stopped by a benign error. See reference 1 below for details.
+  #     # Technically, this fix is only necessary with WERROR=y but the issue
+  #     # still causes a warning on builds where WERROR is unset.
+  #     { env.NIX_CFLAGS_COMPILE = "-Wno-unused-command-line-argument"; }
+  # );
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {

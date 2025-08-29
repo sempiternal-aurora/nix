@@ -182,7 +182,7 @@ args@{
     prism.enable = true;
     media.enable = true;
     tailscale.enable = true;
-    globalprotect.enable = true;
+    globalprotect.enable = false;
     bluetooth.enable = true;
     printing.enable = true;
     brillo.enable = true;

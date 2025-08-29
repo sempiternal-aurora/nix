@@ -24,6 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    chaotic-nyx-unstable = {
+      url = "github:chaotic-cx/nyx";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.home-manager.follows = "home-manager-unstable";
+    };
+
     # nur-unstable = {
     #   url = "github:nix-community/nur";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -79,6 +85,7 @@
         modules = [
           ./hosts/coimpiutair/configuration.nix
           inputs.home-manager-unstable.nixosModules.default
+          inputs.chaotic-nyx-unstable.nixosModules.default
         ];
       };
 

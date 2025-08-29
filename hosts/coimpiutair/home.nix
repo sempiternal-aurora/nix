@@ -1,11 +1,13 @@
 {
   lib,
   userName ? "user",
+  inputs,
   ...
 }:
 {
   imports = [
     ../../modules/home-manager
+    inputs.chaotic-nyx-unstable.homeManagerModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

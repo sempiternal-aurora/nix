@@ -1,14 +1,14 @@
 {
   "nodes": {
-    "chaotic-nyx-unstable": {
+    "chaotic-nyx": {
       "inputs": {
         "flake-schemas": "flake-schemas",
         "home-manager": [
-          "home-manager-unstable"
+          "home-manager"
         ],
         "jovian": "jovian",
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -30,7 +30,7 @@
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
-          "textfox-unstable",
+          "textfox",
           "nixpkgs"
         ]
       },
@@ -64,10 +64,10 @@
         "url": "https://flakehub.com/f/DeterminateSystems/flake-schemas/%3D0.1.5.tar.gz"
       }
     },
-    "home-manager-unstable": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -120,7 +120,7 @@
       "inputs": {
         "nix-github-actions": "nix-github-actions",
         "nixpkgs": [
-          "chaotic-nyx-unstable",
+          "chaotic-nyx",
           "nixpkgs"
         ]
       },
@@ -141,7 +141,7 @@
     "nix-github-actions": {
       "inputs": {
         "nixpkgs": [
-          "chaotic-nyx-unstable",
+          "chaotic-nyx",
           "jovian",
           "nixpkgs"
         ]
@@ -161,7 +161,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "nixpkgs": {
       "locked": {
         "lastModified": 1756386758,
         "narHash": "sha256-1wxxznpW2CKvI9VdniaUnTT2Os6rdRJcRUf65ZK9OtE=",
@@ -179,18 +179,18 @@
     },
     "root": {
       "inputs": {
-        "chaotic-nyx-unstable": "chaotic-nyx-unstable",
-        "home-manager-unstable": "home-manager-unstable",
+        "chaotic-nyx": "chaotic-nyx",
+        "home-manager": "home-manager",
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
         "isabelle-syn-nvim": "isabelle-syn-nvim",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "textfox-unstable": "textfox-unstable"
+        "nixpkgs": "nixpkgs",
+        "textfox": "textfox"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "chaotic-nyx-unstable",
+          "chaotic-nyx",
           "nixpkgs"
         ]
       },
@@ -208,11 +208,11 @@
         "type": "github"
       }
     },
-    "textfox-unstable": {
+    "textfox": {
       "inputs": {
         "firefox-addons": "firefox-addons",
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {

@@ -157,12 +157,22 @@ args@{
       "steam-unwrapped"
       "steam-run"
       "zoom"
+      "nordvpn"
     ];
 
   environment.systemPackages = [
     pkgs.framework-tool
-    pkgs.nordvpn
   ];
+
+  # nordvpn config
+  chaotic.nordvpn.enable = true;
+  users.users."${vars.adminUser}".extraGroups = [ "nordvpn" ];
+  users.users."${vars.localUser}".extraGroups = [ "nordvpn" ];
+  networking.firewall = {
+    # checkReversePath = false;
+    allowedUDPPorts = [ 1194 ];
+    allowedTCPPorts = [ 443 ];
+  };
 
   mine = {
     keyboard = {

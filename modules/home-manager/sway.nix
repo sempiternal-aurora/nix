@@ -77,7 +77,7 @@ in
       font
       pkgs.wl-clipboard
       pkgs.dconf
-      pkgs.discord
+      pkgs.discord-krisp
       pkgs.vlc
       pkgs.pwvucontrol
       pkgs.handlr-regex

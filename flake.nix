@@ -25,7 +25,7 @@
     };
 
     chaotic-nyx-unstable = {
-      url = "github:chaotic-cx/nyx";
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.home-manager.follows = "home-manager-unstable";
     };

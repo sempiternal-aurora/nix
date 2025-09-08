@@ -32,7 +32,7 @@
     };
 
     # VPN Stuff
-    environment.systemPackages = lib.lists.optional config.mine.globalprotect.enable pkgs.globalprotect-openconnect;
+    environment.systemPackages = lib.lists.optional config.mine.globalprotect.enable pkgs.gpclient;
     services.globalprotect.enable = false;
 
     # Open ports in the firewall.

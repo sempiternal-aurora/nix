@@ -36,6 +36,7 @@ in
     ++ lib.lists.optionals cfg.zip [
       pkgs.zip
       pkgs.unzip
+      pkgs.devenv
     ]
     ++ lib.lists.optional cfg.weechat pkgs.weechat
     ++ lib.lists.optional cfg.trash pkgs.trash-cli

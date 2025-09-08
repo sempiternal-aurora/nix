@@ -193,7 +193,7 @@ args@{
     prism.enable = true;
     media.enable = true;
     tailscale.enable = true;
-    globalprotect.enable = false;
+    globalprotect.enable = true;
     bluetooth.enable = true;
     printing.enable = true;
     brillo.enable = true;
@@ -248,7 +248,8 @@ args@{
       auto-optimise-store = true;
       trusted-users = [
         "root"
-        "aurora"
+        vars.adminUser
+        vars.localUser
       ];
     };
     extraOptions = ''

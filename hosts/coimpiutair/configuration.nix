@@ -217,13 +217,9 @@ args@{
   };
 
   hardware.cpu.amd.updateMicrocode = true;
-  # hardware.graphics = {
-  #   enable = true;
-  #   enable32Bit = true;
-  # };
-  hardware.amdgpu.amdvlk = {
+  hardware.graphics = {
     enable = true;
-    support32Bit.enable = true;
+    enable32Bit = true;
   };
 
   zramSwap = {

@@ -45,7 +45,7 @@ in
           Service = {
             Type = "simple";
             ExecStart = "${pkgs._1password-gui}/bin/1password --silent";
-            ExecReload = "${pkgs.uutils-coreutils-noprefix}/bin/kill -SIGUSR2 $MAINPID";
+            ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
             Restart = "on-failure";
             KillMode = "mixed";
             RestartSec = 1;

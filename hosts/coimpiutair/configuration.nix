@@ -201,7 +201,7 @@ args@{
     udisks2.enable = true;
     usbhotspot.enable = true;
     yazi.enable = true;
-    uutils.enable = true;
+    uutils.enable = false;
     docs.enable = true;
     openocd.enable = true;
   };

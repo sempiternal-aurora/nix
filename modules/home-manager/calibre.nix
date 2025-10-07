@@ -8,11 +8,11 @@ let
   cfg = config.mine.calibre;
   sqlite = "${pkgs.sqlite}/bin/sqlite3";
   tofi = "${pkgs.tofi}/bin/tofi";
-  echo = "${pkgs.uutils-coreutils-noprefix}/bin/echo";
+  echo = "${pkgs.coreutils}/bin/echo";
   sed = "${pkgs.gnused}/bin/sed";
   handlr = "${pkgs.handlr-regex}/bin/handlr";
   calibredb = "${pkgs.calibre}/bin/calibredb";
-  tail = "${pkgs.uutils-coreutils-noprefix}/bin/tail";
+  tail = "${pkgs.coreutils}/bin/tail";
   tofi-books = pkgs.writeShellScriptBin "tofi-books" ''
     # Get the list of all titles
     choice=$(

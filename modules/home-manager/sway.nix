@@ -25,8 +25,8 @@ let
   polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
   grep = lib.getExe pkgs.gnugrep;
-  wc = "${pkgs.uutils-coreutils-noprefix}/bin/wc";
-  sleep = "${pkgs.uutils-coreutils-noprefix}/bin/sleep";
+  wc = "${pkgs.coreutils}/bin/wc";
+  sleep = "${pkgs.coreutils}/bin/sleep";
   dunstify = "${pkgs.dunst}/bin/dunstify";
   grim = lib.getExe pkgs.grim;
   swappy = lib.getExe pkgs.swappy;

@@ -109,7 +109,7 @@ in
       shellAliases = {
         pls = "sudo";
         bocsa = "kitten ssh -i ~/.ssh/ssh-key-2023-07-18.key opc@holonet.myria.dev";
-        nix-rebuild = "nixos-rebuild switch --flake ~/nix#${vars.configuration} --sudo";
+        nix-rebuild = "nixos-rebuild switch --flake ~/nix#${vars.configuration} --sudo --keep-going";
       };
     };
 

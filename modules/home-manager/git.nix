@@ -31,7 +31,7 @@
       text = ''
         [user]
             name = Myria Sarvay
-            email = u7644255@anu.edu.au
+            email = myria.sarvay@anu.edu.au
       '';
     };
     "git/github.conf" = {

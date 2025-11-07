@@ -109,6 +109,12 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  xdg.configFile."gdb/gdbinit" = {
+    enable = true;
+    text = ''
+      set auto-load safe-path ~
+    '';
+  };
 
   nix = {
     gc = {

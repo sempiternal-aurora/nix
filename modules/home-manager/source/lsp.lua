@@ -1,22 +1,8 @@
-local configs = require("lspconfig.configs")
-
 vim.filetype.add({
     extension = {
         par = "parol",
     },
 })
-
-if not configs.parol_ls then
-    configs.parol_ls = {
-        default_config = {
-            cmd = { "parol-ls", "--stdio" },
-            filetypes = { "parol" },
-            root_dir = function(fname)
-                return require("lspconfig").util.find_git_ancestor(fname)
-            end,
-        },
-    }
-end
 
 local servers = {
     rust_analyzer = {},
@@ -65,7 +51,13 @@ local servers = {
             },
         },
     },
-    parol_ls = {},
+    parol_ls = {
+        cmd = { "parol-ls", "--stdio" },
+        filetypes = { "parol" },
+        root_dir = function(fname)
+            return require("lspconfig.util").find_git_ancestor(fname)
+        end,
+    },
 }
 
 if string.find(vim.loop.cwd() or "", "fioxa") then
@@ -95,6 +87,7 @@ for server, server_opts in pairs(servers) do
     if server_opts then
         server_opts.capabilities = capabilities
         server_opts.on_attach = on_attach
-        require("lspconfig")[server].setup(server_opts)
+        vim.lsp.config(server, server_opts)
+        vim.lsp.enable(server)
     end
 end

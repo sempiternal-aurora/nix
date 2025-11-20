@@ -23,6 +23,7 @@ args@{
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
 
   isoImage.edition = "myria";
   # networking.hostName = "myria-live-image"; # Define your hostname.
@@ -108,7 +109,7 @@ args@{
 
     sway.enable = true;
     audio.enable = true;
-    globalprotect.enable = true;
+    globalprotect.enable = false;
     bluetooth.enable = true;
     brillo.enable = true;
     udisks2.enable = true;

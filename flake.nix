@@ -63,6 +63,7 @@
         modules = [
           ./hosts/myria-live-image/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.chaotic-nyx.nixosModules.default
         ];
       };
 
@@ -95,6 +96,7 @@
         modules = [
           ./hosts/bocsa/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.chaotic-nyx.nixosModules.default
         ];
       };
     };

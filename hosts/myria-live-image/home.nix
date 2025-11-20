@@ -1,11 +1,13 @@
 {
   lib,
+  inputs,
   userName ? "user",
   ...
 }:
 {
   imports = [
     ../../modules/home-manager
+    inputs.chaotic-nyx.homeManagerModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -26,13 +28,13 @@
     terminal = {
       spotify-player = true;
       trash = true;
-      mercurial = true;
+      mercurial = false;
       zip = true;
       zsh = true;
       fish = true;
       zoxide = true;
       btop = true;
-      comma = true;
+      comma = false;
       hyfetch = true;
       eza = true;
       lf = false;
@@ -50,7 +52,7 @@
       default = true;
     };
     isabelle = {
-      enable = true;
+      enable = false;
       enableNeovimIntegration = true;
     };
     digital.enable = true;

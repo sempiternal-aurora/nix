@@ -31,7 +31,6 @@
     fsType = "ext4";
     options = [
       "noatime"
-      "commit=60"
     ];
   };
 

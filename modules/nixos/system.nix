@@ -20,7 +20,7 @@
     ];
 
     # Set your time zone.
-    time.timeZone = "Australia/Canberra";
+    time.timeZone = "Asia/Hong_Kong";
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_AU.UTF-8";

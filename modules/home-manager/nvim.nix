@@ -31,24 +31,27 @@ in
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraPackages = with pkgs; [
-        ripgrep
-        fd
+      extraPackages =
+        with pkgs;
+        [
+          ripgrep
+          fd
 
-        # nix config
-        nil
-        nixfmt-rfc-style
+          # nix config
+          nil
+          nixfmt-rfc-style
 
-        # lua config
-        lua-language-server
-        stylua
-      ] ++ lib.lists.optionals cfg.latex [
-        # latex config
-        texliveFull
-        tex-fmt
-        texlab
-        ltex-ls-plus
-      ];
+          # lua config
+          lua-language-server
+          stylua
+        ]
+        ++ lib.lists.optionals cfg.latex [
+          # latex config
+          texliveFull
+          tex-fmt
+          texlab
+          ltex-ls-plus
+        ];
 
       plugins = with pkgs.vimPlugins; [
         # colorscheme
@@ -178,6 +181,9 @@ in
         ${builtins.readFile ./source/remap.lua}
         ${builtins.readFile ./source/langs.lua}
         local harpoon = require("harpoon")
+
+        -- Install merlin
+        vim.opt.runtimepath:append { "${pkgs.ocamlPackages.merlin}/share/merlin/vim" }
 
         -- Plugin keybinds
         vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)

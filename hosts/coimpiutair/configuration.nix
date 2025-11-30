@@ -20,7 +20,10 @@ args@{
   ];
 
   # Use the latest linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
+    useLTO = "full";
+    mArch = "ZEN4";
+  };
   # boot.kernelPackages = pkgs.linuxPackagesFor (
   #   (pkgs.linux_zen.override {
   #     stdenv = pkgs.overrideCC pkgs.llvmPackages_latest.stdenv (

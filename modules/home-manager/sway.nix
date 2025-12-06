@@ -588,16 +588,9 @@ in
 
     services.swayidle = {
       enable = true;
-      events = [
-        {
-          event = "before-sleep";
-          command = "${playerctl} pause";
-        }
-        {
-          event = "before-sleep";
-          command = "${swaylock} -f";
-        }
-      ];
+      events = {
+        before-sleep = "${playerctl} pause; ${swaylock} -f";
+      };
       systemdTarget = "sway-session.target";
       timeouts = [
         {

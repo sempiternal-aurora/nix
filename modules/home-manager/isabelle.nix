@@ -43,16 +43,12 @@ in
           plugin = isabelle-lsp-nvim;
           type = "lua";
           config = ''
-            local isabellelsp = require("isabelle-lsp")
-
-            isabellelsp.setup({
+            require("isabelle-lsp").setup({
               isabelle_path = "${pkgs.isabelle}/bin/isabelle",
               unicode_symbols = true,
             })
 
-            local lspconfig = require("lspconfig")
-
-            lspconfig.isabelle.setup({})
+            vim.lsp.enable('isabelle')
           '';
         }
         isabelle-syn-nvim

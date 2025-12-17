@@ -335,9 +335,9 @@ in
           "${modifier}+Shift+d" = "exec \"${drun}\"";
           "${modifier}+Alt+f" = "exec firefox";
           "${modifier}+Alt+d" = "exec discord";
-          "${modifier}+Alt+c" = "exec code";
+          # "${modifier}+Alt+c" = "exec code";
           "${modifier}+Alt+s" = "exec steam";
-          "${modifier}+q" = "exec swaylock";
+          "${modifier}+x" = "exec swaylock";
           "${modifier}+Shift+e" = "exec swaymsg exit";
           "${modifier}+Shift+b" = "exec tofi-books";
           "${modifier}+Shift+v" = "exec copyq show";

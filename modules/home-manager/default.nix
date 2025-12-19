@@ -11,5 +11,6 @@
     ./digital.nix
     ./mathematica.nix
     ./firefox.nix
+    ./emacs.nix
   ];
 }

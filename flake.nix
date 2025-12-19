@@ -30,6 +30,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    nix-doom-emacs = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nur = {
     #   url = "github:nix-community/nur";
     #   inputs.nixpkgs.follows = "nixpkgs";

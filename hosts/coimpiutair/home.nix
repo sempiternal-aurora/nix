@@ -8,6 +8,7 @@
   imports = [
     ../../modules/home-manager
     inputs.chaotic-nyx.homeManagerModules.default
+    inputs.nix-doom-emacs.homeModule
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -63,6 +64,9 @@
       enable = true;
       default = true;
       latex = true;
+    };
+    emacs = {
+      enable = true;
     };
     isabelle = {
       enable = true;

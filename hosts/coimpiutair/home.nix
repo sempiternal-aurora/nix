@@ -89,6 +89,7 @@
       "discord"
       "1password"
       "1password-gui"
+      "idea"
       "idea-ultimate"
       "mathematica"
       "zoom"

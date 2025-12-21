@@ -87,6 +87,10 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/remove-youtube-shorts/latest.xpi";
             installation_mode = "force_installed";
           };
+          "{c84d89d9-a826-4015-957b-affebd9eb603}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/mal-sync/latest.xpi";
+            installation_mode = "force_installed";
+          };
         };
       };
     };

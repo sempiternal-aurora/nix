@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -17,6 +18,10 @@
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
+    ];
+
+    nixpkgs.overlays = [
+      inputs.nix-cachyos-kernel.overlays.default
     ];
 
     # Set your time zone.

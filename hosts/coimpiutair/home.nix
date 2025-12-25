@@ -7,7 +7,7 @@
 {
   imports = [
     ../../modules/home-manager
-    inputs.chaotic-nyx.homeManagerModules.default
+    # inputs.chaotic-nyx.homeManagerModules.default
     inputs.nix-doom-emacs.homeModule
   ];
 

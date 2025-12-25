@@ -20,10 +20,11 @@ args@{
   ];
 
   # Use the latest linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
-    useLTO = "full";
-    mArch = "ZEN4";
-  };
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
+  #   useLTO = "full";
+  #   mArch = "ZEN4";
+  # };
   # boot.kernelPackages = pkgs.linuxPackagesFor (
   #   (pkgs.linux_zen.override {
   #     stdenv = pkgs.overrideCC pkgs.llvmPackages_latest.stdenv (
@@ -169,7 +170,7 @@ args@{
   ];
 
   # nordvpn config
-  chaotic.nordvpn.enable = true;
+  # chaotic.nordvpn.enable = true;
   users.users."${vars.adminUser}".extraGroups = [ "nordvpn" ];
   users.users."${vars.localUser}".extraGroups = [ "nordvpn" ];
   networking.firewall = {

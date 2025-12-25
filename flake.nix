@@ -24,11 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    chaotic-nyx = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
+    # Deprecated and no longer maintained
+    # chaotic-nyx = {
+    #   url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.home-manager.follows = "home-manager";
+    # };
 
     nix-doom-emacs = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
@@ -68,7 +69,6 @@
         modules = [
           ./hosts/myria-live-image/configuration.nix
           inputs.home-manager.nixosModules.default
-          inputs.chaotic-nyx.nixosModules.default
         ];
       };
 
@@ -85,7 +85,6 @@
         modules = [
           ./hosts/coimpiutair/configuration.nix
           inputs.home-manager.nixosModules.default
-          inputs.chaotic-nyx.nixosModules.default
         ];
       };
 
@@ -101,7 +100,6 @@
         modules = [
           ./hosts/bocsa/configuration.nix
           inputs.home-manager.nixosModules.default
-          inputs.chaotic-nyx.nixosModules.default
         ];
       };
     };

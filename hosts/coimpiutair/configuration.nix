@@ -21,7 +21,7 @@ args@{
 
   # Use the latest linux kernel
   # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-rc-lto;
   # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
   #   useLTO = "full";
   #   mArch = "ZEN4";

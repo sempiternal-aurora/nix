@@ -85,7 +85,7 @@ args@{
   nix = {
     # gc = {
     #   automatic = true;
-    #   dates = "weekly";
+    #   dates = "sunday";
     #   options = "--delete-older-than 10d";
     # };
     settings = {

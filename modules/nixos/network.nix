@@ -11,7 +11,7 @@
     mine.bluetooth.enable = lib.mkEnableOption "bluetooth support";
   };
   config = {
-    networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
+    # networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networking.networkmanager = {
       enable = true; # Easiest to use and most distros use this by default.
       plugins = [

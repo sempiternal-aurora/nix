@@ -21,7 +21,32 @@ args@{
 
   # Use the latest linux kernel
   # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-rc-lto;
+  boot.kernelPackages =
+    let
+      mkCachyKernel =
+        pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
+          {
+            inputs = inputs // {
+              cachyos-kernel = inputs.nix-cachyos-kernel.inputs.cachyos-kernel;
+              cachyos-kernel-patches = inputs.nix-cachyos-kernel.inputs.cachyos-kernel-patches;
+            };
+          };
+      version = "6.19-rc3";
+      src = pkgs.fetchurl {
+        url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
+        hash = "sha256-TSbywuMmREYT/9Pas/88Qgg+aOUUbTTCcghjJ9Jk7ho=";
+      };
+      kernel = mkCachyKernel {
+        pname = "linux-cachyos-rc-lto-zen4";
+        inherit version src;
+        configVariant = "linux-cachyos";
+        processorOpt = "zen4";
+        lto = "full";
+      };
+      helpers = pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/helpers.nix" { };
+    in
+    helpers.kernelModuleLLVMOverride (pkgs.linuxPackagesFor kernel);
+  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-rc-lto;
   # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
   #   useLTO = "full";
   #   mArch = "ZEN4";

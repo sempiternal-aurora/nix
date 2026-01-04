@@ -97,7 +97,7 @@ in
 
     textfox = {
       enable = true;
-      profile = "default";
+      profiles = [ "default" ];
       useLegacyExtensions = false;
       config = {
         font = {

@@ -65,6 +65,7 @@ in
         { url = "https://xkcd.com/atom.xml"; }
         { url = "https://www.imfineimfine.com/feed"; }
         { url = "https://ntietz.com/atom.xml"; }
+        { url = "https://github.com/vprover/vampire/releases.atom"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCo0-VCHchPIG3JtJlIQnFew"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0e3QhIYukixgh5VVpKHH9Q"; }
         { url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCePQNin7n0WbY9tEts6oGnw"; }
@@ -400,10 +401,10 @@ in
       enable = cfg.yazi;
       flavors = {
         dracula = pkgs.fetchFromGitHub {
-          owner = "dracula";
-          repo = "yazi";
-          rev = "99b60fd76df4cce2778c7e6c611bfd733cf73866";
-          hash = "sha256-dFhBT9s/54jDP6ZpRkakbS5khUesk0xEtv+xtPrqHVo=";
+          owner = "byt3m4st3r";
+          repo = "dracula.yazi";
+          rev = "ed1e13956790525dcad8e8e65eecb8d6cf3a5e73";
+          hash = "sha256-Nqp52jt5ycaRIEikYfiUXZfoekKqdKKQ84QdG59mSe4=";
         };
       };
       settings = {

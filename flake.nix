@@ -34,6 +34,18 @@
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.cachyos-kernel.follows = "cachyos-kernel";
+      inputs.cachyos-kernel-patches.follows = "cachyos-kernel-patches";
+    };
+
+    cachyos-kernel-patches = {
+      url = "github:CachyOS/kernel-patches";
+      flake = false;
+    };
+
+    cachyos-kernel = {
+      url = "github:CachyOS/linux-cachyos";
+      flake = false;
     };
 
     nix-doom-emacs = {

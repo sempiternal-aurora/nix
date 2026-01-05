@@ -19,11 +19,11 @@
     "cachyos-kernel-patches": {
       "flake": false,
       "locked": {
-        "lastModified": 1767470151,
-        "narHash": "sha256-YClqbqOjSy1fUtmfqWE7zrdkC8OYfX642/q/LaIlkp8=",
+        "lastModified": 1767601194,
+        "narHash": "sha256-NWeMLjch/DHQQa9LdLClejvN8goGVGsEAQjkgrVPP+U=",
         "owner": "CachyOS",
         "repo": "kernel-patches",
-        "rev": "1485985b1bc65228db9058138f66162fd78f281a",
+        "rev": "bd836f10a363f04ec755a7e39ffdc78b8043e336",
         "type": "github"
       },
       "original": {
@@ -182,8 +182,12 @@
     },
     "nix-cachyos-kernel": {
       "inputs": {
-        "cachyos-kernel": "cachyos-kernel",
-        "cachyos-kernel-patches": "cachyos-kernel-patches",
+        "cachyos-kernel": [
+          "cachyos-kernel"
+        ],
+        "cachyos-kernel-patches": [
+          "cachyos-kernel-patches"
+        ],
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "nixpkgs": [
@@ -261,6 +265,8 @@
     },
     "root": {
       "inputs": {
+        "cachyos-kernel": "cachyos-kernel",
+        "cachyos-kernel-patches": "cachyos-kernel-patches",
         "home-manager": "home-manager",
         "isabelle-lsp-nvim": "isabelle-lsp-nvim",
         "isabelle-syn-nvim": "isabelle-syn-nvim",

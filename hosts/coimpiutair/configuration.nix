@@ -25,12 +25,7 @@ args@{
     let
       mkCachyKernel =
         pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
-          {
-            inputs = inputs // {
-              cachyos-kernel = inputs.nix-cachyos-kernel.inputs.cachyos-kernel;
-              cachyos-kernel-patches = inputs.nix-cachyos-kernel.inputs.cachyos-kernel-patches;
-            };
-          };
+          { inherit inputs; };
       version = "6.19-rc4";
       src = pkgs.fetchurl {
         url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";

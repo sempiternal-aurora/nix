@@ -31,10 +31,10 @@ args@{
               cachyos-kernel-patches = inputs.nix-cachyos-kernel.inputs.cachyos-kernel-patches;
             };
           };
-      version = "6.19-rc3";
+      version = "6.19-rc4";
       src = pkgs.fetchurl {
         url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-        hash = "sha256-TSbywuMmREYT/9Pas/88Qgg+aOUUbTTCcghjJ9Jk7ho=";
+        hash = "sha256-1TrNk19+HU/xXvYapkewIZMqFVXGZSKe2Q1Ah6DjSxQ=";
       };
       kernel = mkCachyKernel {
         pname = "linux-cachyos-rc-lto-zen4";

@@ -31,13 +31,17 @@ args@{
         url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
         hash = "sha256-1TrNk19+HU/xXvYapkewIZMqFVXGZSKe2Q1Ah6DjSxQ=";
       };
-      kernel = mkCachyKernel {
-        pname = "linux-cachyos-rc-lto-zen4";
-        inherit version src;
-        configVariant = "linux-cachyos";
-        processorOpt = "zen4";
-        lto = "full";
-      };
+      kernel =
+        (mkCachyKernel {
+          pname = "linux-cachyos-rc-lto-zen4";
+          inherit version src;
+          configVariant = "linux-cachyos";
+          processorOpt = "zen4";
+          lto = "full";
+        }).overrideAttrs
+          {
+            env.NIX_CC_WRAPPER_SUPPRESS_TARGET_WARNING = true;
+          };
       helpers = pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/helpers.nix" { };
     in
     helpers.kernelModuleLLVMOverride (pkgs.linuxPackagesFor kernel);

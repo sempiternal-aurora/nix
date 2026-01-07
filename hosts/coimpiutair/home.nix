@@ -2,6 +2,7 @@
   lib,
   userName ? "user",
   inputs,
+  pkgs,
   ...
 }:
 {
@@ -81,6 +82,11 @@
     mathematica.enable = true;
     firefox.enable = true;
   };
+
+  # Packages I'm maintaining to keep an eye out for breaks
+  home.packages = [
+    pkgs.vampire
+  ];
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =

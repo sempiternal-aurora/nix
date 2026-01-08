@@ -39,7 +39,7 @@ in
 
           # nix config
           nil
-          nixfmt-rfc-style
+          nixfmt
 
           # lua config
           lua-language-server

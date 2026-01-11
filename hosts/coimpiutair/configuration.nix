@@ -6,6 +6,7 @@ args@{
   lib,
   pkgs,
   vars,
+  config,
   ...
 }:
 {
@@ -44,7 +45,15 @@ args@{
           };
       helpers = pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/helpers.nix" { };
     in
-    helpers.kernelModuleLLVMOverride (pkgs.linuxPackagesFor kernel);
+    helpers.kernelModuleLLVMOverride (
+      (pkgs.linuxKernel.packagesFor kernel).extend (
+        final: prev: {
+          zfs_cachyos = final.callPackage "${inputs.nix-cachyos-kernel.outPath}/zfs-cachyos" {
+            inherit inputs;
+          };
+        }
+      )
+    );
   # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-rc-lto;
   # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride {
   #   useLTO = "full";
@@ -149,15 +158,22 @@ args@{
   #     # still causes a warning on builds where WERROR is unset.
   #     { env.NIX_CFLAGS_COMPILE = "-Wno-unused-command-line-argument"; }
   # );
-
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/efi";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/efi";
+      };
     };
+
+    # ZFS Config
+    supportedFilesystems.zfs = true;
+    zfs.package = config.boot.kernelPackages.zfs_cachyos;
   };
+
+  networking.hostId = "5b24b984";
 
   admin-user = {
     enable = true;

@@ -8,14 +8,13 @@
 {
   imports = [
     ../../modules/home-manager
-    # inputs.chaotic-nyx.homeManagerModules.default
     inputs.nix-doom-emacs.homeModule
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userName;
-  home.homeDirectory = "/home/${userName}";
+  home.homeDirectory = "/Users/${userName}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -35,7 +34,7 @@
       mercurial = true;
       zip = true;
       zsh = true;
-      fish = true;
+      fish = false;
       zoxide = true;
       btop = true;
       comma = true;
@@ -47,41 +46,23 @@
       yt-dlp = true;
     };
     direnv.enable = true;
-    sway = {
-      enable = true;
-      powercheck = true;
-    };
     zoom.enable = true;
-    teams.enable = true;
-    _1password = {
-      enable = true;
-      kwallet.enable = true;
-      systemd = {
-        enable = true;
-        target = "sway-session.target";
-      };
-    };
+    _1password.enable = true;
     nvim = {
       enable = true;
       default = true;
       latex = true;
-      xdg-mime = true;
     };
-    emacs = {
-      enable = true;
-    };
-    isabelle = {
-      enable = true;
-      enableNeovimIntegration = true;
-    };
+    #isabelle = {
+    #  enable = true;
+    #  enableNeovimIntegration = true;
+    #};
     jetbrains = {
       enable = true;
       intellij = true;
     };
-    calibre.enable = true;
     digital.enable = true;
-    mathematica.enable = true;
-    firefox.enable = true;
+    firefox.enable = false;
   };
 
   # Packages I'm maintaining to keep an eye out for breaks
@@ -126,14 +107,6 @@
     text = ''
       set auto-load safe-path ~
     '';
-  };
-
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "sunday";
-      options = "--delete-older-than 10d";
-    };
   };
 
   # Let Home Manager install and manage itself.

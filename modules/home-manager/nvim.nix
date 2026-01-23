@@ -12,11 +12,12 @@ in
     mine.nvim.enable = lib.mkEnableOption "enable neovim";
     mine.nvim.default = lib.mkEnableOption "set nvim as the default editor";
     mine.nvim.latex = lib.mkEnableOption "add inbuilt latex lsp support";
+    mine.nvim.xdg-mime = lib.mkEnableOption "add xdg-mime neovim config";
   };
 
   config = lib.mkIf cfg.enable {
     xdg.mimeApps = {
-      enable = true;
+      enable = cfg.xdg-mime;
       defaultApplications = {
         "application/json" = [ "nvim.desktop" ];
         "text/*" = [ "nvim.desktop" ];

@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     isabelle-lsp-nvim = {
       url = "github:Treeniks/isabelle-lsp.nvim";
       flake = false;
@@ -69,55 +74,69 @@
     {
       self,
       nixpkgs,
+      nix-darwin,
       ...
     }@inputs:
     {
-      nixosConfigurations.default = self.nixosConfigurations.coimpiutair;
+      nixosConfigurations = {
+        default = self.nixosConfigurations.coimpiutair;
 
-      nixosConfigurations.myria-live-image = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          vars = {
-            adminUser = "nixos";
-            configuration = "myria-live-image";
+        myria-live-image = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            vars = {
+              adminUser = "nixos";
+              configuration = "myria-live-image";
+            };
           };
+          modules = [
+            ./hosts/myria-live-image/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
         };
-        modules = [
-          ./hosts/myria-live-image/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
+
+        coimpiutair = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            vars = {
+              adminUser = "aurora";
+              localUser = "myria";
+              configuration = "coimpiutair";
+            };
+          };
+          modules = [
+            ./hosts/coimpiutair/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+
+        bocsa = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            vars = {
+              adminUser = "nyla";
+              configuration = "bocsa";
+            };
+          };
+          modules = [
+            ./hosts/bocsa/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
       };
-
-      nixosConfigurations.coimpiutair = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [ ./hosts/macbook/configuration.nix ];
         specialArgs = {
           inherit inputs;
           vars = {
-            adminUser = "aurora";
-            localUser = "myria";
-            configuration = "coimpiutair";
+            adminUser = "myria";
+            configuration = "macbook";
           };
         };
-        modules = [
-          ./hosts/coimpiutair/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
-      };
-
-      nixosConfigurations.bocsa = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          vars = {
-            adminUser = "nyla";
-            configuration = "bocsa";
-          };
-        };
-        modules = [
-          ./hosts/bocsa/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
       };
     };
 }

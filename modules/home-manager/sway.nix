@@ -68,7 +68,7 @@ in
         type = lib.types.str;
       };
       terminal = lib.mkOption {
-        default = pkgs.ghostty;
+        default = lib.getExe pkgs.ghostty;
         type = lib.types.str;
       };
     };

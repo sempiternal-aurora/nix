@@ -176,7 +176,7 @@ in
         haskell-tools-nvim
       ];
 
-      extraLuaConfig = ''
+      initLua = ''
 
         ${builtins.readFile ./source/set.lua}
         ${builtins.readFile ./source/remap.lua}

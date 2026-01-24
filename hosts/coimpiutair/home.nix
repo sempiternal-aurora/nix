@@ -78,6 +78,7 @@
       enable = true;
       intellij = true;
     };
+    discord.enable = true;
     calibre.enable = true;
     digital.enable = true;
     mathematica.enable = true;

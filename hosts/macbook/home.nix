@@ -5,6 +5,10 @@
   pkgs,
   ...
 }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+in
 {
   imports = [
     ../../modules/home-manager
@@ -14,7 +18,7 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userName;
-  home.homeDirectory = "/Users/${userName}";
+  home.homeDirectory = if isDarwin then "/Users/${userName}" else "/home/${userName}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -33,8 +37,8 @@
       trash = true;
       mercurial = true;
       zip = true;
-      zsh = true;
-      fish = false;
+      zsh = isDarwin;
+      fish = isLinux;
       zoxide = true;
       btop = true;
       comma = true;
@@ -46,29 +50,43 @@
       yt-dlp = true;
     };
     direnv.enable = true;
-    zoom.enable = true;
+    sway = {
+      enable = isLinux;
+      powercheck = true;
+      terminal = lib.mkIf isLinux "ghostty";
+    };
+    zoom.enable = isDarwin;
+    teams.enable = isLinux;
     _1password.enable = true;
     nvim = {
       enable = true;
       default = true;
       latex = true;
+      xdg-mime = isLinux;
     };
-    #isabelle = {
-    #  enable = true;
-    #  enableNeovimIntegration = true;
-    #};
+    isabelle = {
+      enable = true;
+      enableNeovimIntegration = true;
+    };
     jetbrains = {
       enable = true;
       intellij = true;
     };
+    discord.enable = isDarwin;
+    calibre.enable = isLinux;
     digital.enable = true;
-    firefox.enable = false;
+    firefox.enable = isLinux;
   };
 
   # Packages I'm maintaining to keep an eye out for breaks
   home.packages = [
     pkgs.vampire
   ];
+
+  programs.ghostty = lib.mkIf isLinux {
+    package = null;
+    systemd.enable = false;
+  };
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =

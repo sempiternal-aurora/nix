@@ -9,7 +9,6 @@ let
   cfg = config.mine.sway;
   screenshotDir = "~/Pictures/Screenshots";
   # terminal = lib.getExe pkgs.kitty;
-  terminal = lib.getExe pkgs.ghostty;
   menu = "${pkgs.tofi}/bin/tofi-run | xargs swaymsg exec --";
   drun = "${pkgs.tofi}/bin/tofi-drun | xargs swaymsg exec --";
   font = pkgs.nerd-fonts.hasklug;
@@ -62,14 +61,20 @@ in
   options = {
     mine.sway = {
       enable = lib.mkEnableOption "enable sway module";
+      fx = lib.mkEnableOption "Extra SwayFX config";
       powercheck = lib.mkEnableOption "enable low power notifications";
       wallpaper = lib.mkOption {
         default = "~/Pictures/Wallpapers/wallpaper";
         type = lib.types.str;
       };
+      terminal = lib.mkOption {
+        default = pkgs.ghostty;
+        type = lib.types.str;
+      };
     };
     mine.zoom.enable = lib.mkEnableOption "enable zoom module";
     mine.teams.enable = lib.mkEnableOption "enable teams module";
+    mine.discord.enable = lib.mkEnableOption "enable discord module";
   };
 
   config = lib.mkIf cfg.enable {
@@ -77,7 +82,6 @@ in
       font
       pkgs.wl-clipboard
       pkgs.dconf
-      pkgs.discord
       # pkgs.discord-krisp
       pkgs.vlc
       pkgs.pwvucontrol
@@ -87,6 +91,7 @@ in
       pkgs.rquickshare
       pkgs.viu
     ]
+    ++ lib.lists.optional config.mine.discord.enable pkgs.discord
     ++ lib.lists.optional config.mine.teams.enable pkgs.teams-for-linux
     ++ lib.lists.optional config.mine.zoom.enable pkgs.zoom-us;
 
@@ -292,7 +297,7 @@ in
       package = null;
       config = {
         modifier = modifier;
-        terminal = terminal;
+        terminal = cfg.terminal;
         menu = menu;
         fonts = {
           names = [ "Hasklug Nerd Font Mono" ];
@@ -381,7 +386,7 @@ in
         };
         bars = [ ];
       };
-      extraConfig = ''
+      extraConfig = lib.mkIf cfg.fx ''
         # window corner radius in px
         corner_radius 15
 
@@ -1050,7 +1055,7 @@ in
       enable = true;
       settings = {
         program_options = {
-          terminal = "${terminal} -d";
+          terminal = "${cfg.terminal} -d";
         };
       };
     };

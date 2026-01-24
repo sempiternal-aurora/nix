@@ -75,6 +75,7 @@
       self,
       nixpkgs,
       nix-darwin,
+      home-manager,
       ...
     }@inputs:
     {
@@ -127,6 +128,7 @@
           ];
         };
       };
+
       darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [ ./hosts/macbook/configuration.nix ];
@@ -138,5 +140,27 @@
           };
         };
       };
+
+      homeConfigurations.macbook =
+        let
+          system = "aarch64-linux";
+          pkgs = import nixpkgs {
+	    inherit system;
+	  };
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit inputs;
+            userName = "myria";
+            vars = {
+              adminUser = "myria";
+              configuration = "macbook";
+            };
+          };
+          modules = [
+            ./hosts/macbook/home.nix
+          ];
+        };
     };
 }

@@ -225,7 +225,9 @@ args@{
       enable = true;
       caps2esc = true;
     };
-
+    media = {
+      qbittorrent = false;
+    };
     greetd = {
       enable = false;
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd \"systemd-cat --identifier=sway sway\"";

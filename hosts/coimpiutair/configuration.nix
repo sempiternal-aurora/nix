@@ -27,10 +27,10 @@ args@{
       mkCachyKernel =
         pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
           { inherit inputs; };
-      version = "6.19-rc6";
+      version = "6.19-rc7";
       src = pkgs.fetchurl {
         url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-        hash = "sha256-tF+ApUubv/UucqXudLQDKw7j5rjYZ/odxgInfexCQDQ=";
+        hash = "sha256-oNENklaRhhcEryz9brMCfqgNHN2oYjodtrIbPncazQk=";
       };
       kernel =
         (mkCachyKernel {

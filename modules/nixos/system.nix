@@ -20,10 +20,6 @@
       "flakes"
     ];
 
-    nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.default
-    ];
-
     # Set your time zone.
     time.timeZone = "Asia/Hong_Kong";
 

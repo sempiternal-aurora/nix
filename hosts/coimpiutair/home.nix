@@ -50,6 +50,7 @@
     sway = {
       enable = true;
       powercheck = true;
+      fx = true;
     };
     zoom.enable = true;
     teams.enable = true;

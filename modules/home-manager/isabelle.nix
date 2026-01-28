@@ -18,9 +18,6 @@ in
     nixpkgs = lib.mkIf cfg.enableNeovimIntegration {
       overlays = [
         (final: prev: {
-          isabelle = prev.isabelle.overrideAttrs (old: {
-            patches = (old.patches or [ ]) ++ [ ./source/fix-copied-permissions.patch ];
-          });
           vimPlugins = prev.vimPlugins // {
             isabelle-lsp-nvim = prev.vimUtils.buildVimPlugin {
               name = "isabelle-lsp.nvim";

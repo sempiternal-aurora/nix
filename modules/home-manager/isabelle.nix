@@ -52,9 +52,16 @@ in
       ]
     );
 
-    home.packages = [
-      (pkgs.isabelle.withComponents (p: [ p.isabelle-linter ]))
-    ];
+    home.packages =
+      let
+        afp = pkgs.callPackage ./afp.nix { };
+      in
+      [
+        (pkgs.isabelle.withComponents (p: [
+          p.isabelle-linter
+          afp
+        ]))
+      ];
 
     # home.file.".isabelle/isabelle-lsp" = {
     #   enable = cfg.enableNeovimIntegration;

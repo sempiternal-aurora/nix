@@ -350,52 +350,68 @@ in
       };
     };
 
-    programs.yazi = {
-      enable = cfg.yazi;
-      flavors = {
-        dracula = pkgs.fetchFromGitHub {
-          owner = "byt3m4st3r";
-          repo = "dracula.yazi";
-          rev = "ed1e13956790525dcad8e8e65eecb8d6cf3a5e73";
-          hash = "sha256-Nqp52jt5ycaRIEikYfiUXZfoekKqdKKQ84QdG59mSe4=";
+    programs.yazi =
+      let
+        flavors = pkgs.fetchFromGitHub {
+          owner = "yazi-rs";
+          repo = "flavors";
+          rev = "4c5753789ea535540e868e2764127be9230cef23";
+          hash = "sha256-tCAJXPV7s1akc+zHGdWjmdMPG4NpBE92vcO7LAvI5TI=";
+        };
+        listOfFlavors =
+          builtins.map
+            (name: {
+              inherit name;
+              value = "${flavors}/${name}.yazi";
+            })
+            [
+              "dracula"
+              "catppuccin-frappe"
+              "catppuccin-latte"
+              "catppuccin-macchiato"
+              "catppuccin-mocha"
+            ];
+
+      in
+      {
+        enable = cfg.yazi;
+        flavors = builtins.listToAttrs listOfFlavors;
+        settings = {
+          mgr = {
+            ratio = [
+              1
+              4
+              3
+            ];
+            sort_by = "natural";
+            sort_sensitive = true;
+            sort_reverse = false;
+            sort_dir_first = true;
+            linemode = "size";
+            show_hidden = false;
+            show_symlink = true;
+          };
+          preview = {
+            wrap = "yes";
+            tab-size = 4;
+            image-filter = "lanczos3";
+          };
+          open = {
+            play = [
+              {
+                run = "vlc \"$@\"";
+                orphan = true;
+                for = "unix";
+              }
+            ];
+          };
+        };
+        theme = {
+          flavor = {
+            dark = "dracula";
+          };
         };
       };
-      settings = {
-        mgr = {
-          ratio = [
-            1
-            4
-            3
-          ];
-          sort_by = "natural";
-          sort_sensitive = true;
-          sort_reverse = false;
-          sort_dir_first = true;
-          linemode = "size";
-          show_hidden = false;
-          show_symlink = true;
-        };
-        preview = {
-          wrap = "yes";
-          tab-size = 4;
-          image-filter = "lanczos3";
-        };
-        open = {
-          play = [
-            {
-              run = "vlc \"$@\"";
-              orphan = true;
-              for = "unix";
-            }
-          ];
-        };
-      };
-      theme = {
-        flavor = {
-          dark = "dracula";
-        };
-      };
-    };
 
     programs.lf = {
       enable = cfg.lf;

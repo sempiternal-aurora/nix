@@ -58,6 +58,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nur = {
     #   url = "github:nix-community/nur";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -127,40 +132,37 @@
             inputs.home-manager.nixosModules.default
           ];
         };
-      };
 
-      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [ ./hosts/macbook/configuration.nix ];
-        specialArgs = {
-          inherit inputs;
-          vars = {
-            adminUser = "myria";
-            configuration = "macbook";
+        macbookair = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit inputs;
+            vars = {
+              adminUser = "myria";
+              configuration = "macbookair";
+            };
           };
+          modules = [
+            ./hosts/macbookair/configuration.nix
+            inputs.home-manager.nixosModules.default
+            inputs.nixos-apple-silicon.nixosModules.default
+          ];
         };
       };
 
-      homeConfigurations.macbook =
-        let
-          system = "aarch64-linux";
-          pkgs = import nixpkgs {
-	    inherit system;
-	  };
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
+      darwinConfigurations = {
+        default = self.darwinConfigurations.macbookair;
+        macbookair = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [ ./hosts/macbookair/darwin-configuration.nix ];
+          specialArgs = {
             inherit inputs;
-            userName = "myria";
             vars = {
               adminUser = "myria";
               configuration = "macbook";
             };
           };
-          modules = [
-            ./hosts/macbook/home.nix
-          ];
         };
+      };
     };
 }

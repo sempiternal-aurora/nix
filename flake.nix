@@ -159,7 +159,7 @@
             inherit inputs;
             vars = {
               adminUser = "myria";
-              configuration = "macbook";
+              configuration = "macbookair";
             };
           };
         };

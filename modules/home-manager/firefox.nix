@@ -98,7 +98,6 @@ in
     textfox = {
       enable = true;
       profiles = [ "default" ];
-      useLegacyExtensions = false;
       config = {
         font = {
           family = "\"Hasklug Nerd Font Mono\", monospace";

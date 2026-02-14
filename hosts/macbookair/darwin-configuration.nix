@@ -14,7 +14,19 @@ args@{
   environment.systemPackages = [ ];
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    settings = {
+      experimental-features = "flakes nix-command";
+      trusted-users = [
+        "root"
+        vars.adminUser
+      ];
+    };
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  };
 
   # Enable alternative shell support in nix-darwin.
   # programs.fish.enable = true;

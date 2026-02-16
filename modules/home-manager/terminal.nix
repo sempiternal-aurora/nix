@@ -377,6 +377,7 @@ in
       {
         enable = cfg.yazi;
         flavors = builtins.listToAttrs listOfFlavors;
+        shellWrapperName = "y";
         settings = {
           mgr = {
             ratio = [

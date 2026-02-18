@@ -27,10 +27,10 @@ args@{
       mkCachyKernel =
         pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
           { inherit inputs; };
-      version = "6.19";
+      version = "6.19.2";
       src = pkgs.fetchurl {
-        url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-        hash = "sha256-LouYw9vHfDMLDjQcI3hLdvovnySCqfzqMQbn5+ScTCU=";
+        url = "https://git.kernel.org/stable/t/linux-${version}.tar.gz";
+        hash = "sha256-SvqnlMduCCbRQ82w/AUswdutp/yY2DItpffvxQnIbps=";
       };
       kernel =
         (mkCachyKernel {
@@ -212,6 +212,7 @@ args@{
       caps2esc = true;
     };
     media = {
+      enable = true;
       qbittorrent = false;
     };
     greetd = {
@@ -225,7 +226,6 @@ args@{
     lutris.enable = true;
     itch.enable = true;
     prism.enable = true;
-    media.enable = true;
     tailscale.enable = true;
     globalprotect.enable = true;
     bluetooth.enable = true;

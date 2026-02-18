@@ -21,7 +21,7 @@ let
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
   firefox = lib.getExe pkgs.firefox;
   kill = "${pkgs.procps}/bin/kill";
-  polkit-mate = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+  polkit-mate = "${pkgs.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   acpi = lib.getExe pkgs.acpi;
   grep = lib.getExe pkgs.gnugrep;
   wc = "${pkgs.coreutils}/bin/wc";

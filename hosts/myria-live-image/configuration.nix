@@ -22,7 +22,7 @@ args@{
     inputs.home-manager.nixosModules.default
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
 
   isoImage.edition = "myria";

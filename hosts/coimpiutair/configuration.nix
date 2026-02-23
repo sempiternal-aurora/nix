@@ -237,7 +237,10 @@ args@{
     yazi.enable = true;
     uutils.enable = false;
     docs.enable = true;
-    openocd.enable = true;
+    udev = {
+      openocd = true;
+      vivado = true;
+    };
   };
 
   # 1Password __MUST__ be installed as root

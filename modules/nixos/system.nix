@@ -7,7 +7,6 @@
 }:
 {
   options = {
-    mine.fprintd.enable = lib.mkEnableOption "fingerprint support";
     mine.usbhotspot.enable = lib.mkEnableOption "apple usb mobile hotspot support";
     mine.udisks2.enable = lib.mkEnableOption "permission to other than root mount";
     mine.brillo.enable = lib.mkEnableOption "brightness cli controls";
@@ -26,11 +25,8 @@
     # Select internationalisation properties.
     i18n.defaultLocale = "en_AU.UTF-8";
 
-    services.fprintd.enable = config.mine.fprintd.enable;
     services.usbmuxd.enable = config.mine.usbhotspot.enable;
     services.udisks2.enable = config.mine.udisks2.enable;
-    services.power-profiles-daemon.enable = true;
-    services.fwupd.enable = true;
 
     security.polkit.enable = true;
     security.pam.services.swaylock = { };

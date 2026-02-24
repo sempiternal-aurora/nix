@@ -31,6 +31,7 @@ in
       enable = cfg.enable;
       settings.default_session.command = cfg.command;
     };
+
     services.displayManager.ly = {
       enable = lcfg.enable;
       settings = lib.mkDefault {

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -115,6 +116,7 @@
           modules = [
             ./hosts/coimpiutair/configuration.nix
             inputs.home-manager.nixosModules.default
+            inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           ];
         };
 

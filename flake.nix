@@ -152,6 +152,29 @@
         };
       };
 
+      homeConfigurations = {
+        default = self.homeConfigurations.macbookair;
+        macbookair =
+          let
+            system = "aarch64-linux";
+            pkgs = import nixpkgs { inherit system; };
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit inputs;
+              userName = "myria";
+              vars = {
+                adminUser = "myria";
+                configuration = "macbookair";
+              };
+            };
+            modules = [
+              ./hosts/macbookair/home.nix
+            ];
+          };
+      };
+
       darwinConfigurations = {
         default = self.darwinConfigurations.macbookair;
         macbookair = nix-darwin.lib.darwinSystem {

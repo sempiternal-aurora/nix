@@ -164,12 +164,18 @@ in
           plugin = nvim-treesitter.withAllGrammars;
           type = "lua";
           config = ''
-            require("nvim-treesitter.configs").setup({
-              indent = { enable = true },
-              highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { "markdown" },
-              },
+            vim.api.nvim_create_autocmd('FileType', {
+              pattern = '*',
+              callback = function()
+                vim.treesitter.start()
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+              end,
+            })
+            vim.api.nvim_create_autocmd('FileType', {
+              pattern = 'markdown',
+              callback = function()
+                vim.bo.syntax = 'ON'
+              end,
             })
           '';
         }

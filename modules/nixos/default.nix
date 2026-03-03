@@ -2,6 +2,7 @@
   imports = [
     ./admin-user.nix
     ./network.nix
+    ./containers.nix
     ./local-user.nix
     ./audio.nix
     ./console.nix

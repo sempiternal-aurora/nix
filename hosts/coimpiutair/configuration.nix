@@ -134,6 +134,7 @@ args@{
     yazi.enable = true;
     uutils.enable = false;
     docs.enable = true;
+    podman.enable = true;
     udev = {
       openocd = true;
       vivado = true;

@@ -163,21 +163,7 @@ in
         {
           plugin = nvim-treesitter.withAllGrammars;
           type = "lua";
-          config = ''
-            vim.api.nvim_create_autocmd('FileType', {
-              pattern = '*',
-              callback = function()
-                vim.treesitter.start()
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-              end,
-            })
-            vim.api.nvim_create_autocmd('FileType', {
-              pattern = 'markdown',
-              callback = function()
-                vim.bo.syntax = 'ON'
-              end,
-            })
-          '';
+          config = builtins.readFile ./source/treesitter.lua;
         }
         haskell-tools-nvim
       ];

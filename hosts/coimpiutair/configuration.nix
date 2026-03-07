@@ -20,18 +20,38 @@ args@{
     inputs.home-manager.nixosModules.default
   ];
 
+  nixpkgs = {
+    overlays = [
+      inputs.nix-cachyos-kernel.overlays.pinned
+    ];
+
+    # Allow unfree licences for some packages
+    config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "discord"
+        "1password-gui"
+        "1password-cli"
+        "1password"
+        "idea"
+        "steam"
+        "steam-original"
+        "steam-unwrapped"
+        "steam-run"
+        "zoom"
+        "nordvpn"
+      ];
+  };
+
   # Use the latest linux kernel
-  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages =
     let
       mkCachyKernel =
         pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
           { inherit inputs; };
-      version = "7.0-rc2";
-      src = pkgs.fetchurl {
-        url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-        hash = "sha256-BlKlJdEYvwDN6iWJfuOvd1gcm6lN6McJ/vmMwOmzHdc=";
-      };
+      version = pkgs.cachyosKernels.linuxPackages-cachyos-rc.kernel.version;
+      src = pkgs.cachyosKernels.linuxPackages-cachyos-rc.kernel.src.src;
       kernel =
         (mkCachyKernel {
           pname = "linux-cachyos-rc-lto-zen4";
@@ -71,23 +91,6 @@ args@{
   };
 
   networking.hostName = "coimpiutair"; # Define your hostname.
-
-  # Allow unfree licences for some packages
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-      "1password-gui"
-      "1password-cli"
-      "1password"
-      "idea"
-      "steam"
-      "steam-original"
-      "steam-unwrapped"
-      "steam-run"
-      "zoom"
-      "nordvpn"
-    ];
 
   hardware.framework = {
     enableKmod = true;

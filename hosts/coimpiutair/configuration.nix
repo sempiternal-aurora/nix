@@ -22,7 +22,7 @@ args@{
 
   nixpkgs = {
     overlays = [
-      inputs.nix-cachyos-kernel.overlays.pinned
+      inputs.nix-cachyos-kernel.overlays.default
     ];
 
     # Allow unfree licences for some packages

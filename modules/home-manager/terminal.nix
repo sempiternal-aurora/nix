@@ -184,6 +184,7 @@ in
         vim_keys = true;
         proc_sorting = "cpu lazy";
         proc_gradient = false;
+        update_ms = 200;
       };
     };
 

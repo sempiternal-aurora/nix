@@ -32,7 +32,7 @@ in
 
   mine = {
     terminal = {
-      newsboat = true;
+      newsboat = isLinux;
       spotify-player = true;
       weechat = true;
       trash = true;

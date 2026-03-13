@@ -47,9 +47,10 @@ args@{
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages =
     let
-      mkCachyKernel =
-        pkgs.callPackage "${inputs.nix-cachyos-kernel.outPath}/kernel-cachyos/mkCachyKernel.nix"
-          { inherit inputs; };
+      mkCachyKernel = inputs.nix-cachyos-kernel.mkCachyKernel {
+        inherit pkgs;
+        buildLinux = pkgs.buildLinux;
+      };
       version = pkgs.cachyosKernels.linuxPackages-cachyos-rc.kernel.version;
       src = pkgs.cachyosKernels.linuxPackages-cachyos-rc.kernel.src.src;
       kernel =

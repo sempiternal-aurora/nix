@@ -76,7 +76,7 @@ in
     discord.enable = isDarwin;
     calibre.enable = isLinux;
     digital.enable = true;
-    firefox.enable = isLinux;
+    firefox.enable = true;
   };
 
   # Packages I'm maintaining to keep an eye out for breaks

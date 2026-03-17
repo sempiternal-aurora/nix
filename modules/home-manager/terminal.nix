@@ -65,6 +65,7 @@ in
         { url = "https://www.otwstatus.org/history.atom"; }
         { url = "https://www.kernel.org/feeds/kdist.xml"; }
         { url = "https://asahilinux.org/blog/index.xml"; }
+        { url = "https://lore.kernel.org/asahi/new.atom"; }
         { url = "https://www.sandraandwoo.com/feed"; }
         { url = "https://www.theshovel.com.au/rss"; }
         { url = "https://foxes-in-love.tumblr.com/rss"; }

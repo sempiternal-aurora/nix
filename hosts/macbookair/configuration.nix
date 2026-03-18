@@ -25,15 +25,14 @@ args@{
   boot = {
     loader = {
       systemd-boot.enable = true;
-      efi = {
-        canTouchEfiVariables = false;
-        efiSysMountPoint = "/boot/efi";
-      };
+      efi.canTouchEfiVariables = false;
     };
   };
 
-  # peripheral firmware from macos
-  peripheralFirmwareDirectory = /boot/efi/asahi;
+  hardware.asahi = {
+    extractPeripheralFirmware = false;
+    peripheralFirmwareDirectory = "/etc/nixos/firmware";
+  };
 
   admin-user = {
     enable = true;
@@ -65,10 +64,6 @@ args@{
       enable = true;
       caps2esc = true;
     };
-    greetd = {
-      enable = false;
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd \"systemd-cat --identifier=sway sway\"";
-    };
     ly.enable = true;
     sway.enable = true;
     audio.enable = true;
@@ -82,13 +77,11 @@ args@{
     bluetooth.enable = true;
     printing.enable = true;
     brillo.enable = true;
-    fprintd.enable = true;
     udisks2.enable = true;
     usbhotspot.enable = true;
     yazi.enable = true;
     uutils.enable = false;
     docs.enable = true;
-    openocd.enable = true;
   };
 
   # 1Password __MUST__ be installed as root

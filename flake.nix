@@ -61,7 +61,7 @@
 
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {
@@ -155,29 +155,6 @@
             inputs.nixos-apple-silicon.nixosModules.default
           ];
         };
-      };
-
-      homeConfigurations = {
-        default = self.homeConfigurations.macbookair;
-        macbookair =
-          let
-            system = "aarch64-linux";
-            pkgs = import nixpkgs { inherit system; };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit inputs;
-              userName = "myria";
-              vars = {
-                adminUser = "myria";
-                configuration = "macbookair";
-              };
-            };
-            modules = [
-              ./hosts/macbookair/home.nix
-            ];
-          };
       };
 
       darwinConfigurations = {

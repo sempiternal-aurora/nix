@@ -14,29 +14,24 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "usb_storage" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/72bd8b6f-0e7f-46f2-a181-6560211eabe7";
-    fsType = "btrfs";
-    options = [ "subvol=root" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/72bd8b6f-0e7f-46f2-a181-6560211eabe7";
-    fsType = "btrfs";
-    options = [ "subvol=home" ];
+    device = "/dev/disk/by-uuid/e3792537-b7ad-475a-b8ee-5d4b8095e041";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+      "commit=60"
+      "barrier=0"
+      "discard"
+    ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2cd4968a-3953-4afe-9818-d9c10317e4a5";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/5CDF-1DF4";
     fsType = "vfat";
     options = [

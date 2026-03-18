@@ -54,7 +54,8 @@ in
     sway = {
       enable = isLinux;
       powercheck = true;
-      terminal = lib.mkIf isLinux "ghostty";
+      fx = true;
+      terminal = lib.mkIf isLinux (lib.getExe pkgs.ghostty);
     };
     zoom.enable = isDarwin;
     teams.enable = isLinux;
@@ -120,6 +121,7 @@ in
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    WLR_NO_HARDWARE_CURSORS = 1;
   };
   xdg.configFile."gdb/gdbinit" = {
     enable = true;

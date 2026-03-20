@@ -30,8 +30,19 @@ args@{
   };
 
   hardware.asahi = {
-    extractPeripheralFirmware = false;
-    peripheralFirmwareDirectory = "/etc/nixos/firmware";
+    enable = true;
+    setupAsahiSound = true;
+    peripheralFirmwareDirectory = pkgs.requireFile {
+      name = "firmware";
+      hashMode = "recursive";
+      hash = "sha256-yrZPTqTNEoTivlVVVMNT93nOH9CIhuh+icExoLfaH24=";
+      message = ''
+        Add the file to the store:
+        $ sudo nix store add-path /etc/nixos/firmware
+        Get the hash:
+        $ sudo nix hash path --algo sha256 /etc/nixos/firmware
+      '';
+    };
   };
 
   admin-user = {
@@ -43,10 +54,7 @@ args@{
   networking = {
     hostName = "macbookair"; # Define your hostname.
     networkmanager.wifi.backend = "iwd";
-    wireless = {
-      iwd.enable = true;
-      enable = false;
-    };
+    wireless.iwd.settings.Network.NameResolvingService = "resolvconf";
   };
 
   # Allow unfree licences for some packages

@@ -54,7 +54,10 @@ args@{
   networking = {
     hostName = "macbookair"; # Define your hostname.
     networkmanager.wifi.backend = "iwd";
-    wireless.iwd.settings.Network.NameResolvingService = "resolvconf";
+    wireless.iwd.settings = {
+      General.EnableNetworkConfiguration = true;
+      Network.NameResolvingService = "resolvconf";
+    };
   };
 
   # Allow unfree licences for some packages

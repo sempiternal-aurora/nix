@@ -54,6 +54,8 @@ let
     #  if [[ $current_charge -ge $warn_charge ]]; then
     #    dunstify -r 7693 -u critical "Stop Charging!" "Battery is at ''${current_charge} percent!"
     #  fi
+    else
+      ${dunstify} -C 7693
     fi
   '';
 in

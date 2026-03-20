@@ -128,9 +128,12 @@ args@{
     lutris.enable = true;
     itch.enable = true;
     prism.enable = true;
-    tailscale.enable = true;
-    globalprotect.enable = true;
-    bluetooth.enable = true;
+    networking = {
+      enable = true;
+      tailscale.enable = true;
+      globalprotect.enable = true;
+      bluetooth.enable = true;
+    };
     printing.enable = true;
     brillo.enable = true;
     udisks2.enable = true;

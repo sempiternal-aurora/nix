@@ -38,7 +38,7 @@ args@{
       hash = "sha256-yrZPTqTNEoTivlVVVMNT93nOH9CIhuh+icExoLfaH24=";
       message = ''
         Add the file to the store:
-        $ sudo nix store add-path /etc/nixos/firmware
+        $ sudo nix store add /etc/nixos/firmware
         Get the hash:
         $ sudo nix hash path --algo sha256 /etc/nixos/firmware
       '';
@@ -51,14 +51,7 @@ args@{
     homeManager = import ./home.nix (args // { userName = vars.adminUser; });
   };
 
-  networking = {
-    hostName = "macbookair"; # Define your hostname.
-    networkmanager.wifi.backend = "iwd";
-    wireless.iwd.settings = {
-      General.EnableNetworkConfiguration = true;
-      Network.NameResolvingService = "resolvconf";
-    };
-  };
+  networking.hostName = "macbookair"; # Define your hostname.
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =
@@ -90,9 +83,13 @@ args@{
     itch.enable = false;
     prism.enable = false;
     media.enable = false;
-    tailscale.enable = true;
-    globalprotect.enable = true;
-    bluetooth.enable = true;
+    networking = {
+      enable = true;
+      iwdBackend = true;
+      tailscale.enable = true;
+      globalprotect.enable = true;
+      bluetooth.enable = true;
+    };
     printing.enable = true;
     brillo.enable = true;
     udisks2.enable = true;

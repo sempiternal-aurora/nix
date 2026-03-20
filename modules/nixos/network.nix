@@ -4,21 +4,52 @@
   config,
   ...
 }:
+let
+  cfg = config.mine.networking;
+in
 {
-  options = {
-    mine.tailscale.enable = lib.mkEnableOption "install tailscale client";
-    mine.globalprotect.enable = lib.mkEnableOption "globalprotect vpn gui";
-    mine.bluetooth.enable = lib.mkEnableOption "bluetooth support";
+  options.mine.networking = {
+    tailscale.enable = lib.mkEnableOption "install tailscale client";
+    globalprotect.enable = lib.mkEnableOption "globalprotect vpn gui";
+    bluetooth.enable = lib.mkEnableOption "bluetooth support";
+    enable = lib.mkEnableOption "networking";
+    iwdBackend = lib.mkEnableOption "use iwd backend for network manager";
   };
-  config = {
-    # networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
-    networking.networkmanager = {
-      enable = true; # Easiest to use and most distros use this by default.
-      plugins = [
-        pkgs.networkmanager-openvpn
-        pkgs.networkmanager-openconnect
-      ];
+
+  config = lib.mkIf cfg.enable {
+    networking = {
+      networkmanager = {
+        enable = true; # Easiest to use and most distros use this by default.
+        wifi.backend = if cfg.iwdBackend then "iwd" else "wpa_supplicant";
+        plugins = [
+          pkgs.networkmanager-openvpn
+          pkgs.networkmanager-openconnect
+        ];
+      };
+
+      wireless.iwd.settings = lib.mkIf cfg.iwdBackend {
+        General.EnableNetworkConfiguration = true;
+        Network.NameResolvingService = "resolvconf";
+      };
     };
+
+    systemd.tmpfiles.settings."10-iwd" =
+      let
+        ANU-Secure = pkgs.requireFile {
+          name = "ANU-Secure.8021x";
+          hashMode = "flat";
+          hash = "sha256-EUZu8LGW4wSR6j636bFl1EumVUcyg76E0haJ22rqWPA=";
+          message = ''
+            Add the file to the store:
+            $ nix store add --mode flat ANU-Secure.8021x
+            Get the hash:
+            $ nix hash file --algo sha256 ANU-Secure.8021x
+          '';
+        };
+      in
+      lib.mkIf cfg.iwdBackend {
+        "/var/lib/iwd/ANU-Secure.8021x".L.argument = "${ANU-Secure}";
+      };
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
@@ -27,12 +58,12 @@
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
     services.tailscale = {
-      enable = config.mine.tailscale.enable;
+      enable = cfg.tailscale.enable;
       useRoutingFeatures = "client";
     };
 
     # VPN Stuff
-    environment.systemPackages = lib.lists.optional config.mine.globalprotect.enable pkgs.gpclient;
+    environment.systemPackages = lib.lists.optional cfg.globalprotect.enable pkgs.gpclient;
     services.globalprotect.enable = false;
 
     # Open ports in the firewall.
@@ -41,7 +72,7 @@
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
 
-    hardware.bluetooth.enable = config.mine.bluetooth.enable;
-    services.blueman.enable = config.mine.bluetooth.enable;
+    hardware.bluetooth.enable = cfg.bluetooth.enable;
+    services.blueman.enable = cfg.bluetooth.enable;
   };
 }

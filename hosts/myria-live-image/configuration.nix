@@ -109,8 +109,11 @@ args@{
 
     sway.enable = true;
     audio.enable = true;
-    globalprotect.enable = false;
-    bluetooth.enable = true;
+    networking = {
+      enable = true;
+      globalprotect.enable = false;
+      bluetooth.enable = true;
+    };
     brillo.enable = true;
     udisks2.enable = true;
     usbhotspot.enable = true;

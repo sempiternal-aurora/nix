@@ -40,7 +40,14 @@ args@{
     homeManager = import ./home.nix (args // { userName = vars.adminUser; });
   };
 
-  networking.hostName = "macbookair"; # Define your hostname.
+  networking = {
+    hostName = "macbookair"; # Define your hostname.
+    networkmanager.wifi.backend = "iwd";
+    wireless = {
+      iwd.enable = true;
+      enable = false;
+    };
+  };
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =

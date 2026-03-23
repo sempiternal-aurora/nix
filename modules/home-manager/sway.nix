@@ -271,27 +271,34 @@ in
       size = 48;
     };
 
-    gtk = {
-      enable = true;
-      cursorTheme = {
-        package = pkgs.dracula-theme;
-        name = "Dracula-cursors";
-        size = 24;
+    gtk =
+      let
+        cursorTheme = {
+          package = pkgs.dracula-theme;
+          name = "Dracula-cursors";
+          size = 24;
+        };
+        theme = {
+          name = "Dracula";
+          package = pkgs.dracula-theme;
+        };
+        iconTheme = {
+          name = "Dracula";
+          package = pkgs.dracula-icon-theme;
+        };
+      in
+      {
+        enable = true;
+        font = {
+          package = font;
+          size = 12;
+          name = "Hasklug Nerd Font Regular";
+        };
+        inherit theme cursorTheme iconTheme;
+        gtk4 = {
+          inherit theme cursorTheme iconTheme;
+        };
       };
-      font = {
-        package = font;
-        size = 12;
-        name = "Hasklug Nerd Font Regular";
-      };
-      theme = {
-        name = "Dracula";
-        package = pkgs.dracula-theme;
-      };
-      iconTheme = {
-        name = "Dracula";
-        package = pkgs.dracula-icon-theme;
-      };
-    };
 
     wayland.windowManager.sway = {
       enable = true;

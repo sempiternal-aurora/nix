@@ -9,6 +9,7 @@
     ../../modules/home-manager
     # inputs.chaotic-nyx.homeManagerModules.default
     inputs.nix-doom-emacs.homeModule
+    inputs.nix-index-database.homeModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

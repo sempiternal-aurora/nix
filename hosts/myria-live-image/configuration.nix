@@ -119,7 +119,6 @@ args@{
     usbhotspot.enable = true;
     yazi.enable = true;
     docs.enable = true;
-    openocd.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

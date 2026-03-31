@@ -606,7 +606,7 @@ in
       events = {
         before-sleep = "${playerctl} pause; ${swaylock} -f";
       };
-      systemdTarget = "sway-session.target";
+      systemdTargets = [ "sway-session.target" ];
       timeouts = [
         {
           timeout = 300;

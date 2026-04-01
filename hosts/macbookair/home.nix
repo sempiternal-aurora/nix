@@ -121,7 +121,6 @@ in
   #
   home.sessionVariables = {
     EDITOR = "nvim";
-    WLR_NO_HARDWARE_CURSORS = 1;
   };
   xdg.configFile."gdb/gdbinit" = {
     enable = true;

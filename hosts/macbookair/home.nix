@@ -130,6 +130,14 @@ in
     '';
   };
 
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "sunday";
+      options = "--delete-older-than 10d";
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

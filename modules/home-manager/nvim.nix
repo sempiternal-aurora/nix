@@ -28,6 +28,9 @@ in
       enable = true;
       defaultEditor = cfg.default;
 
+      withRuby = false;
+      withPython3 = false;
+
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;

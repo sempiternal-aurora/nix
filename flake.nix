@@ -168,7 +168,7 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = self.outputs.overlays.default;
+            overlays = [ self.outputs.overlays.default ];
           };
         in
         {

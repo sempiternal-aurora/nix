@@ -7,9 +7,9 @@ rustPlatform.buildRustPackage {
   version = "0-unstable-2026-04-11";
 
   src = fetchFromGitHub {
-    owner = "sempiternal-aurora";
+    owner = "PETR0-4LT";
     repo = "petro_bot";
-    rev = "aea38266e9319d01cc5868ad1006876118921e4a";
+    rev = "6c760e23a270a75345c0eef86ee00c4189116bf7";
     hash = "sha256-w6Zm/iF7kCZEds8IAyLHBUWcDDrIdAochkCUYLOmhm8=";
   };
 

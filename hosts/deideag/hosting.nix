@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -51,6 +50,10 @@
         }
       ];
     };
+
+    environment.systemPackages = [
+      (pkgs.callPackage ./petro-bot.nix { })
+    ];
 
     services.phpfpm = {
       phpOptions = ''

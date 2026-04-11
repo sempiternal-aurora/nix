@@ -33,7 +33,6 @@ args@{
   systemd.targets.multi-user.enable = true;
 
   users.mutableUsers = false;
-  users.users.root.hashedPassword = "";
   admin-user = {
     enable = true;
     userName = vars.adminUser;

@@ -30,19 +30,46 @@
         ] caddyConfig;
     };
 
-    services.phpfpm.pools.holonet = {
-      user = "php";
-      group = "www-data";
-      phpPackage = pkgs.php;
-      settings = {
-        "listen.owner" = "php";
-        "listen.group" = "www-data";
-        "pm" = "dynamic";
-        "pm.max_children" = 10;
-        "pm.start_servers" = 3;
-        "pm.min_spare_servers" = 2;
-        "pm.max_spare_servers" = 5;
-        "pm.max_requests" = 500;
+    services.mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+      initialDatabases = [
+        {
+          name = "holonet";
+          schema = ./holonet.sql;
+        }
+      ];
+      ensureDatabases = [
+        "holonet"
+      ];
+      ensureUsers = [
+        {
+          name = "php";
+          ensurePermissions = {
+            "holonet.*" = "INSERT, SELECT, UPDATE";
+          };
+        }
+      ];
+    };
+
+    services.phpfpm = {
+      phpOptions = ''
+        display_errors = on;
+      '';
+      pools.holonet = {
+        user = "php";
+        group = "www-data";
+        phpPackage = pkgs.php;
+        settings = {
+          "listen.owner" = "php";
+          "listen.group" = "www-data";
+          "pm" = "dynamic";
+          "pm.max_children" = 10;
+          "pm.start_servers" = 3;
+          "pm.min_spare_servers" = 2;
+          "pm.max_spare_servers" = 5;
+          "pm.max_requests" = 500;
+        };
       };
     };
 

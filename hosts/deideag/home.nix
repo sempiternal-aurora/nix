@@ -47,6 +47,7 @@
       latex = false;
     };
     sway.enable = false;
+    direnv.enable = true;
   };
 
   # Allow unfree licences for some packages

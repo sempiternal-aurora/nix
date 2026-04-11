@@ -57,7 +57,7 @@
 
     services.phpfpm = {
       phpOptions = ''
-        display_errors = on;
+        display_errors = off;
       '';
       pools.holonet = {
         user = "php";

@@ -43,6 +43,7 @@
         pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         pkgs.wget
         pkgs.git
+        pkgs.tmux
       ]
       ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
       ++ lib.lists.optionals config.mine.usbhotspot.enable [

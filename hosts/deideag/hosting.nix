@@ -13,7 +13,7 @@
   config = {
     services.caddy = {
       enable = true;
-      group = "www";
+      group = "www-data";
       virtualHosts =
         let
           caddyConfig = url: {
@@ -32,7 +32,7 @@
 
     services.phpfpm.pools.holonet = {
       user = "php";
-      group = "www";
+      group = "www-data";
       phpPackage = pkgs.php;
       settings = {
         "pm" = "dynamic";
@@ -45,12 +45,12 @@
     };
 
     users = {
-      groups.www = { };
+      groups."www-data" = { };
 
       users.php = {
         isSystemUser = true;
         createHome = false;
-        group = "www";
+        group = "www-data";
       };
     };
 

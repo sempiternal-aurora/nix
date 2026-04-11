@@ -43,7 +43,7 @@ in
             Add the file to the store:
             $ nix store add --mode flat ANU-Secure.8021x
             Get the hash:
-            $ nix hash file --algo sha256 ANU-Secure.8021x
+            $ nix hash file --type sha256 ANU-Secure.8021x
           '';
         };
       in
@@ -56,7 +56,10 @@ in
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
     services.tailscale = {
       enable = cfg.tailscale.enable;
       useRoutingFeatures = "client";

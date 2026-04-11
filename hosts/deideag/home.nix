@@ -7,7 +7,8 @@
 {
   imports = [
     ../../modules/home-manager
-    # inputs.chaotic-nyx.homeManagerModules.default
+    inputs.nix-doom-emacs.homeModule
+    inputs.nix-index-database.homeModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -26,14 +27,14 @@
 
   mine = {
     terminal = {
-      newsboat = true;
-      weechat = true;
+      newsboat = false;
+      weechat = false;
       trash = true;
-      mercurial = true;
+      mercurial = false;
       zip = true;
-      zsh = true;
+      zsh = false;
       fish = true;
-      zoxide = true;
+      zoxide = false;
       btop = true;
       hyfetch = true;
       eza = true;
@@ -43,7 +44,9 @@
     nvim = {
       enable = true;
       default = true;
+      latex = false;
     };
+    sway.enable = false;
   };
 
   # Allow unfree licences for some packages

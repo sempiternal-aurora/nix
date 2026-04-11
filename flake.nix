@@ -125,17 +125,17 @@
           ];
         };
 
-        bocsa = nixpkgs.lib.nixosSystem {
+        deideag = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             vars = {
               adminUser = "nyla";
-              configuration = "bocsa";
+              configuration = "deideag";
             };
           };
           modules = [
-            ./hosts/bocsa/configuration.nix
+            ./hosts/deideag/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };

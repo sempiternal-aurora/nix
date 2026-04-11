@@ -4,11 +4,14 @@
   config,
   ...
 }:
+let
+  cfg = config.mine.sway;
+in
 {
   options = {
     mine.sway.enable = lib.mkEnableOption "sway tiling window manager";
   };
-  config = {
+  config = lib.mkIf cfg.enable {
     xdg.portal = {
       enable = true;
       extraPortals = [
@@ -20,7 +23,7 @@
     };
 
     programs.sway = {
-      enable = config.mine.sway.enable;
+      enable = true;
       package = pkgs.swayfx;
     };
   };

@@ -16,9 +16,11 @@ in
       default = "adminuser";
       description = "priviledged user's name";
     };
-    #admin-user.sshKey = lib.mkOption {
-    #    description = "your users ssh key";
-    #};
+    admin-user.sshKeys = lib.mkOption {
+        description = "your users ssh key";
+        default = [];
+        type = lib.types.listOf lib.types.str;
+    };
     admin-user.homeManager = lib.mkOption {
       description = "primary user's name";
     };
@@ -35,7 +37,7 @@ in
         "uinput"
       ];
       shell = pkgs.fish;
-      #openssh.authorizedKeys.keys = [ cfg.sshKey ];
+      openssh.authorizedKeys.keys = cfg.sshKeys;
     };
 
     home-manager = {

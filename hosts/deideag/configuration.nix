@@ -13,35 +13,63 @@ args@{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./hosting.nix
     ../../modules/nixos
     inputs.home-manager.nixosModules.default
   ];
 
-  # Use the latest linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
     };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "/dev/sda";
-    };
+    initrd.systemd.enable = true;
   };
 
+  systemd.targets.multi-user.enable = true;
+
+  users.mutableUsers = false;
+  users.users.root.hashedPassword = "";
   admin-user = {
     enable = true;
     userName = vars.adminUser;
     homeManager = import ./home.nix (args // { userName = vars.adminUser; });
+    sshKeys = import "${pkgs.requireFile {
+      name = "nyla-ssh-keys.nix";
+      hashMode = "flat";
+      hash = "sha256-EpsKCcOCwk2uOZnuLziDp5HgxI20wr7LVd2B1yLvgwM=";
+      message = ''
+        Add the file to the store:
+        $ nix store add --mode flat nyla-ssh-keys.nix
+        Get the hash:
+        $ nix hash file --type sha256 nyla-ssh-keys.nix
+      '';
+    }}";
   };
+
+  # Enable passwordless sudo.
+  security.sudo.extraRules = [
+    {
+      users = [ vars.adminUser ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  services.openssh.settings.PasswordAuthentication = false;
+  services.getty.autologinUser = null;
 
   local-user.enable = false;
 
-  networking.hostName = "bocsa"; # Define your hostname.
+  networking.hostName = vars.configuration; # Define your hostname.
 
   # Allow unfree licences for some packages
   nixpkgs.config.allowUnfreePredicate =
@@ -63,33 +91,32 @@ args@{
       enable = true;
       caps2esc = true;
     };
-
-    media = {
+    media.enable = false;
+    networking = {
       enable = true;
-      openFirewall = true;
+      tailscale.enable = false;
     };
-    tailscale.enable = true;
-    printing.enable = true;
-    udisks2.enable = true;
-    usbhotspot.enable = true;
+    printing.enable = false;
+    udisks2.enable = false;
+    usbhotspot.enable = false;
     yazi.enable = true;
     uutils.enable = false;
-    docs.enable = true;
+    docs.enable = false;
   };
 
   zramSwap = {
-    enable = true;
+    enable = false;
     priority = 2;
   };
 
   nix = {
-    # gc = {
-    #   automatic = true;
-    #   dates = "sunday";
-    #   options = "--delete-older-than 10d";
-    # };
+    gc = {
+      automatic = true;
+      dates = "sunday";
+      options = "--delete-older-than 10d";
+    };
     settings = {
-      # auto-optimise-store = true;
+      auto-optimise-store = true;
       trusted-users = [
         "root"
         vars.adminUser

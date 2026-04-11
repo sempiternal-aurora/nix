@@ -37,17 +37,19 @@ args@{
     enable = true;
     userName = vars.adminUser;
     homeManager = import ./home.nix (args // { userName = vars.adminUser; });
-    sshKeys = import "${pkgs.requireFile {
-      name = "nyla-ssh-keys.nix";
-      hashMode = "flat";
-      hash = "sha256-EpsKCcOCwk2uOZnuLziDp5HgxI20wr7LVd2B1yLvgwM=";
-      message = ''
-        Add the file to the store:
-        $ nix store add --mode flat nyla-ssh-keys.nix
-        Get the hash:
-        $ nix hash file --type sha256 nyla-ssh-keys.nix
-      '';
-    }}";
+    sshKeys = import (
+      pkgs.requireFile {
+        name = "nyla-ssh-keys.nix";
+        hashMode = "flat";
+        hash = "sha256-EpsKCcOCwk2uOZnuLziDp5HgxI20wr7LVd2B1yLvgwM=";
+        message = ''
+          Add the file to the store:
+          $ nix store add --mode flat nyla-ssh-keys.nix
+          Get the hash:
+          $ nix hash file --type sha256 nyla-ssh-keys.nix
+        '';
+      }
+    );
   };
 
   # Enable passwordless sudo.

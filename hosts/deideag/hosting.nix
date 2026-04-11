@@ -51,6 +51,41 @@
       ];
     };
 
+    systemd.services.petro_bot = {
+      description = "A simple roleplaying server discord bot";
+
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      script = ''
+        exec ${pkgs.petro_bot}/bin/petro_bot --token $TOKEN --database $STATE_DIRECTORY/test-db.db3
+      '';
+
+      serviceConfig = {
+        Restart = "on-failure";
+
+        User = "petro-bot";
+        Group = "petro-bot";
+
+        StateDirectory = "petro-bot";
+        StateDirectoryMode = "0700";
+      };
+
+      environment = import (
+        pkgs.requireFile {
+          name = "petro-bot-env.nix";
+          hashMode = "flat";
+          hash = "sha256-/Ryz849ykpH7oegJ2hsU2LqW20wu37HUEoDN1H6IsiY=";
+          message = ''
+            Add the file to the store:
+            $ nix store add --mode flat petro-bot-env.nix
+            Get the hash:
+            $ nix hash file --type sha256 petro-bot-env.nix
+          '';
+        }
+      );
+    };
+
     environment.systemPackages = [
       pkgs.petro_bot
     ];
@@ -77,12 +112,21 @@
     };
 
     users = {
-      groups."www-data" = { };
+      groups = {
+        "petro-bot" = { };
+        "www-data" = { };
+      };
 
-      users.php = {
-        isSystemUser = true;
-        createHome = false;
-        group = "www-data";
+      users = {
+        php = {
+          isSystemUser = true;
+          createHome = false;
+          group = "www-data";
+        };
+        "petro-bot" = {
+          isSystemUser = true;
+          group = "petro-bot";
+        };
       };
     };
 

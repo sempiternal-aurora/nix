@@ -52,7 +52,7 @@
     };
 
     environment.systemPackages = [
-      (pkgs.callPackage ./petro-bot.nix { })
+      pkgs.petro_bot
     ];
 
     services.phpfpm = {

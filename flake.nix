@@ -105,6 +105,7 @@
           modules = [
             ./hosts/myria-live-image/configuration.nix
             inputs.home-manager.nixosModules.default
+            { nixpkgs.overlays = [ self.outputs.overlays.default ]; }
           ];
         };
 
@@ -122,6 +123,7 @@
             ./hosts/coimpiutair/configuration.nix
             inputs.home-manager.nixosModules.default
             inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+            { nixpkgs.overlays = [ self.outputs.overlays.default ]; }
           ];
         };
 
@@ -137,6 +139,7 @@
           modules = [
             ./hosts/deideag/configuration.nix
             inputs.home-manager.nixosModules.default
+            { nixpkgs.overlays = [ self.outputs.overlays.default ]; }
           ];
         };
 
@@ -153,15 +156,34 @@
             ./hosts/macbookair/configuration.nix
             inputs.home-manager.nixosModules.default
             inputs.nixos-apple-silicon.nixosModules.default
+            { nixpkgs.overlays = [ self.outputs.overlays.default ]; }
           ];
         };
       };
+
+      overlays.default = import ./pkgs/overlay.nix;
+
+      packages = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ] (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = self.outputs.overlays.default;
+          };
+        in
+        {
+          inherit (pkgs) petro_bot afp;
+        }
+      );
 
       darwinConfigurations = {
         default = self.darwinConfigurations.macbookair;
         macbookair = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ ./hosts/macbookair/darwin-configuration.nix ];
+          modules = [
+            ./hosts/macbookair/darwin-configuration.nix
+            { nixpkgs.overlays = [ self.outputs.overlays.default ]; }
+          ];
           specialArgs = {
             inherit inputs;
             vars = {

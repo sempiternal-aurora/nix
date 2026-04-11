@@ -32,12 +32,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3f9d566b-9964-4512-bcd6-3bb2596d710c";
-    fsType = "xfs";
-  };
-
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/A1B2-7E6F";
+    device = "/dev/disk/by-uuid/6BDD-42EB";
     fsType = "vfat";
     options = [
       "fmask=0077"

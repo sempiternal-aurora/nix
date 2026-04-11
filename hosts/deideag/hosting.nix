@@ -20,7 +20,7 @@
             extraConfig = ''
               root * /var/www/${url}/public_html
               file_server
-              php_fastcgi ${config.services.phpfpm.pools.holonet.socket}
+              php_fastcgi unix/${config.services.phpfpm.pools.holonet.socket}
             '';
           };
         in
@@ -35,6 +35,8 @@
       group = "www-data";
       phpPackage = pkgs.php;
       settings = {
+        "listen.owner" = "php";
+        "listen.group" = "www-data";
         "pm" = "dynamic";
         "pm.max_children" = 10;
         "pm.start_servers" = 3;

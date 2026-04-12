@@ -74,7 +74,7 @@ args@{
       systemd-boot.enable = true;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
+        efiSysMountPoint = "/boot";
       };
     };
     initrd.systemd.enable = true;

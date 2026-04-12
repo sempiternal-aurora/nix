@@ -36,7 +36,7 @@
     ];
   };
 
-  fileSystems."/efi" = {
+  fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7050-6780";
     fsType = "vfat";
     options = [
@@ -54,15 +54,6 @@
       "commit=60"
       "barrier=0"
       "discard"
-    ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/71DB-F2FF";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
     ];
   };
 

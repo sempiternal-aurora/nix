@@ -17,9 +17,9 @@ in
       description = "priviledged user's name";
     };
     admin-user.sshKeys = lib.mkOption {
-        description = "your users ssh key";
-        default = [];
-        type = lib.types.listOf lib.types.str;
+      description = "your users ssh key";
+      default = [ ];
+      type = lib.types.listOf lib.types.str;
     };
     admin-user.homeManager = lib.mkOption {
       description = "primary user's name";

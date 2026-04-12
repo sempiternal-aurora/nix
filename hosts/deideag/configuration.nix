@@ -65,7 +65,6 @@ args@{
     }
   ];
 
-  services.openssh.settings.PasswordAuthentication = false;
   services.getty.autologinUser = null;
 
   local-user.enable = false;

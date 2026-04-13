@@ -64,6 +64,7 @@ in
     mine.sway = {
       enable = lib.mkEnableOption "enable sway module";
       fx = lib.mkEnableOption "Extra SwayFX config";
+      idle = lib.mkEnableOption "Whether to use swayidle";
       powercheck = lib.mkEnableOption "enable low power notifications";
       wallpaper = lib.mkOption {
         default = "~/Pictures/Wallpapers/wallpaper";
@@ -602,7 +603,7 @@ in
     };
 
     services.swayidle = {
-      enable = true;
+      enable = cfg.idle;
       events = {
         before-sleep = "${playerctl} pause; ${swaylock} -f";
       };

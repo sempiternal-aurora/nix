@@ -46,6 +46,7 @@
     direnv.enable = true;
     sway = {
       enable = true;
+      idle = false;
       powercheck = true;
       wallpaper = "${./black-hole.jpg}";
     };

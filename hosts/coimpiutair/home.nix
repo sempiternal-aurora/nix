@@ -50,6 +50,7 @@
     direnv.enable = true;
     sway = {
       enable = true;
+      idle = true;
       powercheck = true;
       fx = true;
     };

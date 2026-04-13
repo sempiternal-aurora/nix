@@ -53,6 +53,7 @@ in
     direnv.enable = true;
     sway = {
       enable = isLinux;
+      idle = true;
       powercheck = true;
       fx = true;
       terminal = lib.mkIf isLinux (lib.getExe pkgs.ghostty);

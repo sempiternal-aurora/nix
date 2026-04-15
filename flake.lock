@@ -210,15 +210,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1776209712,
+        "lastModified": 1776224607,
         "narHash": "sha256-2YXukXWFuRqr6IRq63hsDrTW1bHuKxGrwITuNsp9C24=",
-        "owner": "sempiternal-aurora",
+        "owner": "xddxdd",
         "repo": "nix-cachyos-kernel",
-        "rev": "bd858f0d43b81b596d9f20c15ee627a0b2322e7c",
+        "rev": "8c4679dc2ae89de25fd328ecbf761155e7a902b7",
         "type": "github"
       },
       "original": {
-        "owner": "sempiternal-aurora",
+        "owner": "xddxdd",
         "repo": "nix-cachyos-kernel",
         "type": "github"
       }

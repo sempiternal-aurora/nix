@@ -44,5 +44,10 @@ in
         tty = 1;
       };
     };
+
+    security.pam.services.ly.kwallet = {
+      enable = lcfg.enable;
+      forceRun = true;
+    };
   };
 }

@@ -60,7 +60,10 @@ in
     };
     zoom.enable = isDarwin;
     teams.enable = isLinux;
-    _1password.enable = true;
+    _1password = {
+      enable = true;
+      kwallet.enable = isLinux;
+    };
     nvim = {
       enable = true;
       default = true;

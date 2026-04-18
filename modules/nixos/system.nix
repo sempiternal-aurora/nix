@@ -44,6 +44,7 @@
         pkgs.wget
         pkgs.git
         pkgs.tmux
+        pkgs.sl
       ]
       ++ lib.lists.optional config.mine.yazi.enable pkgs.yazi
       ++ lib.lists.optionals config.mine.usbhotspot.enable [

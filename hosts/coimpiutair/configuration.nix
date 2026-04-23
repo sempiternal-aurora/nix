@@ -40,6 +40,7 @@ args@{
         "steam-run"
         "zoom"
         "nordvpn"
+        "stm32cubeide"
       ];
   };
 

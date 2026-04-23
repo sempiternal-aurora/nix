@@ -105,6 +105,7 @@
       "idea-ultimate"
       "mathematica"
       "zoom"
+      "stm32cubeide"
     ];
 
   # Home Manager can also manage your environment variables through

@@ -188,11 +188,15 @@ stdenv.mkDerivation (finalAttrs: {
 
     # Create wrapper script for the main IDE
     makeWrapper $out/opt/stm32cubeide/stm32cubeide $out/bin/stm32cubeide \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}" \
+      --set GDK_BACKEND x11 \
+      --set GTK_THEME "Adwaita"
 
     # Also create wayland-compatible wrapper (still uses x11 backend)
     makeWrapper $out/opt/stm32cubeide/stm32cubeide $out/bin/stm32cubeide_wayland \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}" \
+      --set GDK_BACKEND x11 \
+      --set GTK_THEME "Adwaita"
 
     # Create wrapper for headless build
     if [ -f $out/opt/stm32cubeide/headless-build.sh ]; then

@@ -2,7 +2,7 @@
   callPackage,
   requireFile,
   lib,
-  version ? "2.0.0",
+  version ? "2.1.1",
   source ? null,
   versionInfo ? null,
 }:
@@ -19,7 +19,8 @@ let
       This nix expression requires that ${basename}.sh.zip is
       already part of the store. Download it from
       https://www.st.com/en/development-tools/stm32cubeide.html
-      and then add it to the store with:
+      (it's the generic linux version) and then add it to the
+      store with:
       $ nix store add --mode flat ${basename}.sh.zip
       or
       $ nix-store --add-fixed sha256 ${basename}.sh.zip

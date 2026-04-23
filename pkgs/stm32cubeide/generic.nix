@@ -9,6 +9,7 @@
   gnutar,
   unzip,
   makeDesktopItem,
+  stlinkVersion,
   stlinkUdevVersion,
   jlinkUdevVersion,
 
@@ -218,7 +219,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     # Install stlink-server from the separate package
     mkdir -p $out/opt/stlink-server
-    bash st-stlink-server.${version}-1-linux-amd64.install.sh \
+    bash st-stlink-server.${stlinkVersion}-linux-amd64.install.sh \
       --noexec --target $out/opt/stlink-server
 
     if [ -f $out/opt/stlink-server/stlink-server ]; then

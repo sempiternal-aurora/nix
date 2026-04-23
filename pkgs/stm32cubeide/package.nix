@@ -2,7 +2,7 @@
   callPackage,
   requireFile,
   lib,
-  version ? "2.1.1",
+  version ? "2.0.0",
   source ? null,
   versionInfo ? null,
 }:
@@ -30,7 +30,7 @@ let
 in
 callPackage ./generic.nix {
   inherit version basename;
-  inherit (selected) jlinkUdevVersion stlinkUdevVersion;
+  inherit (selected) stlinkVersion jlinkUdevVersion stlinkUdevVersion;
 
   src = lib.defaultTo defaultSource source;
 }

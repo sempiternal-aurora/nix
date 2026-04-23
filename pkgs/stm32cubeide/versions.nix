@@ -4,6 +4,7 @@
     date = "20260312";
     magicNumber = "0043";
 
+    stlinkVersion = "2.1.1-1";
     jlinkUdevVersion = "9.24";
     stlinkUdevVersion = "1.0.3-3";
 
@@ -14,6 +15,7 @@
     date = "20251114";
     magicNumber = "1348";
 
+    stlinkVersion = "2.1.1-1";
     jlinkUdevVersion = "8.80";
     stlinkUdevVersion = "1.0.3-2";
 

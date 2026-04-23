@@ -13,6 +13,6 @@
     ./media.nix
     ./printing.nix
     ./documentation.nix
-    ./openocd.nix
+    ./udev.nix
   ];
 }

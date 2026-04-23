@@ -172,7 +172,7 @@
           };
         in
         {
-          inherit (pkgs) petro_bot afp;
+          inherit (pkgs) petro_bot afp stm32cubeide;
         }
       );
 

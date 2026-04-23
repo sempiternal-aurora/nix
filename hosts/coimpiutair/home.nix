@@ -91,6 +91,7 @@
   # Packages I'm maintaining to keep an eye out for breaks
   home.packages = [
     pkgs.vampire
+    pkgs.stm32cubeide
   ];
 
   # Allow unfree licences for some packages

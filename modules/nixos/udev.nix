@@ -13,6 +13,7 @@ in
       udev = {
         openocd = lib.mkEnableOption "Enable OpenOCD udev rules";
         vivado = lib.mkEnableOption "Enable UDEV rules for Vivado FPGA devices";
+        stm32 = lib.mkEnableOption "Enable UDEV rules for STM32 devices";
       };
     };
   };
@@ -20,7 +21,8 @@ in
   config = {
     environment.systemPackages = lib.optional cfg.openocd pkgs.openocd;
     services.udev.packages =
-      (lib.optional cfg.openocd pkgs.openocd)
+      lib.optional cfg.openocd pkgs.openocd
+      ++ lib.optional cfg.stm32 pkgs.stm32cubeide
       ++ lib.optionals cfg.vivado [
         (pkgs.writeTextFile {
           name = "xilinx-dilligent-usb-udev";

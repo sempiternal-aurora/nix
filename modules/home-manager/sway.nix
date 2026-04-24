@@ -367,6 +367,7 @@ in
           "XF86MonBrightnessUp" = "exec brillo -q -A 5";
           "XF86MonBrightnessDown" = "exec brillo -q -U 5";
           "${modifier}+Print" = "mode \"screenshot\"";
+          "${modifier}+p" = "mode \"screenshot\"";
         };
         modes = {
           "screenshot" = {

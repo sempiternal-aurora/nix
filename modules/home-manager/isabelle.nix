@@ -7,6 +7,9 @@
 }:
 let
   cfg = config.mine.isabelle;
+  aurora-pkgs = import inputs.aurora-nixpkgs {
+    inherit (pkgs.stdenv.hostPlatform) system;
+  };
 in
 {
   options = {
@@ -19,15 +22,8 @@ in
       inputs.self.outputs.overlays.default
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
-          isabelle-lsp-nvim = prev.vimUtils.buildVimPlugin {
-            name = "isabelle-lsp.nvim";
-            src = inputs.isabelle-lsp-nvim;
-            dependencies = [ final.vimPlugins.nvim-lspconfig ];
-          };
-          isabelle-syn-nvim = prev.vimUtils.buildVimPlugin {
-            name = "isabelle-syn.nvim";
-            src = inputs.isabelle-syn-nvim;
-          };
+          isabelle-lsp-nvim = aurora-pkgs.vimPlugins.isabelle-lsp-nvim;
+          isabelle-syn-nvim = aurora-pkgs.vimPlugins.isabelle-syn-nvim;
         };
       })
     ];

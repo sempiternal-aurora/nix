@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    aurora-nixpkgs.url = "github:sempiternal-aurora/nixpkgs/isabelle-vim-plugins";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager = {
@@ -13,16 +14,6 @@
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    isabelle-lsp-nvim = {
-      url = "github:Treeniks/isabelle-lsp.nvim";
-      flake = false;
-    };
-
-    isabelle-syn-nvim = {
-      url = "github:Treeniks/isabelle-syn.nvim";
-      flake = false;
     };
 
     textfox = {

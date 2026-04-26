@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "aurora-nixpkgs": {
+      "locked": {
+        "lastModified": 1777170971,
+        "narHash": "sha256-R3Wlx+i/DTsllN+y0/hG6JzmAu0egBLEFid+Wsl3kbk=",
+        "owner": "sempiternal-aurora",
+        "repo": "nixpkgs",
+        "rev": "ac3d33c64b74cea3a2fc0bc04363e8c9710cf996",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sempiternal-aurora",
+        "ref": "isabelle-vim-plugins",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "cachyos-kernel": {
       "flake": false,
       "locked": {
@@ -137,38 +153,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "isabelle-lsp-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1764685009,
-        "narHash": "sha256-2SijIavooMFft9S/fMcH/YE77wctAP0Oneg/YAR9+LM=",
-        "owner": "Treeniks",
-        "repo": "isabelle-lsp.nvim",
-        "rev": "3601b59d77cc4998de29f966ded7d4d959318be2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Treeniks",
-        "repo": "isabelle-lsp.nvim",
-        "type": "github"
-      }
-    },
-    "isabelle-syn-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1715734052,
-        "narHash": "sha256-f04jyExUwos9w89IeKbRdRMtWIsQYe0McAUoijq7mCA=",
-        "owner": "Treeniks",
-        "repo": "isabelle-syn.nvim",
-        "rev": "114b06dc34edf1707be7249b5a3815733e68d4c9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Treeniks",
-        "repo": "isabelle-syn.nvim",
         "type": "github"
       }
     },
@@ -346,11 +330,10 @@
     },
     "root": {
       "inputs": {
+        "aurora-nixpkgs": "aurora-nixpkgs",
         "cachyos-kernel": "cachyos-kernel",
         "cachyos-kernel-patches": "cachyos-kernel-patches",
         "home-manager": "home-manager",
-        "isabelle-lsp-nvim": "isabelle-lsp-nvim",
-        "isabelle-syn-nvim": "isabelle-syn-nvim",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-darwin": "nix-darwin",
         "nix-doom-emacs": "nix-doom-emacs",

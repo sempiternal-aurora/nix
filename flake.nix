@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    aurora-nixpkgs.url = "github:sempiternal-aurora/nixpkgs/isabelle-vim-plugins";
+    aurora-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager = {

@@ -70,7 +70,6 @@ in
 
     # VPN Stuff
     environment.systemPackages = lib.lists.optional cfg.globalprotect.enable pkgs.gpclient;
-    services.globalprotect.enable = false;
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];

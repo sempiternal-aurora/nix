@@ -2,11 +2,11 @@
   "nodes": {
     "aurora-nixpkgs": {
       "locked": {
-        "lastModified": 1777335718,
-        "narHash": "sha256-w6rDLAIhg7scfpLRY7mc2HYBZ30g/G25kBFXrvlQ+zw=",
+        "lastModified": 1777344427,
+        "narHash": "sha256-PlGh/mjA6KH3wcDF1DfvWuC7wPaasJO3+IRRfTAzobI=",
         "owner": "sempiternal-aurora",
         "repo": "nixpkgs",
-        "rev": "1df26a090b76e9218fe245b94f3e182adab3a1f4",
+        "rev": "65dc4a78b84a432a5b3d137d284b7293f54123d8",
         "type": "github"
       },
       "original": {

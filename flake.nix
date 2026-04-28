@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    aurora-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    aurora-nixpkgs.url = "github:sempiternal-aurora/nixpkgs/stm32cubeide";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager = {

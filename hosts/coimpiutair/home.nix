@@ -5,6 +5,12 @@
   pkgs,
   ...
 }:
+let
+  auroraPkgs = import inputs.aurora-nixpkgs {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
+in
 {
   imports = [
     ../../modules/home-manager
@@ -91,7 +97,7 @@
   # Packages I'm maintaining to keep an eye out for breaks
   home.packages = [
     pkgs.vampire
-    pkgs.stm32cubeide
+    (auroraPkgs.stm32cubeide.override { version = "1.19.0"; })
   ];
 
   # Allow unfree licences for some packages

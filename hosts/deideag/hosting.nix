@@ -52,7 +52,7 @@
     };
 
     systemd.services.petro_bot = {
-      description = "A simple roleplaying server discord bot";
+      description = "petro_bot";
 
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];

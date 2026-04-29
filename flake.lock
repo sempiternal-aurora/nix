@@ -2,11 +2,11 @@
   "nodes": {
     "aurora-nixpkgs": {
       "locked": {
-        "lastModified": 1777344427,
-        "narHash": "sha256-PlGh/mjA6KH3wcDF1DfvWuC7wPaasJO3+IRRfTAzobI=",
+        "lastModified": 1777432910,
+        "narHash": "sha256-7Klxxwh9P7NCQnmN9KBENXG6mw5ULD3YnOCwJoQ+FIU=",
         "owner": "sempiternal-aurora",
         "repo": "nixpkgs",
-        "rev": "65dc4a78b84a432a5b3d137d284b7293f54123d8",
+        "rev": "a9f1b7e2e237d1140b6624b810e7f8d3c0c0e5c5",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     "cachyos-kernel": {
       "flake": false,
       "locked": {
-        "lastModified": 1777307369,
-        "narHash": "sha256-FYukFIChtz6KiS1fIXVSvsoQ6R3+uRdMSr22Zf91arU=",
+        "lastModified": 1777460646,
+        "narHash": "sha256-NeS1O3PlSU+VQ7qvvdFttkHEInwNhGwz5Hx1L+C3lcg=",
         "owner": "CachyOS",
         "repo": "linux-cachyos",
-        "rev": "8d016151fa47272075ba46febbc9d30212c8b2fb",
+        "rev": "fbcbeb4d0bb4cc702582b953985a0b3b08c16962",
         "type": "github"
       },
       "original": {
@@ -51,11 +51,11 @@
     "doomemacs": {
       "flake": false,
       "locked": {
-        "lastModified": 1776590253,
-        "narHash": "sha256-wU0gAHaCCX/sTUvbsgSxXAPxb1xEazfu5PClDe3SbXA=",
+        "lastModified": 1777326848,
+        "narHash": "sha256-7ErKUgw6Ch7hP1oBjMSos8xXRD+rxxjaOldRn+TcClo=",
         "owner": "doomemacs",
         "repo": "doomemacs",
-        "rev": "707da6f7e90f26a4e00e5f8f98f29fd08824e71e",
+        "rev": "6be3337b49867bd86f90fe5ca4beeb6b38afaddb",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776936542,
-        "narHash": "sha256-UEC1ywLxd+0bSX+qNWuooO2nrJAT7hRrLONyycG8gnE=",
+        "lastModified": 1777374399,
+        "narHash": "sha256-7l5lBvVcMF4yyWD6rRF4qGLkqWkZ6XjFGX/ug+DTF2c=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "32f7f12480ae05b1f89d06161230ac16cb4656ef",
+        "rev": "caffeac5f51131d1fc095da8d526e0a94443e2d0",
         "type": "github"
       },
       "original": {
@@ -143,11 +143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777349711,
-        "narHash": "sha256-PGKgo2dO6fK603QGI+DWXdKmS09pbJjjTxwRHdhkGZA=",
+        "lastModified": 1777434174,
+        "narHash": "sha256-KwTyQ5g2qDhWIs/O6vH8HeF8n4JCzZIT/VYE7nYnukQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c1140540536d483e2730320100f6835d62c94fdf",
+        "rev": "d3b4e4b1bd59aedd3d4eb0a8df7162edb6da4607",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777316039,
-        "narHash": "sha256-JYxrUkkSXjGgviTGPL4bF6OoW+pGY+sUBCgcuVd+cN8=",
+        "lastModified": 1777403542,
+        "narHash": "sha256-ciJV9oBNGJOK8Q6r+HMVUpt5p+VUZ3/9TNF/k33cLK4=",
         "owner": "xddxdd",
         "repo": "nix-cachyos-kernel",
-        "rev": "f0064c04cf854e7aba2d867ee166a95e3c6eb8b5",
+        "rev": "30e96c439041c62ef1ae7ecb5714be9c0bf09e1c",
         "type": "github"
       },
       "original": {
@@ -214,11 +214,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1777289939,
-        "narHash": "sha256-wZnl3HB88oTME6oL7zGLrhxQmMNeH+QUCpXIfrci1pE=",
+        "lastModified": 1777381936,
+        "narHash": "sha256-ti3Rfha4cpWy+23yH/8TSMiSVLnt4SQpj64fKzzaT5U=",
         "owner": "marienz",
         "repo": "nix-doom-emacs-unstraightened",
-        "rev": "29e1722cb93ede486b79369e81a9c15d7d7b7a48",
+        "rev": "b342035050387785c6ed7559292c5b6041ece109",
         "type": "github"
       },
       "original": {
@@ -366,11 +366,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777134537,
-        "narHash": "sha256-qcwha4m396AGnLF539tVx4lboaZ1TvOeSaWPk01G6iY=",
+        "lastModified": 1777451299,
+        "narHash": "sha256-Okqpw+zxAwHKXuuxlwYy9Ge9JUpnTbsMXqws2eOKfKo=",
         "owner": "adriankarlen",
         "repo": "textfox",
-        "rev": "a52da2adee3d37c1e41c30a3176fd6deb36ebc4e",
+        "rev": "3af57df1ed3a38eb584475fd9e032d9643f2a94d",
         "type": "github"
       },
       "original": {

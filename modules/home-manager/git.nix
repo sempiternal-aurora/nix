@@ -26,6 +26,10 @@
     ];
     maintenance.enable = true;
   };
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
 
   xdg.configFile = {
     "git/gitlab.conf" = {

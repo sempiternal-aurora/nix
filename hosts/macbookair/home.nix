@@ -136,7 +136,7 @@ in
   nix = {
     gc = {
       automatic = true;
-      dates = "sunday";
+      dates = "weekly";
       options = "--delete-older-than 10d";
     };
   };

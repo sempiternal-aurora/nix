@@ -58,7 +58,7 @@ in
       fx = true;
       terminal = lib.mkIf isLinux (lib.getExe pkgs.ghostty);
     };
-    zoom.enable = isDarwin;
+    zoom.enable = false;
     teams.enable = isLinux;
     _1password = {
       enable = true;
@@ -67,11 +67,11 @@ in
     nvim = {
       enable = true;
       default = true;
-      latex = true;
+      latex = isLinux;
       xdg-mime = isLinux;
     };
     isabelle = {
-      enable = true;
+      enable = isLinux;
       enableNeovimIntegration = true;
     };
     jetbrains = {
@@ -80,7 +80,7 @@ in
     };
     discord.enable = isDarwin;
     calibre.enable = isLinux;
-    digital.enable = true;
+    digital.enable = isLinux;
     firefox.enable = true;
   };
 

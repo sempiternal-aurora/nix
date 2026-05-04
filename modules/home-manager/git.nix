@@ -24,7 +24,6 @@
         condition = "gitdir:nixpkgs";
       }
     ];
-    maintenance.enable = true;
   };
   programs.gh = {
     enable = true;

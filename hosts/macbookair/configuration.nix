@@ -34,9 +34,9 @@ args@{
     enable = true;
     setupAsahiSound = true;
     peripheralFirmwareDirectory = pkgs.requireFile {
-      name = "firmware";
+      name = "vendorfw";
       hashMode = "recursive";
-      hash = "sha256-yrZPTqTNEoTivlVVVMNT93nOH9CIhuh+icExoLfaH24=";
+      hash = "sha256-4T4/SE66zVJoPfgx6ppcx5s1YEG0y43d9YmVhzaBOco=";
       message = ''
         Add the file to the store:
         $ sudo nix store add /etc/nixos/firmware

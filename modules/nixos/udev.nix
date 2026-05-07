@@ -2,10 +2,15 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 let
   cfg = config.mine.udev;
+  auroraPkgs = import inputs.aurora-nixpkgs {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
 in
 {
   options = {
@@ -22,7 +27,7 @@ in
     environment.systemPackages = lib.optional cfg.openocd pkgs.openocd;
     services.udev.packages =
       lib.optional cfg.openocd pkgs.openocd
-      ++ lib.optional cfg.stm32 pkgs.stm32cubeide
+      ++ lib.optional cfg.stm32 auroraPkgs.stm32cubeide
       ++ lib.optionals cfg.vivado [
         (pkgs.writeTextFile {
           name = "xilinx-dilligent-usb-udev";

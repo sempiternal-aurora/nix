@@ -97,7 +97,8 @@ in
   # Packages I'm maintaining to keep an eye out for breaks
   home.packages = [
     pkgs.vampire
-    (auroraPkgs.stm32cubeide.override { version = "1.19.0"; })
+    pkgs.stm32cubemx
+    auroraPkgs.stm32cubeide
   ];
 
   # Allow unfree licences for some packages

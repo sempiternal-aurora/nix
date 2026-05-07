@@ -41,6 +41,7 @@ args@{
         "zoom"
         "nordvpn"
         "stm32cubeide"
+        "stm32cubemx"
       ];
   };
 
@@ -147,6 +148,7 @@ args@{
     udev = {
       openocd = true;
       vivado = true;
+      stm32 = true;
     };
   };
 

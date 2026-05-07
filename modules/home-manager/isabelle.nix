@@ -7,9 +7,6 @@
 }:
 let
   cfg = config.mine.isabelle;
-  aurora-pkgs = import inputs.aurora-nixpkgs {
-    inherit (pkgs.stdenv.hostPlatform) system;
-  };
 in
 {
   options = {
@@ -20,12 +17,6 @@ in
   config = lib.mkIf cfg.enable {
     nixpkgs.overlays = [
       inputs.self.outputs.overlays.default
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
-          isabelle-lsp-nvim = aurora-pkgs.vimPlugins.isabelle-lsp-nvim;
-          isabelle-syn-nvim = aurora-pkgs.vimPlugins.isabelle-syn-nvim;
-        };
-      })
     ];
 
     programs.neovim.plugins = lib.mkIf cfg.enableNeovimIntegration (

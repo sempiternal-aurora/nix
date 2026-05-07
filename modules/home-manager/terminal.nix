@@ -35,13 +35,18 @@ in
     mine.direnv.enable = lib.mkEnableOption "install direnv for reproducible development environments";
   };
   config = {
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+      setSessionVariables = true;
+    };
+
     home.packages = [
       pkgs.lolcat
     ]
     ++ lib.lists.optionals cfg.zip [
       pkgs.zip
       pkgs.unzip
-      pkgs.devenv
     ]
     ++ lib.lists.optional cfg.weechat pkgs.weechat
     ++ lib.lists.optional cfg.trash pkgs.trash-cli
@@ -537,7 +542,7 @@ in
       enableZshIntegration = true;
     };
 
-    home.file."${config.xdg.configHome}/eza/theme.yml" = {
+    xdg.configFile."eza/theme.yml" = {
       enable = cfg.eza;
       source =
         builtins.fetchGit {

@@ -19,6 +19,13 @@
       "flakes"
     ];
 
+    # Dirty frag mitigation while we wait for the upstream patches
+    boot.extraModprobeConfig = ''
+      install esp4  ${pkgs.coreutils}/bin/false
+      install esp6  ${pkgs.coreutils}/bin/false
+      install rsrpc ${pkgs.coreutils}/bin/false
+    '';
+
     # Set your time zone.
     time.timeZone = "Australia/Canberra";
 

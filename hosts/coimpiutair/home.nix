@@ -76,9 +76,7 @@ in
       latex = true;
       xdg-mime = true;
     };
-    emacs = {
-      enable = true;
-    };
+    emacs.enable = true;
     isabelle = {
       enable = true;
       enableNeovimIntegration = true;

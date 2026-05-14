@@ -188,6 +188,7 @@ args@{
     };
     settings = {
       auto-optimise-store = true;
+      sandbox = true;
       trusted-users = [
         "root"
         vars.adminUser

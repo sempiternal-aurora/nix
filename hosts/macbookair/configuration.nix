@@ -119,6 +119,7 @@ args@{
     };
     settings = {
       auto-optimise-store = true;
+      sandbox = true;
       extra-substituters = [
         "https://nixos-apple-silicon.cachix.org"
       ];
